@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
 import Test from './components/Test';
+import AddRecipe from './components/AddRecipe';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/logout' element={<Logout/>}/>
           <Route path='/test' element={<Test/>}/>
+          <Route path='/add-recipe' element={<AddRecipe/>}/>
         </Routes>
       </BrowserRouter>
     </div>
