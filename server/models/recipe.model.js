@@ -1,4 +1,10 @@
 const mongoose = require('mongoose')
+const IngredientsSchema = mongoose.Schema({
+  ingredient:String,
+  qty:Number, 
+  uom:String
+})
+
 const RecipeSchema = mongoose.Schema({
   recipeName:{
     type:String
@@ -10,6 +16,6 @@ const RecipeSchema = mongoose.Schema({
     type:String
   }, 
   ingredients:{
-    type:[IngredietnsSchema]
+    type:[IngredientsSchema]
   }
 })
