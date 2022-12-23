@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Dashboard = () => {
   const [recipes,setRecipes] = useState([]); 
   useEffect(()=>{ 
-    axios.get('http://localhost:8000/api/recipes')
+    axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
     .then((res)=>{
       setRecipes(res.data); 
     })

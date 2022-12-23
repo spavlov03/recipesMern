@@ -6,7 +6,7 @@ const ViewRecipe = () => {
   const {id} = useParams();
   const [recipe,setRecipe] = useState({}); 
   useEffect(()=>{
-    axios.get(`http://localhost:8000/api/recipe/${id}`)
+    axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     .then((res)=>{
       setRecipe(res.data);
     })
@@ -21,9 +21,8 @@ const ViewRecipe = () => {
       <p>Directions : {recipe.directions}</p>
       <div>Ingredients : 
         <ul>
-          {recipe.ingredients.map((ing,index)=>(
-        <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>
-      ))} 
+          {recipe.ingredients?.map((ing,index)=>(
+        <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
       </div>
 

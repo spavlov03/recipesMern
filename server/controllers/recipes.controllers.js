@@ -3,7 +3,6 @@ module.exports = {
   createRecipe: (req,res) => { 
     Recipe.create(req.body)
     .then(recipe=> {
-      console.log('inside controller')
       res.json(recipe)})
     .catch(err=>res.status(400).json(err))
   }, 

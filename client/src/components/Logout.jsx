@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom'
 const Logout = () => {
   const navigate = useNavigate();
   useEffect(()=> { 
-    axios.get('http://localhost:8000/api/logout')
+    axios.get('http://localhost:8000/api/logout',{withCredentials:true})
     .then((res)=>{
-      // navigate("/")
+      navigate("/")
       console.log(res)
     })
     .catch(err=>console.log(err))

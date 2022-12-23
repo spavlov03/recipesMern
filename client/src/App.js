@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Test from './components/Test';
 import AddRecipe from './components/AddRecipe';
 import ViewRecipe from './components/ViewRecipe';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Routes>
+          <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>

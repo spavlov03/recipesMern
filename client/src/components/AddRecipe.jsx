@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const AddRecipe = () => {
   const [recipeName,setRecipeName] = useState('');
@@ -7,6 +8,7 @@ const AddRecipe = () => {
   const [directions,setDirections] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
   const [errors,setErrors] = useState({});
+  const navigate = useNavigate();
 
   let handleChange = (i,e) => { 
     let newIngredientsValues = [...ingredients]; 
@@ -35,6 +37,7 @@ const AddRecipe = () => {
     })
     .then(res=>{
       console.log(res.data); 
+      navigate('/dashboard')
     })
     .catch((err)=> { 
       console.log(err)
@@ -54,7 +57,7 @@ const AddRecipe = () => {
         <input className='form-control' type="text" name='directions' onChange={(e)=>setDirections(e.target.value)}/>
         <label>Ingredients:</label>
         {ingredients.map((element,index) => (
-          <div>
+          <div key={index}>
             <label>Name:</label>
             <input type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
             <label>Quantity</label>
