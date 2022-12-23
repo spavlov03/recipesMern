@@ -14,6 +14,9 @@ app.use(cors({
   origin: "http://localhost:3000",credentials:true
 }))
 
+const recipesRoutes = require("./routes/recipes.routes")
+recipesRoutes(app);
+
 const userRoutes = require("./routes/user.routes")
 userRoutes(app);
 

@@ -1,6 +1,5 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import './App.css';
-import LogReg from './views/LogReg';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -8,6 +7,7 @@ import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
 import Test from './components/Test';
 import AddRecipe from './components/AddRecipe';
+import ViewRecipe from './components/ViewRecipe';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
           <Route path='/logout' element={<Logout/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/add-recipe' element={<AddRecipe/>}/>
+          <Route path='/recipe/:id' element={<ViewRecipe/>}/>
         </Routes>
       </BrowserRouter>
     </div>

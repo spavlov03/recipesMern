@@ -1,12 +1,23 @@
-import React from 'react'
-import AddRecipe from './AddRecipe'
+import axios from 'axios'
+import { useState,useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
+  const [recipes,setRecipes] = useState([]); 
+  useEffect(()=>{ 
+    axios.get('http://localhost:8000/api/recipes')
+    .then((res)=>{
+      setRecipes(res.data); 
+    })
+    .catch(err=>console.log(err))
+  },[])
   return (
     <div>
       <p>This is the Dasboard</p>
-      <p>For my recipes app</p>
-      <AddRecipe/>
+      <p>List of Recipes</p>
+      {recipes.map((recipe,index)=> {
+        return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
+      })}
     </div>
   )
 }
