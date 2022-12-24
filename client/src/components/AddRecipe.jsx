@@ -2,7 +2,7 @@ import {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-const AddRecipe = () => {
+const AddRecipe = ({user,setUser}) => {
   const [recipeName,setRecipeName] = useState('');
   const [cookTime,setCookTime] = useState(0);
   const [directions,setDirections] = useState('');

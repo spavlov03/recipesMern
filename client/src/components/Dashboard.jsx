@@ -2,17 +2,20 @@ import axios from 'axios'
 import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const Dashboard = () => {
+
+const Dashboard = ({user,setUser}) => {
   const [recipes,setRecipes] = useState([]); 
   useEffect(()=>{ 
     axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
     .then((res)=>{
-      setRecipes(res.data); 
+      setRecipes(res.data);
     })
     .catch(err=>console.log(err))
   },[])
+  
   return (
     <div>
+      <p>Hello User - {user.email}</p>
       <p>This is the Dasboard</p>
       <p>List of Recipes</p>
       {recipes.map((recipe,index)=> {

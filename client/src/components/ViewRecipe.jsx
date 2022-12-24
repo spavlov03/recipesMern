@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const ViewRecipe = () => {
+const ViewRecipe = ({user,setUser}) => {
   const {id} = useParams();
   const [recipe,setRecipe] = useState({}); 
   useEffect(()=>{

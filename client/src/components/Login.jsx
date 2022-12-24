@@ -1,13 +1,13 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({user,setUser}) => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState(""); 
   const [errors,setErrors] = useState(); 
   const navigate = useNavigate(); 
-
+  
   const submitHandler = (e) => { 
     e.preventDefault()
     axios.post('http://localhost:8000/api/login', {
@@ -15,6 +15,9 @@ const Login = () => {
       password
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
+      console.log('res after login',res)
+      setUser(res.data.user);
+      localStorage.setItem("user",user)
       navigate('/dashboard')
     })
     .catch((err)=>{ 
