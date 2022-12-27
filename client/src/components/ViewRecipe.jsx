@@ -25,6 +25,8 @@ const ViewRecipe = ({user,setUser}) => {
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
       </div>
+      {recipe.creatorId===user._id?<button className='btn btn-danger'>Delete Recipe</button> : null}
+      
 
     </div>
   )
