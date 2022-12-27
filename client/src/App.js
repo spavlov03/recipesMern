@@ -23,7 +23,7 @@ function App() {
           <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
           <Route path='/register' element={<Register user={user} setUser={setUser}/>}/>
           <Route path='/dashboard' element={<Dashboard user={user} setUser={setUser}/>}/>
-          <Route path='/logout' element={<Logout/>}/>
+          <Route path='/logout' element={<Logout setUser={setUser}/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe user={user} setUser={setUser}/>}/>

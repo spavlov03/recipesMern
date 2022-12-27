@@ -12,11 +12,11 @@ const ViewRecipe = ({user,setUser}) => {
     })
     .catch(err=>console.log(err))
     },[])
-  
 
   return (
     <div className='mx-auto'>
       <p>Recipe name : {recipe.recipeName}</p>
+      <p>Added By: {recipe.creatorFirstName} {recipe.creatorLastName}</p>
       <p>Cook Time : {recipe.cookTime} Minutes</p>
       <p>Directions : {recipe.directions}</p>
       <div>Ingredients : 

@@ -20,6 +20,12 @@ const UserSchema = new mongoose.Schema({
       'admin', 
       'user'
     ]
+  },
+  firstName:{
+    type:String
+  }, 
+  lastName: { 
+    type:String
   }
 },{timestamps:true})
 

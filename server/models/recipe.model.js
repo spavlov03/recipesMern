@@ -18,7 +18,13 @@ const RecipeSchema = mongoose.Schema({
   ingredients:{
     type:[IngredientsSchema]
   },
-  creator:{
+  creatorId:{
+    type:String
+  }, 
+  creatorFirstName:{
+    type:String
+  },
+  creatorLastName:{
     type:String
   }
 })

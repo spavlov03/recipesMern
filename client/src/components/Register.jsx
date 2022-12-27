@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const Register = ({user,setUser}) => {
+  const [firstName,setFirstName] = useState(""); 
+  const [lastName,setLastName] = useState(""); 
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState(""); 
   const [errors,setErrors] = useState({}); 
@@ -12,12 +14,15 @@ const Register = ({user,setUser}) => {
   const submitHandler = (e) => { 
     e.preventDefault()
     axios.post('http://localhost:8000/api/register', {
+      firstName, 
+      lastName,
       email,
       password, 
       confirmPassword
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
       navigate('/dashboard')
+      window.location.reload(false);
     })
     .catch((err)=>{ 
       console.log(err)
@@ -30,6 +35,10 @@ const Register = ({user,setUser}) => {
     <div className='border w-50'>
       <p>Sign Up</p>
       <form onSubmit={submitHandler}>
+        <label className='form-label'>First Name:</label>
+        <input className='form-control' type="text" onChange={(e)=>setFirstName(e.target.value)}/>
+        <label className='form-label'>Last Name:</label>
+        <input className='form-control' type="text" onChange={(e)=>setLastName(e.target.value)}/>
         <label className='form-label'>Email:</label>
         <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>

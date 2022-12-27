@@ -25,16 +25,19 @@ const AddRecipe = ({user,setUser}) => {
   }
   let handleSubmit = (e) => { 
     e.preventDefault(); 
-    console.log(`Recipe name is ${recipeName}`)
-    console.log(`Cook time is ${cookTime}`)
-    console.log(`Directions are ${directions}`)
-    console.log(`Ingredients are ${ingredients}`)
+    // console.log(`Recipe name is ${recipeName}`)
+    // console.log(`Cook time is ${cookTime}`)
+    // console.log(`Directions are ${directions}`)
+    // console.log(`Ingredients are ${ingredients}`)
     axios.post('http://localhost:8000/api/recipe',{
       recipeName,
       cookTime,
       directions, 
-      ingredients
-    })
+      ingredients, 
+      creatorId: user._id, 
+      creatorFirstName: user.firstName,
+      creatorLastName: user.lastName
+    },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
       navigate('/dashboard')
@@ -48,6 +51,7 @@ const AddRecipe = ({user,setUser}) => {
   return (
     <div>
       <p>Add A recipe</p>
+      <p>Your Name is {user.firstName} and ID is {user._id}</p>
       <form onSubmit={handleSubmit}>
         <label className='form-label'>Reicipe Name</label>
         <input className='form-control' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>

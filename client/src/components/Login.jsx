@@ -15,9 +15,7 @@ const Login = ({user,setUser}) => {
       password
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      console.log('res after login',res)
       setUser(res.data.user);
-      localStorage.setItem("user",user)
       navigate('/dashboard')
     })
     .catch((err)=>{ 
