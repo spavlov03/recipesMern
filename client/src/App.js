@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Test from './components/Test';
 import AddRecipe from './components/AddRecipe';
 import ViewRecipe from './components/ViewRecipe';
+import EditRecipe from './components/EditRecipe';
 import Home from './components/Home';
 import { useState } from 'react';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/test' element={<Test/>}/>
           <Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe user={user} setUser={setUser}/>}/>
+          <Route path='/recipe/:id/edit' element={<EditRecipe user={user} setUser={setUser}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

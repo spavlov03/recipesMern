@@ -47,5 +47,7 @@ module.exports = {
         console.log("ERROR")
         res.status(400).json({ errors: 'failed to get logged in user' })
     }
-}
+  },
+
+
 }

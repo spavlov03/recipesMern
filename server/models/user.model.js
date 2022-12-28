@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt'); 
 const uniqueValidator = require('mongoose-unique-validator')
 
+// const profilePicSchema = mongoose.Schema({
+//   name:String, 
+//   desc:String, 
+//   img:{
+//     data:Buffer,
+//     contentType:String
+//   }
+// })
+
 const UserSchema = new mongoose.Schema({
   email:{
     type:String,
@@ -26,7 +35,10 @@ const UserSchema = new mongoose.Schema({
   }, 
   lastName: { 
     type:String
-  }
+  }, 
+  about: {
+    type:String
+  }, 
 },{timestamps:true})
 
 UserSchema.pre('save', async function(next){

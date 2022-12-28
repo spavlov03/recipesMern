@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams,Link } from 'react-router-dom'
 
 const ViewRecipe = ({user,setUser}) => {
   const {id} = useParams();
@@ -25,6 +25,7 @@ const ViewRecipe = ({user,setUser}) => {
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
       </div>
+      {recipe.creatorId===user._id?<Link className='btn btn-warning me-2' to={`/recipe/${recipe._id}/edit`}>Edit Recipe</Link> : null}
       {recipe.creatorId===user._id?<button className='btn btn-danger'>Delete Recipe</button> : null}
       
 
