@@ -4,4 +4,5 @@ module.exports = (app) => {
   app.post('/api/recipe',authenticate,RecipesControllers.createRecipe);
   app.get('/api/recipes',RecipesControllers.getAllRecipes);
   app.get('/api/recipe/:id',RecipesControllers.getOneRecipe)
+  app.put('/api/recipe/:id',RecipesControllers.updateRecipe)
 }

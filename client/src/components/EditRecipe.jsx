@@ -38,14 +38,14 @@ const EditRecipe = ({user,setUser}) => {
   let handleSubmit = (e) => { 
     e.preventDefault(); 
 
-    axios.post('http://localhost:8000/api/recipe',{
+    axios.put(`http://localhost:8000/api/recipe/${id}`,{
       recipeName,
       cookTime,
       directions, 
-      ingredients, 
-      creatorId: user._id, 
-      creatorFirstName: user.firstName,
-      creatorLastName: user.lastName
+      ingredients
+      // creatorId: user._id, 
+      // creatorFirstName: user.firstName,
+      // creatorLastName: user.lastName
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -86,7 +86,7 @@ const EditRecipe = ({user,setUser}) => {
         ))}
         <div className='mt-2'>
           <button className='btn btn-info' type='button' onClick={()=>addIngredientsFields()}>Add</button>
-          <button className='btn btn-success ms-2' type="submit">Submit</button>
+          <button className='btn btn-success ms-2' type="submit">Edit</button>
         </div>
       </form>
     </div>
