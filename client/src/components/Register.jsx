@@ -32,13 +32,16 @@ const Register = ({user,setUser}) => {
   }
 
   return (
-    <div className='border w-50'>
+    <div className='container'>
+    <div className='row mt-3'>
       <p>Sign Up</p>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className='mx-auto border col-lg-4 col-8'>
         <label className='form-label'>First Name:</label>
         <input className='form-control' type="text" onChange={(e)=>setFirstName(e.target.value)}/>
+        {errors.firstName && <span className='text-danger'>{errors.firstName.message}</span>} <br/>
         <label className='form-label'>Last Name:</label>
         <input className='form-control' type="text" onChange={(e)=>setLastName(e.target.value)}/>
+        {errors.lastName && <span className='text-danger'>{errors.lastName.message}</span>} <br/>
         <label className='form-label'>Email:</label>
         <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
@@ -48,8 +51,9 @@ const Register = ({user,setUser}) => {
         <label className='form-label'>Confirm password:</label>
         <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
-        <input className="btn btn-primary mt-3" type="submit" value="Register" />
+        <input className="btn btn-primary mt-3 mb-5" type="submit" value="Register" />
       </form>
+    </div>
     </div>
   )
 }

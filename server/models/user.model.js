@@ -18,10 +18,13 @@ const UserSchema = new mongoose.Schema({
       validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
       message: "Please enter a valid email"
     }, 
-    unique: true
+    unique: true, 
+    required: [true,"Email is required"]
   }, 
   password:{
-    type:String
+    type:String, 
+    required: [true,"Password is required"], 
+    minLength: [8,"Password must be at least 8 characters"]
   },
   type:{
     type:String, 
@@ -31,10 +34,14 @@ const UserSchema = new mongoose.Schema({
     ]
   },
   firstName:{
-    type:String
+    type:String, 
+    minLength: [2,"First name must be at least 2 characters"], 
+    required: [true,"First name is required"]
   }, 
   lastName: { 
-    type:String
+    type:String, 
+    minLength: [2,"Last name must be at least 2 characters"], 
+    required: [true,"Last name is required"]
   }, 
   about: {
     type:String

@@ -24,7 +24,7 @@ const Login = ({user,setUser}) => {
     })
   }
   return (
-    <div className='border w-50'>
+    <div className='border w-50 mx-auto mt-3'>
       <p>Login</p>
       <form onSubmit={submitHandler}> 
         <label className='form-label'>Email:</label>
