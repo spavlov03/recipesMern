@@ -4,17 +4,17 @@ const app = express();
 const PORT = 8000
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
-const multer = require('multer')
+// const multer = require('multer')
 
-const storage = multer.diskStorage({
-  destination: (req,file,cb) => { 
-    cb(null,'uploads')
-  },
-  filename: (req,file,cb) => { 
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-}); 
-const upload = multer({storage:storage}); 
+// const storage = multer.diskStorage({
+//   destination: (req,file,cb) => { 
+//     cb(null,'uploads')
+//   },
+//   filename: (req,file,cb) => { 
+//     cb(null, file.fieldname + '-' + Date.now())
+//   }
+// }); 
+// const upload = multer({storage:storage}); 
 
 require("./config/mongoose.config"); 
 
