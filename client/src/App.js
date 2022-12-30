@@ -10,6 +10,7 @@ import AddRecipe from './components/AddRecipe';
 import ViewRecipe from './components/ViewRecipe';
 import EditRecipe from './components/EditRecipe';
 import Home from './components/Home';
+import AdminPanel from './components/AdminPanel';
 import { useState } from 'react';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
           <Route path='/register' element={<Register user={user} setUser={setUser}/>}/>
           <Route path='/dashboard' element={<Dashboard user={user} setUser={setUser}/>}/>
+          <Route path='/admin' element={<AdminPanel user={user} setUser={setUser}/>}/>
           <Route path='/logout' element={<Logout setUser={setUser}/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>

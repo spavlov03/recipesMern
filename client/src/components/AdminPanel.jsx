@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Dashboard = ({user,setUser}) => {
+const AdminPanel = ({user,setUser}) => {
   const [recipes,setRecipes] = useState([]); 
   // useEffect(()=>{ 
   //   axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
@@ -14,7 +14,7 @@ const Dashboard = ({user,setUser}) => {
   //   .catch(err=>console.log(err))
   // },[])
   useEffect(()=>{ 
-    const requestOne = axios.get('http://localhost:8000/api/recipes/approved',{withCredentials:true})
+    const requestOne = axios.get('http://localhost:8000/api/recipes/pending',{withCredentials:true})
     // const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
     axios.all([requestOne])
     .then(axios.spread((...res)=>{
@@ -29,15 +29,13 @@ const Dashboard = ({user,setUser}) => {
   return (
     <div>
       <p>Hello User - {user.firstName}</p>
-      <p>This is the Dasboard</p>
-      <p>List of All Recipes</p>
+      <p>This is the Admin Panel</p>
+      <p>List of Recipes waiting on approval</p>
       {recipes?.map((recipe,index)=> {
         return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
       })}
-
-
     </div>
   )
 }
 
-export default Dashboard
+export default AdminPanel

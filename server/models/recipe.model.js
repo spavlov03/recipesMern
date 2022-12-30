@@ -26,6 +26,10 @@ const RecipeSchema = mongoose.Schema({
   },
   creatorLastName:{
     type:String
+  }, 
+  status:{
+    type:String, 
+    enum: ['pending','approved']
   }
 })
 

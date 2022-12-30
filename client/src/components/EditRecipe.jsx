@@ -1,26 +1,44 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate,useParams } from 'react-router-dom';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const EditRecipe = ({user,setUser}) => {
-  useEffect(()=>{
-    axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
-    .then((res)=>{
-      setRecipeName(res.data.recipeName);
-      setCookTime(res.data.cookTime)
-      setDirections(res.data.directions)
-      setIngredients(res.data.ingredients)
-    })
-    .catch(err=>console.log(err))
-    },[])
   const [recipeName,setRecipeName] = useState('');
   const [cookTime,setCookTime] = useState(0);
   const [directions,setDirections] = useState('');
+  const [status,setStatus] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
   const {id} = useParams();
   const [recipe,setRecipe] = useState({}); 
+  const [approved, setApproved] = useState("pending");
+  const [checked,setChecked] = useState(false);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked)
+    if (checked === true) {
+      setApproved("pending")
+    } else {
+      setApproved("approved")
+    }
+  
+  };
+
+  useEffect(()=>{
+    axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
+    .then((res)=>{
+      setRecipeName(res.data.recipeName);
+      setCookTime(res.data.cookTime);
+      setDirections(res.data.directions);
+      setIngredients(res.data.ingredients);
+      setStatus(res.data.status);
+    })
+    .catch(err=>console.log(err))
+    },[])
 
   let handleChange = (i,e) => { 
     let newIngredientsValues = [...ingredients]; 
@@ -42,13 +60,15 @@ const EditRecipe = ({user,setUser}) => {
       recipeName,
       cookTime,
       directions, 
-      ingredients
+      ingredients, 
+      status:approved,
       // creatorId: user._id, 
       // creatorFirstName: user.firstName,
       // creatorLastName: user.lastName
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
+      user.type==="admin"?navigate('/admin'):
       navigate('/dashboard')
     })
     .catch((err)=> { 
@@ -68,6 +88,17 @@ const EditRecipe = ({user,setUser}) => {
         <input className='form-control' type="text" name='cookTime' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
         <label className='form-label'>Directions</label>
         <input className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
+        {user.type=="admin"?<p><FormControlLabel control={<Switch checked={checked} onChange={switchHandler}/>} label="Approve" /></p>:null}
+          {/* <div className="container">
+            <p>Approved : </p>
+            <div className="toggle-switch">
+              <input type="checkbox" className="checkbox" name="status" id="status"/>
+              <label className="label" htmlFor="status">
+                <span className="inner" />
+                <span className="switch" />
+            </label>
+            </div>
+          </div> */}
         <label>Ingredients:</label>
         {ingredients.map((element,index) => (
           <div key={index}>

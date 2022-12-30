@@ -24,9 +24,10 @@ const ViewRecipe = ({user,setUser}) => {
           {recipe.ingredients?.map((ing,index)=>(
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
+        {user.type==="admin"? <p className="">Status: {recipe.status}</p> : null }
       </div>
-      {recipe.creatorId===user._id?<Link className='btn btn-warning me-2' to={`/recipe/${recipe._id}/edit`}>Edit Recipe</Link> : null}
-      {recipe.creatorId===user._id?<button className='btn btn-danger'>Delete Recipe</button> : null}
+      {recipe.creatorId===user._id || user.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${recipe._id}/edit`}>Edit Recipe</Link> : null}
+      {recipe.creatorId===user._id || user.type==='admin'?<button className='btn btn-danger'>Delete Recipe</button> : null}
       
 
     </div>

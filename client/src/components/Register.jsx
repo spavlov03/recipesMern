@@ -18,7 +18,8 @@ const Register = ({user,setUser}) => {
       lastName,
       email,
       password, 
-      confirmPassword
+      confirmPassword, 
+      type:"user"
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
       navigate('/dashboard')

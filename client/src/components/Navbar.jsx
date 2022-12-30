@@ -45,6 +45,9 @@ const Navbar = ({user,setUser}) => {
               <li className="nav-item">
                 {!user._id? null : <Link className="nav-link active" to="/add-recipe">Add Recipe</Link> }
               </li>
+              {user.type==="admin"? <li className="nav-item">
+          <Link className="nav-link active" to='/admin'>Pending Approval</Link>
+        </li> : null }
             </ul>
       {/* <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -63,6 +66,7 @@ const Navbar = ({user,setUser}) => {
         <li className="nav-item">
           <Link className="nav-link" to="/logout">Logout</Link>
         </li> }
+
       </ul>
         </div>
         </div>

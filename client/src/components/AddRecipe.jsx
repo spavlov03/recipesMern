@@ -36,7 +36,8 @@ const AddRecipe = ({user,setUser}) => {
       ingredients, 
       creatorId: user._id, 
       creatorFirstName: user.firstName,
-      creatorLastName: user.lastName
+      creatorLastName: user.lastName, 
+      status:'pending'
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
