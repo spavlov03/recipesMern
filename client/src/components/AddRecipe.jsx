@@ -7,6 +7,7 @@ const AddRecipe = ({user,setUser}) => {
   const [cookTime,setCookTime] = useState(0);
   const [directions,setDirections] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
+  const [yeilds,setYeilds] = useState(0)
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -37,7 +38,8 @@ const AddRecipe = ({user,setUser}) => {
       creatorId: user._id, 
       creatorFirstName: user.firstName,
       creatorLastName: user.lastName, 
-      status:'pending'
+      status:'pending', 
+      yeilds,
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -52,14 +54,44 @@ const AddRecipe = ({user,setUser}) => {
   return (
     <div>
       <p>Add A recipe</p>
-      <p>Your Name is {user.firstName} and ID is {user._id}</p>
-      <form onSubmit={handleSubmit} className='mx-auto w-75'>
-        <label className='form-label'>Reicipe Name</label>
-        <input className='form-control' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
-        <label className='form-label'>Time to cook</label>
-        <input className='form-control' type="text" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
-        <label className='form-label'>Directions</label>
-        <input className='form-control' type="text" name='directions' onChange={(e)=>setDirections(e.target.value)}/>
+      <form onSubmit={handleSubmit} className='mx-auto w-50 d-flex flex-column border gap-1'>
+        <div className='d-flex'>
+          <label className='col-4'>Reicipe Name</label>
+          <input className='col-3' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
+        </div>
+        <div className='d-flex'>
+          <label className='col-4'>Time to cook in minutes</label>
+          <input className='col-3' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
+        </div>
+        <div className='d-flex'>
+          <label className='col-4'>Yeilds</label>
+          <div className='d-flex col-3'>
+          <input className='col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span>Servings</span></div>
+        </div>
+        <div className='border'>
+        <label className='col-7'>Ingredients:</label>
+        {ingredients.map((element,index) => (
+          <div key={index} className="d-flex">
+            <label className='col-1'>Name:</label>
+            <input className='col-2' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+            <label className='col-2'>Quantity</label>
+            <input className='col-1' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+            <label className='col-2'>Unit of Measure</label>
+            <input type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+            {
+              index ?
+              <button type='button' className='btn btn-danger' onClick={()=>removeIngredientsFields(index)}>Remove</button>
+              :null
+            }
+          </div>
+        ))}
+        <button className='btn btn-info mt-2 mb-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
+        </div>
+        <div className='d-flex'>
+          <label className='col-4'>Directions</label>
+          <textarea rows="6" cols="50" className='col-7' type="text" name='directions' onChange={(e)=>setDirections(e.target.value)}/>
+        </div>
+        
         {/* <label className='form-label'>Cuisine/Diet:</label>
         <div className="d-flex gap-2">
           <div>
@@ -96,24 +128,9 @@ const AddRecipe = ({user,setUser}) => {
           </div>
         </div> */} 
         {/* Add Later */}
-        <label>Ingredients:</label>
-        {ingredients.map((element,index) => (
-          <div key={index}>
-            <label>Name:</label>
-            <input type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
-            <label>Quantity</label>
-            <input type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
-            <label>Unit of Measure</label>
-            <input type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
-            {
-              index ?
-              <button type='button' className='btn btn-danger' onClick={()=>removeIngredientsFields(index)}>Remove</button>
-              :null
-            }
-          </div>
-        ))}
+        
         <div className='mt-2'>
-          <button className='btn btn-info' type='button' onClick={()=>addIngredientsFields()}>Add</button>
+          
           <button className='btn btn-success ms-2' type="submit">Submit</button>
         </div>
       </form>

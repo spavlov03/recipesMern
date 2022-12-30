@@ -1,11 +1,56 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate,useParams } from 'react-router-dom';
-import FormGroup from '@mui/material/FormGroup';
+import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import Switch, { SwitchProps } from '@mui/material/Switch';
 
-const EditRecipe = ({user,setUser}) => {
+
+const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
+  const IOSSwitch = styled((props: SwitchProps) => (
+    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />))
+  (({ theme }) => ({
+    width: 42,
+    height: 26,
+    padding: 0,
+    '& .MuiSwitch-switchBase': {
+      padding: 0,
+      margin: 2,
+      transitionDuration: '300ms',
+      '&.Mui-checked': {
+        transform: 'translateX(16px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+          opacity: 1,
+          border: 0,
+        },'&.Mui-disabled + .MuiSwitch-track': {
+          opacity: 0.5,},
+      },'&.Mui-focusVisible .MuiSwitch-thumb': {
+        color: '#33cf4d',
+        border: '6px solid #fff'},
+      '&.Mui-disabled .MuiSwitch-thumb': {
+        color:
+          theme.palette.mode === 'light'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[600],
+      },
+      '&.Mui-disabled + .MuiSwitch-track': {
+        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+      },
+    },
+    '& .MuiSwitch-thumb': {
+      boxSizing: 'border-box',
+      width: 22,
+      height: 22,
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 26 / 2,
+      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+      opacity: 1,
+      transition: theme.transitions.create(['background-color'], {
+        duration: 500,
+      }),},}));
   const [recipeName,setRecipeName] = useState('');
   const [cookTime,setCookTime] = useState(0);
   const [directions,setDirections] = useState('');
@@ -36,6 +81,7 @@ const EditRecipe = ({user,setUser}) => {
       setDirections(res.data.directions);
       setIngredients(res.data.ingredients);
       setStatus(res.data.status);
+      setOneRecipe(res.data)
     })
     .catch(err=>console.log(err))
     },[])
@@ -61,7 +107,7 @@ const EditRecipe = ({user,setUser}) => {
       cookTime,
       directions, 
       ingredients, 
-      status:approved,
+      status:user.type==="admin"?approved:"pending",
       // creatorId: user._id, 
       // creatorFirstName: user.firstName,
       // creatorLastName: user.lastName
@@ -75,7 +121,6 @@ const EditRecipe = ({user,setUser}) => {
       console.log(err)
       setErrors(err.response.data.errors)
     })
-
   }
   return (
     <div>
@@ -88,7 +133,7 @@ const EditRecipe = ({user,setUser}) => {
         <input className='form-control' type="text" name='cookTime' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
         <label className='form-label'>Directions</label>
         <input className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
-        {user.type=="admin"?<p><FormControlLabel control={<Switch checked={checked} onChange={switchHandler}/>} label="Approve" /></p>:null}
+        {user.type=="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
           {/* <div className="container">
             <p>Approved : </p>
             <div className="toggle-switch">
@@ -98,6 +143,7 @@ const EditRecipe = ({user,setUser}) => {
                 <span className="switch" />
             </label>
             </div>
+            <Switch checked={checked} onChange={switchHandler}/>
           </div> */}
         <label>Ingredients:</label>
         {ingredients.map((element,index) => (

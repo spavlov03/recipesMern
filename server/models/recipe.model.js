@@ -30,6 +30,9 @@ const RecipeSchema = mongoose.Schema({
   status:{
     type:String, 
     enum: ['pending','approved']
+  }, 
+  yields:{
+    type:Number
   }
 })
 
