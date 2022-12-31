@@ -54,38 +54,54 @@ const AddRecipe = ({user,setUser}) => {
   return (
     <div>
       <p>Add A recipe</p>
-      <form onSubmit={handleSubmit} className='mx-auto w-50 d-flex flex-column border gap-1'>
-        <div className='d-flex'>
-          <label className='col-4'>Reicipe Name</label>
-          <input className='col-3' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
-        </div>
-        <div className='d-flex'>
-          <label className='col-4'>Time to cook in minutes</label>
-          <input className='col-3' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
-        </div>
-        <div className='d-flex'>
-          <label className='col-4'>Yeilds</label>
-          <div className='d-flex col-3'>
-          <input className='col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span>Servings</span></div>
+      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column border myForm'>
+        <div id='topField'>
+          <div className='d-flex flex-column gap-1'>
+          <div className='d-flex '>
+            <label className='regLabel'>Reicipe Name</label>
+            <input className='regInput' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
+          </div>
+          <div className='d-flex ingFields'>
+            <label className='regLabel'>Cook in minutes</label>
+            <input className='regInput' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
+          </div>
+          <div className='d-flex ingFields'>
+            <label className='regLabel'>Yeilds</label>
+            <div className='d-flex regInput'>
+            <input className='col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span id='servings'>Servings</span></div>
+            </div>
+          </div>
+            <div>
+              <p>IMG PLACEHOLDER</p>
+            </div>
         </div>
         <div className='border'>
-        <label className='col-7'>Ingredients:</label>
+        <label className='text-center'>Ingredients:</label>
         {ingredients.map((element,index) => (
-          <div key={index} className="d-flex">
-            <label className='col-1'>Name:</label>
-            <input className='col-2' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
-            <label className='col-2'>Quantity</label>
-            <input className='col-1' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
-            <label className='col-2'>Unit of Measure</label>
-            <input type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+          <div key={index} className="border pb-2">
+            <div className='w-100 ingBox'>
+              <div className='d-flex ingField'>
+                <label className='ingLabel'>Name:</label>
+                <input className='ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+              </div>
+              <div className='d-flex ingField'>
+                <label className='ingLabel qtyLabel'>Quantity</label>
+                <input className='ingInput qty' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+              </div>
+              <div className='d-flex ingField'>
+                <label className='ingLabel uomLabel'>Unit of Measure</label>
+                <input className='ingInput qty' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+              </div>
+            </div>
+            
             {
               index ?
-              <button type='button' className='btn btn-danger' onClick={()=>removeIngredientsFields(index)}>Remove</button>
+              <button type='button' className='btn btn-danger removeBtn' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>
               :null
             }
           </div>
         ))}
-        <button className='btn btn-info mt-2 mb-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
+        <button className='btn btn-info' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
         </div>
         <div className='d-flex'>
           <label className='col-4'>Directions</label>

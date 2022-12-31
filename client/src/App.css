@@ -36,3 +36,96 @@
     transform: rotate(360deg);
   }
 }
+@media all and (max-width:600px) {
+  .myForm { 
+    width: 100%;
+  }
+  .regLabel { 
+    width: 130px;
+  }
+  .regInput {
+    width: 200px;
+    margin-left: 10px;
+    height: 30px;
+  }
+  .ingLabel {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+  .ingInput { 
+    width: 200px;
+    height: 30px;
+    margin-left: 30px;
+  }
+  .ingBox { 
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  #servings { 
+    margin-left: 10px;
+  }
+  .removeBtn { 
+    width: 200px;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+
+}
+
+@media all and (min-width:600px) { 
+  .myForm { 
+    width: 90%;
+  }
+}
+
+@media all and (min-width:992px){
+  .myForm {
+    width: 50%;
+  }
+  .regLabel { 
+    width: 120px;
+  }
+  .regInput {
+    width: 250px;
+    margin-left: 10px;
+    height: 30px;
+  }
+  .ingLabel {
+    width: 70px;
+  }
+  .ingInput { 
+    width: 200px;
+    height: 30px;
+  }
+  .ingBox { 
+    display: flex;
+    flex-direction: row; 
+    padding: 10px;
+    align-items: center;
+  }
+  #servings { 
+    margin-left: 10px;
+  }
+  .removeBtn { 
+    width: 200px;
+    align-self: center;
+  }
+  .qty{ 
+    width: 80px;
+  }
+  .qtyLabel { 
+    width:80px
+  }
+  .uomLabel { 
+    width: 120px;
+  }
+  .ingField { 
+    align-items: center;
+  }
+  #topField { 
+    display: flex;
+    gap: 10px;
+    background-color: #61dafb;
+  }
+}
