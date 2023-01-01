@@ -16,7 +16,7 @@ const Login = ({user,setUser}) => {
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
       setUser(res.data.user);
-      navigate('/dashboard')
+      navigate('/')
     })
     .catch((err)=>{ 
       console.log(err)

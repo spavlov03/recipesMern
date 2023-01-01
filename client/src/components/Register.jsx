@@ -22,7 +22,7 @@ const Register = ({user,setUser}) => {
       type:"user"
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      navigate('/dashboard')
+      navigate('/')
       window.location.reload(false);
     })
     .catch((err)=>{ 

@@ -29,7 +29,7 @@ const Dashboard = ({user,setUser}) => {
   return (
     <div>
       <p>Hello User - {user.firstName}</p>
-      <p>This is the Dasboard</p>
+      {/* <p>This is the Dasboard</p> */}
       <p>List of All Recipes</p>
       {recipes?.map((recipe,index)=> {
         return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>

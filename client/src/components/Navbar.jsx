@@ -30,9 +30,9 @@ const Navbar = ({user,setUser}) => {
               <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to='/dashboard'>Dashboard</NavLink>
-              </li>
+              </li> */}
               {/* <li className="nav-item dropdown">
                 <NavLink className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login/Reg</NavLink>
                 <ul className="dropdown-menu">
@@ -48,6 +48,7 @@ const Navbar = ({user,setUser}) => {
               {user.type==="admin"? <li className="nav-item">
           <Link className="nav-link active" to='/admin'>Pending Approval</Link>
         </li> : null }
+        
             </ul>
       {/* <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -69,6 +70,10 @@ const Navbar = ({user,setUser}) => {
 
       </ul>
         </div>
+        {!user._id? null :
+        <Link className='' to={`/user/${user._id}`}>
+          <img className ="profilePic rounded-3" src={require('../imgs/IMG_5402.jpg')} alt="profile pic" />
+          <span>{user.firstName}</span></Link>}
         </div>
       </nav>
     

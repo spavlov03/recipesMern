@@ -43,7 +43,7 @@ const AddRecipe = ({user,setUser}) => {
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
-      navigate('/dashboard')
+      navigate('/')
     })
     .catch((err)=> { 
       console.log(err)

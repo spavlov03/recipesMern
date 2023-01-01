@@ -16,7 +16,7 @@ const ViewRecipe = ({user,setUser}) => {
   return (
     <div className='mx-auto'>
       <p>Recipe name : {recipe.recipeName}</p>
-      <p>Added By: {recipe.creatorFirstName} {recipe.creatorLastName}</p>
+      <p>Added By: <Link to={`/user/${recipe.creatorId}`}>{recipe.creatorFirstName} {recipe.creatorLastName}</Link></p>
       <p>Cook Time : {recipe.cookTime} Minutes</p>
       <p>Directions : {recipe.directions}</p>
       <div>Ingredients : 
