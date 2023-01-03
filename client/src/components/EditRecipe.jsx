@@ -115,7 +115,7 @@ const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
     .then(res=>{
       console.log(res.data); 
       user.type==="admin"?navigate('/admin'):
-      navigate('/dashboard')
+      navigate(-1)
     })
     .catch((err)=> { 
       console.log(err)

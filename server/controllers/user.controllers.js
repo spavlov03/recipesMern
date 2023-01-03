@@ -52,7 +52,5 @@ module.exports = {
     User.findById({_id:req.params.id})
     .then(oneUser => res.json(oneUser))
     .catch(err=>res.json(err))
-  }
-
-
+  },
 }

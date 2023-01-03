@@ -29,7 +29,7 @@ function App() {
           <Route path='/' element={<Dashboard user={user} setUser={setUser}/>}/>
           {user.type==="admin"?<Route path='/admin' element={<AdminPanel user={user} setUser={setUser}/>}/>:null}
           <Route path='/logout' element={<Logout setUser={setUser}/>}/>
-          <Route path='/recipe/:id' element={<ViewRecipe user={user} setUser={setUser}/>}/>
+          <Route path='/recipe/:id' element={<ViewRecipe user={user} setUser={setUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>
           {user._id?<Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
           {user._id===oneRecipe.creatorId || user.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe user={user} setUser={setUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/user/:id' element={<UserDetail user={user} setUser={setUser}/>}/>

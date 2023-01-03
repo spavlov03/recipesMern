@@ -4,6 +4,9 @@ const app = express();
 const PORT = 8000
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
+// const bodyParser = require('body-parser')
+// const fs = require('fs')
+// const path = require('path')
 // const multer = require('multer')
 
 // const storage = multer.diskStorage({
@@ -21,6 +24,9 @@ require("./config/mongoose.config");
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
+// app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.set("view engine", "ejs");
 app.use(cors({
   origin: "http://localhost:3000",credentials:true
 }))

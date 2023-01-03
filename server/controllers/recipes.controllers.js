@@ -33,7 +33,8 @@ module.exports = {
   }, 
   findRecipesByUser: (req,res) => { 
     // console.log("inside controller",req.params)
-    Recipe.find({creatorId:req.params.creatorId,status:"approved"})
+    Recipe.find({creatorId:req.params.creatorId})
+    // Recipe.find({creatorId:req.params.creatorId,status:"approved"})
     .then(recipes=>res.json(recipes))
     .catch(err=>{
       // console.log("error in find")

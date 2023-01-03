@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams,Link } from 'react-router-dom'
+import ProfilePic from './ProfilePic';
 
 
 const UserDetail = ({user,setUser}) => {
   const [thisUser,setThisUser] = useState({}); 
   const [recipes,setRecipes] = useState([]); 
   const {id} = useParams();
+  const [loggedAuthor,setloggedAuthor] = useState(false);
+  
   useEffect(()=> { 
     const requestOne = axios.get(`http://localhost:8000/api/user/${id}`)
     const requestTwo = axios.get(`http://localhost:8000/api/recipes/${id}`)
@@ -26,13 +29,18 @@ const UserDetail = ({user,setUser}) => {
     <div>
       <p>This is {thisUser?.firstName} {thisUser?.lastName} profile</p>
       <p>Recipes by {thisUser?.firstName}</p>  
-      <p>
+      {thisUser._id===user._id?<div>
         {recipes?.map((recipe,index)=> { 
           return <div key={index}>
-            <p>{recipe.recipeName}</p>
+            <p><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName} - {recipe.status}</Link></p>
           </div>
         })}
-      </p>
+      </div>:<div>{recipes.filter(recipe => recipe.status === "approved").map((recipe,index)=> { 
+          return <div key={index}>
+            <p><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
+          </div>
+        })}</div>}
+        <p><ProfilePic/></p>
     </div>
   )
 }
