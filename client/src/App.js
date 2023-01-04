@@ -13,6 +13,7 @@ import AdminPanel from './components/AdminPanel';
 import NotAuthorized from './components/NotAuthorized';
 import UserDetail from './components/UserDetail';
 import { useState } from 'react';
+import AddProfilePic from './components/AddProfilePic';
 
 function App() {
   const [user,setUser] = useState({});
@@ -26,6 +27,7 @@ function App() {
           {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
           <Route path='/register' element={<Register user={user} setUser={setUser}/>}/>
+          <Route path='/register/addPic' element={<AddProfilePic user={user} setUser={setUser}/>}/>
           <Route path='/' element={<Dashboard user={user} setUser={setUser}/>}/>
           {user.type==="admin"?<Route path='/admin' element={<AdminPanel user={user} setUser={setUser}/>}/>:null}
           <Route path='/logout' element={<Logout setUser={setUser}/>}/>

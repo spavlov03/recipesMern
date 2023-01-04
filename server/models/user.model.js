@@ -46,9 +46,9 @@ const UserSchema = new mongoose.Schema({
   about: {
     type:String
   }, 
-  // profilePic: { 
-  //   type: [ProfilePicSchema]
-  // }
+  pic: { 
+    type: String,
+  }
 },{timestamps:true})
 
 UserSchema.pre('save', async function(next){

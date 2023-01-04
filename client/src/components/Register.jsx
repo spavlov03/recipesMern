@@ -10,30 +10,9 @@ const Register = ({user,setUser}) => {
   const [errors,setErrors] = useState({}); 
   const navigate = useNavigate(); 
   const [confirmPassword,setConfirmPassword] = useState("")
-  const [profilePic,setProfilePic] = useState("")
-  const [url,setUrl] = useState("")
-
-  // const uploadPic = () => { 
-  //   const data = new FormData()
-  //   data.append('file',profilePic)
-  //   data.append("upload_preset",'insta-clone')
-  //   data.append("cloud_name",'cnq')
-  //   fetch('https://api.cloudinary.com/v1_1/cnq/image/upload', { 
-  //     method:"post", 
-  //     body:data
-  //   })
-  //   .then(res=>{
-  //     console.log(res)
-  //     res.json()})
-  //   .then(data=>{ 
-  //     setUrl(data.url)
-  //     console.log('url is ',url)
-  //   })
-  //   .catch(err=>console.log(err))
-  // }
+  
 
   const submitHandler = (e) => { 
-    // uploadPic()
     e.preventDefault()
     axios.post('http://localhost:8000/api/register', {
       firstName, 
@@ -41,11 +20,11 @@ const Register = ({user,setUser}) => {
       email,
       password, 
       confirmPassword, 
-      type:"user"
+      type:"user", 
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      navigate('/')
-      window.location.reload(false);
+      navigate('/register/addPic')
+      // window.location.reload(false);
     })
     .catch((err)=>{ 
       console.log(err)
@@ -75,17 +54,14 @@ const Register = ({user,setUser}) => {
         <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
         <div>
-        <div className=''>
-          <label className='form-label'>Upload Profile Picture:</label>
-          <input type="file" onChange={(e)=>setProfilePic(e.target.files[0])}/>
-        </div>
         {/* <div>
           <input type="text" />
         </div> */}
         </div>
         <input className="btn btn-primary mt-3 mb-5" type="submit" value="Register" />
       </form>
-    </div>
+        
+      </div>
     </div>
   )
 }
