@@ -21,10 +21,11 @@ const Register = ({user,setUser}) => {
       password, 
       confirmPassword, 
       type:"user", 
+      pic: "https://res.cloudinary.com/dwy8aok2u/image/upload/v1672876982/tvoxxudbgowv6qesjvft.png",
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      navigate('/register/addPic')
-      // window.location.reload(false);
+      navigate('/')
+      window.location.reload(false);
     })
     .catch((err)=>{ 
       console.log(err)

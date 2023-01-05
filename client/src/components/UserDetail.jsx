@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useEffect,useState } from 'react';
 import { useParams,Link } from 'react-router-dom'
-import ProfilePic from './ProfilePic';
+// import AddProfilePic from './AddProfilePic';
 
 
 const UserDetail = ({user,setUser}) => {
   const [thisUser,setThisUser] = useState({}); 
   const [recipes,setRecipes] = useState([]); 
   const {id} = useParams();
-  const [loggedAuthor,setloggedAuthor] = useState(false);
+  // const [loggedAuthor,setloggedAuthor] = useState(false);
   
   useEffect(()=> { 
     const requestOne = axios.get(`http://localhost:8000/api/user/${id}`)
@@ -26,10 +26,13 @@ const UserDetail = ({user,setUser}) => {
     .catch(err=>console.log(err))
   },[])
   return (
-    <div>
+    <div >
+      <div className='polaroid mx-auto'>
+      <img className ="detailPic" src={thisUser.pic} alt="profile pic" />
       <p>This is {thisUser?.firstName} {thisUser?.lastName} profile</p>
+      </div>
       <p>Recipes by {thisUser?.firstName}</p>  
-      {thisUser._id===user._id?<div>
+      {thisUser._id===user._id || user.type==="admin"?<div>
         {recipes?.map((recipe,index)=> { 
           return <div key={index}>
             <p><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName} - {recipe.status}</Link></p>
@@ -40,7 +43,7 @@ const UserDetail = ({user,setUser}) => {
             <p><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
           </div>
         })}</div>}
-        <p><ProfilePic/></p>
+        {thisUser._id===user._id?<Link to={`/user/${user._id}/edit`}>Edit Profile</Link>:null}
     </div>
   )
 }

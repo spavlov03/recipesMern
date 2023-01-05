@@ -1,8 +1,8 @@
 import {useState} from 'react'
 
-const AddProfilePic = () => {
+const AddProfilePic = ({url,setUrl}) => {
   const [profilePic,setProfilePic] = useState("")
-  const [url,setUrl] = useState("")
+  // const [url,setUrl] = useState("")
   const uploadPic = (e) => { 
     const data = new FormData()
     data.append('file',profilePic)
@@ -22,11 +22,11 @@ const AddProfilePic = () => {
 
 
   return (
-    <div>
-      <div className=''>
+    <div className=''>
+      <div className='d-flex flex-column mx-auto'>
         <label className='form-label'>Upload Profile Picture:</label>
         <input type="file" onChange={(e)=>setProfilePic(e.target.files[0])}/>
-        <button className="btn btn-success" onClick={()=>uploadPic()}>Submit</button>
+        <button className="btn btn-success w-50 mx-auto mt-1" onClick={()=>uploadPic()}>Upload Photo</button>
       </div>
     </div>
   )

@@ -72,13 +72,10 @@ const Navbar = ({user,setUser}) => {
         </div>
         {!user._id? null :
         <Link className='' to={`/user/${user._id}`}>
-          <img className ="profilePic rounded-3" src={require('../imgs/IMG_5402.jpg')} alt="profile pic" />
+          <img className ="profilePic rounded-3" src={user.pic} alt="profile pic" />
           <span>{user.firstName}</span></Link>}
         </div>
       </nav>
-    
-      {/* <h1>Recipes by Svet</h1>
-      <NavLink to='/login'>Login</NavLink> | <NavLink to='/register'>Register</NavLink> | <Link to="/logout">Logout</Link> | <NavLink to='/dashboard'>Dashboard</NavLink> | {!user._id? null : <Link to="/add-recipe">Add Recipe</Link> } */}
     </div>
   )
 }

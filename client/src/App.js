@@ -8,12 +8,12 @@ import Logout from './components/Logout';
 import AddRecipe from './components/AddRecipe';
 import ViewRecipe from './components/ViewRecipe';
 import EditRecipe from './components/EditRecipe';
-import Home from './components/Home';
 import AdminPanel from './components/AdminPanel';
 import NotAuthorized from './components/NotAuthorized';
 import UserDetail from './components/UserDetail';
 import { useState } from 'react';
 import AddProfilePic from './components/AddProfilePic';
+import EditProfile from './components/EditProfile';
 
 function App() {
   const [user,setUser] = useState({});
@@ -27,7 +27,7 @@ function App() {
           {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
           <Route path='/register' element={<Register user={user} setUser={setUser}/>}/>
-          <Route path='/register/addPic' element={<AddProfilePic user={user} setUser={setUser}/>}/>
+          {user._id===oneRecipe.creatorId?<Route path='/user/:id/edit' element={<EditProfile user={user} setUser={setUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/' element={<Dashboard user={user} setUser={setUser}/>}/>
           {user.type==="admin"?<Route path='/admin' element={<AdminPanel user={user} setUser={setUser}/>}/>:null}
           <Route path='/logout' element={<Logout setUser={setUser}/>}/>

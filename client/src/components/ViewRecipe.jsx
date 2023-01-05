@@ -24,7 +24,7 @@ const ViewRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
           {oneRecipe.ingredients?.map((ing,index)=>(
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
-        <p>Recipe Status is {oneRecipe.status}</p>
+        {/* <p>Recipe Status is {oneRecipe.status}</p> */}
         {user.type==="admin"? <p className="">Status: {oneRecipe.status}</p> : null }
       </div>
       {oneRecipe.creatorId===user._id || user.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}

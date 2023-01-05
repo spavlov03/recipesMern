@@ -13,6 +13,17 @@ module.exports = {
       res.status(400).json(error)
     }
   }, 
+  editUser: async (req,res) => { 
+    try {
+    const user = jwt.verify(req.cookies.userToken, SECRET);
+    const currentUser = await User.findOneAndUpdate({ _id: user._id },(req.body));
+    // console.log('current user ',currentUser)
+    res.json(currentUser);
+    } catch (error) {
+      console.log("error in user update")
+      res.status(400).json({ errors: 'Error in user update' })
+    }
+    },
   loginUser:async (req,res)=>{
     const user = await User.findOne({email:req.body.email})
     console.log('User IS--->',user)
