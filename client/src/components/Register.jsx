@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Register = ({user,setUser}) => {
+const Register = ({user,setUser,loggedUser,setLoggedUser}) => {
   const [firstName,setFirstName] = useState(""); 
   const [lastName,setLastName] = useState(""); 
   const [email,setEmail] = useState("");
@@ -24,6 +24,7 @@ const Register = ({user,setUser}) => {
       pic: "https://res.cloudinary.com/dwy8aok2u/image/upload/v1672876982/tvoxxudbgowv6qesjvft.png",
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
+      setLoggedUser(res.data.user)
       navigate('/')
       window.location.reload(false);
     })

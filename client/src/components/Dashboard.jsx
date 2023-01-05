@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Dashboard = ({user,setUser}) => {
+const Dashboard = ({user,setUser,loggedUser,setLoggedUser}) => {
   const [recipes,setRecipes] = useState([]); 
   // useEffect(()=>{ 
   //   axios.get('http://localhost:8000/api/recipes',{withCredentials:true})

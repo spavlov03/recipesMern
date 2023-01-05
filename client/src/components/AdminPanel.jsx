@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const AdminPanel = ({user,setUser}) => {
+const AdminPanel = ({loggedUser,setLoggedUser}) => {
   const [recipes,setRecipes] = useState([]); 
   // useEffect(()=>{ 
   //   axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
@@ -28,7 +28,7 @@ const AdminPanel = ({user,setUser}) => {
   
   return (
     <div>
-      <p>Hello User - {user.firstName}</p>
+      <p>Hello User - {loggedUser.firstName}</p>
       <p>This is the Admin Panel</p>
       <p>List of Recipes waiting on approval</p>
       {recipes?.map((recipe,index)=> {

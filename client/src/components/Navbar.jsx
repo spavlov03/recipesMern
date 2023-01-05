@@ -1,22 +1,23 @@
-import {useState,useEffect} from 'react'
+import {useEffect} from 'react'
 import { NavLink,Link } from 'react-router-dom'
 import axios from 'axios'
 
 
 
-const Navbar = ({user,setUser}) => {
-  useEffect(()=>{ 
-    // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
-    const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
-    axios.all([requestTwo])
-    .then(axios.spread((...res)=>{
-      // const responseOne = res[0]
-      // setRecipes(responseOne.data);
-      const responseTwo = res[0]
-      setUser(responseTwo.data)
-    }))
-    .catch(err=>console.log('there is error in useEffect',err))
-  },[])
+const Navbar = ({loggedUser,setLoggedUser}) => {
+  
+  // useEffect(()=>{ 
+  //   // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
+  //   const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
+  //   axios.all([requestTwo])
+  //   .then(axios.spread((...res)=>{
+  //     // const responseOne = res[0]
+  //     // setRecipes(responseOne.data);
+  //     const responseTwo = res[0]
+  //     setUser(responseTwo.data)
+  //   }))
+  //   .catch(err=>console.log('there is error in useEffect',err))
+  // },[setUser])
   
   return (
     <div className=''>
@@ -43,9 +44,9 @@ const Navbar = ({user,setUser}) => {
                 </ul>
               </li> */}
               <li className="nav-item">
-                {!user._id? null : <Link className="nav-link active" to="/add-recipe">Add Recipe</Link> }
+                {!loggedUser._id? null : <Link className="nav-link active" to="/add-recipe">Add Recipe</Link> }
               </li>
-              {user.type==="admin"? <li className="nav-item">
+              {loggedUser.type==="admin"? <li className="nav-item">
           <Link className="nav-link active" to='/admin'>Pending Approval</Link>
         </li> : null }
         
@@ -55,25 +56,25 @@ const Navbar = ({user,setUser}) => {
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form> */}
       <ul className="navbar-nav mb-2 mb-lg-0">
-      {user._id? null :
+      {loggedUser._id? null :
         <li className="nav-item">
           <NavLink className="nav-link active" aria-current="page" to='/login'>Login</NavLink>
         </li> }
-        {user._id? null :
+        {loggedUser._id? null :
         <li className="nav-item">
           <NavLink className="nav-link active" aria-current="page" to='/register'>Register</NavLink>
         </li> }
-        {!user._id? null :
+        {!loggedUser._id? null :
         <li className="nav-item">
           <Link className="nav-link" to="/logout">Logout</Link>
         </li> }
 
       </ul>
         </div>
-        {!user._id? null :
-        <Link className='' to={`/user/${user._id}`}>
-          <img className ="profilePic rounded-3" src={user.pic} alt="profile pic" />
-          <span>{user.firstName}</span></Link>}
+        {!loggedUser._id? null :
+        <Link className='' to={`/user/${loggedUser._id}`}>
+          <img className ="profilePic rounded-3" src={loggedUser.pic} alt="profile pic" />
+          <span>{loggedUser.firstName}</span></Link>}
         </div>
       </nav>
     </div>

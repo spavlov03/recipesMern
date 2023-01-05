@@ -18,23 +18,24 @@ import EditProfile from './components/EditProfile';
 function App() {
   const [user,setUser] = useState({});
   const [oneRecipe,setOneRecipe] =useState({});
+  const [loggedUser,setLoggedUser] = useState({_id:null}); 
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar user={user} setUser={setUser}/>
+        <Navbar user={user} setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>
         <Routes>
           {/* <Route path='/' element={<Home/>}/> */}
-          <Route path='/login' element={<Login user={user} setUser={setUser}/>}/>
-          <Route path='/register' element={<Register user={user} setUser={setUser}/>}/>
-          {user._id===oneRecipe.creatorId?<Route path='/user/:id/edit' element={<EditProfile user={user} setUser={setUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
-          <Route path='/' element={<Dashboard user={user} setUser={setUser}/>}/>
-          {user.type==="admin"?<Route path='/admin' element={<AdminPanel user={user} setUser={setUser}/>}/>:null}
-          <Route path='/logout' element={<Logout setUser={setUser}/>}/>
+          <Route path='/login' element={<Login user={user} setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          <Route path='/register' element={<Register user={user} setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          <Route path='/' element={<Dashboard user={user} setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}
+          <Route path='/logout' element={<Logout setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe user={user} setUser={setUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>
-          {user._id?<Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
-          {user._id===oneRecipe.creatorId || user.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe user={user} setUser={setUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
-          <Route path='/user/:id' element={<UserDetail user={user} setUser={setUser}/>}/>
+          {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe user={user} setUser={setUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
+          {loggedUser._id===oneRecipe.creatorId || user.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe user={user} setUser={setUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
+          <Route path='/user/:id' element={<UserDetail user={user} setUser={setUser} loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          {loggedUser._id || loggedUser._id===oneRecipe.creatorId?<Route path='/user/:id/edit' element={<EditProfile user={user} setUser={setUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
         </Routes>
       </BrowserRouter>
     </div>

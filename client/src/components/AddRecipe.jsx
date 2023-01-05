@@ -2,7 +2,7 @@ import {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-const AddRecipe = ({user,setUser}) => {
+const AddRecipe = ({loggedUser,setLoggedUser}) => {
   const [recipeName,setRecipeName] = useState('');
   const [cookTime,setCookTime] = useState(0);
   const [directions,setDirections] = useState('');
@@ -35,9 +35,9 @@ const AddRecipe = ({user,setUser}) => {
       cookTime,
       directions, 
       ingredients, 
-      creatorId: user._id, 
-      creatorFirstName: user.firstName,
-      creatorLastName: user.lastName, 
+      creatorId: loggedUser._id, 
+      creatorFirstName: loggedUser.firstName,
+      creatorLastName: loggedUser.lastName, 
       status:'pending', 
       yeilds,
     },{withCredentials:true})

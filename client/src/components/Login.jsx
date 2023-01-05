@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({user,setUser}) => {
+const Login = ({user,setUser,loggedUser,setLoggedUser}) => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState(""); 
   const [errors,setErrors] = useState(); 
@@ -15,7 +15,7 @@ const Login = ({user,setUser}) => {
       password
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      setUser(res.data.user);
+      setLoggedUser(res.data.user);
       navigate('/')
     })
     .catch((err)=>{ 
