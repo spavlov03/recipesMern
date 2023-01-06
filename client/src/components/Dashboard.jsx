@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Dashboard = ({user,setUser,loggedUser,setLoggedUser}) => {
+const Dashboard = ({loggedUser}) => {
   const [recipes,setRecipes] = useState([]); 
   // useEffect(()=>{ 
   //   axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
@@ -27,7 +27,7 @@ const Dashboard = ({user,setUser,loggedUser,setLoggedUser}) => {
   },[])
   
   return (
-    <div>{!user._id?null:<p>Hello User - {user.firstName}</p>}
+    <div>{!loggedUser._id?null:<p>Hello User - {loggedUser.firstName}</p>}
       {/* <p>This is the Dasboard</p> */}
       <p>List of All Recipes</p>
       {recipes?.map((recipe,index)=> {

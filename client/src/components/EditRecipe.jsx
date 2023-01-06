@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 
 
-const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
+const EditRecipe = ({loggedUser,setOneRecipe}) => {
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />))
   (({ theme }) => ({
@@ -84,7 +84,7 @@ const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
       setOneRecipe(res.data)
     })
     .catch(err=>console.log(err))
-    },[])
+    },[id,setOneRecipe])
 
   let handleChange = (i,e) => { 
     let newIngredientsValues = [...ingredients]; 
@@ -107,14 +107,14 @@ const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
       cookTime,
       directions, 
       ingredients, 
-      status:user.type==="admin"?approved:"pending",
+      status:loggedUser.type==="admin"?approved:"pending",
       // creatorId: user._id, 
       // creatorFirstName: user.firstName,
       // creatorLastName: user.lastName
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
-      user.type==="admin"?navigate('/admin'):
+      loggedUser.type==="admin"?navigate('/admin'):
       navigate(-1)
     })
     .catch((err)=> { 
@@ -133,7 +133,7 @@ const EditRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
         <input className='form-control' type="text" name='cookTime' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
         <label className='form-label'>Directions</label>
         <input className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
-        {user.type=="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
+        {loggedUser.type==="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
           {/* <div className="container">
             <p>Approved : </p>
             <div className="toggle-switch">

@@ -1,33 +1,36 @@
 import {useState,useEffect} from 'react'
-import { useNavigate,useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AddProfilePic from './AddProfilePic'
 
-const EditProfile = ({user,setUser}) => {
+const EditProfile = ({loggedUser}) => {
   const [firstName,setFirstName] = useState(""); 
   const [lastName,setLastName] = useState(""); 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState(""); 
+  // const [email,setEmail] = useState("");
+  // const [password,setPassword] = useState(""); 
   const [errors,setErrors] = useState({}); 
   const navigate = useNavigate(); 
-  const [confirmPassword,setConfirmPassword] = useState("")
+  // const [confirmPassword,setConfirmPassword] = useState("")
   const [url,setUrl] = useState("")
-  const {id} = useParams();
+  // const {id} = useParams();
 
   
   useEffect(()=>{ 
-    axios.get(`http://localhost:8000/api/user/${id}`,{withCredentials:true})
+    axios.get(`http://localhost:8000/api/user/${loggedUser._id}`,{withCredentials:true})
     .then((res)=>{
       setFirstName(res.data.firstName)
       setLastName(res.data.lastName)
       setUrl(res.data.pic)
+      // setAuthor(res.data)
     })
     .catch(err=>console.log('there is error in useEffect',err))
   },[])
 
   const submitHandler = (e) => { 
+    // console.log(`ID ---->>> ${id}`)
+    // console.log(`logged user ---->>> ${loggedUser}`)
     e.preventDefault()
-    axios.put(`http://localhost:8000/api/user/${user.id}/edit`, {
+    axios.put(`http://localhost:8000/api/user/${loggedUser._id}/edit`, {
       firstName, 
       lastName,
       // email,
@@ -37,7 +40,7 @@ const EditProfile = ({user,setUser}) => {
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
       navigate(-1)
-      // window.location.reload(false);
+      window.location.reload(false);
     })
     .catch((err)=>{ 
       console.log(err)

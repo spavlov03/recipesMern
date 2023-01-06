@@ -1,8 +1,8 @@
-import {useState,useEffect} from 'react'
+import {useEffect} from 'react'
 import axios from 'axios'
 import { useParams,Link } from 'react-router-dom'
 
-const ViewRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
+const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   const {id} = useParams();
   // const [recipe,setRecipe] = useState({}); Not needed , state is lifted 
   useEffect(()=>{
@@ -11,7 +11,7 @@ const ViewRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
       setOneRecipe(res.data);
     })
     .catch(err=>console.log(err))
-    },[])
+    },[id,setOneRecipe])
 
   return (
     <div className='mx-auto'>
@@ -25,10 +25,10 @@ const ViewRecipe = ({user,setUser,oneRecipe,setOneRecipe}) => {
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
         {/* <p>Recipe Status is {oneRecipe.status}</p> */}
-        {user.type==="admin"? <p className="">Status: {oneRecipe.status}</p> : null }
+        {loggedUser.type==="admin"? <p className="">Status: {oneRecipe.status}</p> : null }
       </div>
-      {oneRecipe.creatorId===user._id || user.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
-      {oneRecipe.creatorId===user._id || user.type==='admin'?<button className='btn btn-danger'>Delete Recipe</button> : null}
+      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
+      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger'>Delete Recipe</button> : null}
       
 
     </div>

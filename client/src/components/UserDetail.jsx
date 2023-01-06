@@ -4,7 +4,7 @@ import { useParams,Link } from 'react-router-dom'
 // import AddProfilePic from './AddProfilePic';
 
 
-const UserDetail = ({setUser,loggedUser,setLoggedUser}) => {
+const UserDetail = ({loggedUser}) => {
   
   const [thisUser,setThisUser] = useState({}); 
   const [recipes,setRecipes] = useState([]); 
@@ -20,10 +20,9 @@ const UserDetail = ({setUser,loggedUser,setLoggedUser}) => {
       const responseTwo = res[1]
       // console.log(responseTwo)
       setThisUser(responseOne.data)
-      console.log(`this user is ${thisUser}`)
+      // console.log(`this user is ${thisUser}`)
       setRecipes(responseTwo.data)
-      console.log(`these are the recipes ${recipes}`)
-      
+      // console.log(`these are the recipes ${recipes}`)
     }))
     .catch(err=>console.log(err))
   },[id,recipes,thisUser])

@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Register = ({user,setUser,loggedUser,setLoggedUser}) => {
+const Register = ({setLoggedUser}) => {
   const [firstName,setFirstName] = useState(""); 
   const [lastName,setLastName] = useState(""); 
   const [email,setEmail] = useState("");

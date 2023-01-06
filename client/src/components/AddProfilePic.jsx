@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const AddProfilePic = ({url,setUrl}) => {
+const AddProfilePic = ({setUrl}) => {
   const [profilePic,setProfilePic] = useState("")
   // const [url,setUrl] = useState("")
   const uploadPic = (e) => { 

@@ -1,23 +1,24 @@
-import {useEffect} from 'react'
 import { NavLink,Link } from 'react-router-dom'
 import axios from 'axios'
+import { useEffect } from 'react'
+
 
 
 
 const Navbar = ({loggedUser,setLoggedUser}) => {
   
-  // useEffect(()=>{ 
-  //   // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
-  //   const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
-  //   axios.all([requestTwo])
-  //   .then(axios.spread((...res)=>{
-  //     // const responseOne = res[0]
-  //     // setRecipes(responseOne.data);
-  //     const responseTwo = res[0]
-  //     setUser(responseTwo.data)
-  //   }))
-  //   .catch(err=>console.log('there is error in useEffect',err))
-  // },[setUser])
+  useEffect(()=>{ 
+    // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
+    const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
+    axios.all([requestTwo])
+    .then(axios.spread((...res)=>{
+      // const responseOne = res[0]
+      // setRecipes(responseOne.data);
+      const responseTwo = res[0]
+      setLoggedUser(responseTwo.data)
+    }))
+    .catch(err=>console.log('there is error in useEffect',err))
+  },[setLoggedUser])
   
   return (
     <div className=''>
