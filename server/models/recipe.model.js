@@ -1,22 +1,37 @@
 const mongoose = require('mongoose')
 const IngredientsSchema = mongoose.Schema({
-  ingredient:String,
-  qty:Number, 
-  uom:String
+  ingredient:{
+    type:String,
+    // required: [true,"Ingredient must have name"]
+  },
+  qty:{
+    type:Number,
+    // required: [true,"Enter Ingredient Quantity"]
+  },
+  uom:{
+    type:String,
+    // required: [true,"Enter unit of measurment"]
+  },
+  
 })
 
 const RecipeSchema = mongoose.Schema({
   recipeName:{
-    type:String
+    type:String, 
+    required: [true,"Recipe name is required"]
   }, 
   cookTime:{
-    type:Number
+    type:Number, 
+    required: [true,"Cook time is required"]
   }, 
   directions:{ 
-    type:String
+    type:String, 
+    required: [true,"Directions are required"]
   }, 
   ingredients:{
-    type:[IngredientsSchema]
+    type:[IngredientsSchema], 
+    // required: [true,"Must list at least one ingredient"]
+
   },
   creatorId:{
     type:String
@@ -32,7 +47,11 @@ const RecipeSchema = mongoose.Schema({
     enum: ['pending','approved']
   }, 
   yields:{
-    type:Number
+    type:Number, 
+    required: [true,"Must enter number of servings"]
+  }, 
+  recipeImg: { 
+    type:String,
   }
 })
 

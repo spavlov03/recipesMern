@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -26,7 +26,7 @@
 
 .App-link {
   color: #61dafb;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -36,9 +36,10 @@
     transform: rotate(360deg);
   }
 }
-@media all and (max-width:600px) {
+@media all and (max-width:991px) {
   .myForm { 
     width: 100%;
+    align-items: center;
   }
   .regLabel { 
     width: 130px;
@@ -61,6 +62,8 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    align-items: center;
+    
   }
   #servings { 
     margin-left: 10px;
@@ -70,14 +73,18 @@
     align-self: center;
     margin-bottom: 10px;
   }
+  .recipeForm { 
+    /* background-color: blueviolet; */
+    width: 400px;
+  }
 
 }
 
-@media all and (min-width:600px) { 
+/* @media all and (min-width:600px) { 
   .myForm { 
     width: 90%;
   }
-}
+} */
 
 @media all and (min-width:992px){
   .myForm {
@@ -101,7 +108,6 @@
   .ingBox { 
     display: flex;
     flex-direction: row; 
-    padding: 10px;
     align-items: center;
   }
   #servings { 
@@ -126,7 +132,11 @@
   #topField { 
     display: flex;
     gap: 10px;
-    background-color: #61dafb;
+    /* background-color: #61dafb; */
+  }
+  .recipeForm { 
+    width: 800px;
+    /* background-color: blueviolet; */
   }
 }
 .profilePic { 

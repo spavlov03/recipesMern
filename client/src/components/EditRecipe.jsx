@@ -126,13 +126,13 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
     <div>
       <p>Edit {recipe.recipeName}</p>
       {/* <p>Your Name is {user.firstName} and ID is {user._id}</p> */}
-      <form onSubmit={handleSubmit} className='mx-auto w-75'>
+      <form onSubmit={handleSubmit} className='mx-auto recipeForm'>
         <label className='form-label'>Reicipe Name</label>
         <input className='form-control' type="text" name='recipeName' value={recipeName} onChange={(e)=>setRecipeName(e.target.value)}/>
         <label className='form-label'>Time to cook</label>
         <input className='form-control' type="text" name='cookTime' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
         <label className='form-label'>Directions</label>
-        <input className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
+        <textarea className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
         {loggedUser.type==="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
           {/* <div className="container">
             <p>Approved : </p>
@@ -147,24 +147,24 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
           </div> */}
         <label>Ingredients:</label>
         {ingredients.map((element,index) => (
-          <div key={index}>
-            <label>Name:</label>
-            <input type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
-            <label>Quantity</label>
-            <input type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
-            <label>Unit of Measure</label>
-            <input type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+          <div key={index} className='ingBox'>
+            <label className='form-label ingLabel'>Name:</label>
+            <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+            <label className='form-label ingLabel'>Quantity</label>
+            <input className='form-control ingInput' type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+            <label className='form-label ingLabel'>Unit of Measure</label>
+            <input className='form-control ingInput' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
             {
               index ?
-              <button type='button' className='btn btn-danger' onClick={()=>removeIngredientsFields(index)}>Remove</button>
+              <button type='button' className='btn btn-danger mt-2' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>
               :null
             }
           </div>
         ))}
-        <div className='mt-2'>
-          <button className='btn btn-info' type='button' onClick={()=>addIngredientsFields()}>Add</button>
-          <button className='btn btn-success ms-2' type="submit">Edit</button>
+        <div className=''>
+          <button className='btn btn-info mt-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
         </div>
+          <button className='btn btn-success mt-3' type="submit">Edit Recipe</button>
       </form>
     </div>
   )

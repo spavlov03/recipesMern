@@ -12,6 +12,16 @@ const ProfilePicSchema = mongoose.Schema({
 })
 
 const UserSchema = new mongoose.Schema({
+  firstName:{
+    type:String, 
+    minLength: [2,"First name must be at least 2 characters"], 
+    required: [true,"First name is required"]
+  }, 
+  lastName: { 
+    type:String, 
+    minLength: [2,"Last name must be at least 2 characters"], 
+    required: [true,"Last name is required"]
+  }, 
   email:{
     type:String,
     validate: {
@@ -33,16 +43,6 @@ const UserSchema = new mongoose.Schema({
       'user'
     ]
   },
-  firstName:{
-    type:String, 
-    minLength: [2,"First name must be at least 2 characters"], 
-    required: [true,"First name is required"]
-  }, 
-  lastName: { 
-    type:String, 
-    minLength: [2,"Last name must be at least 2 characters"], 
-    required: [true,"Last name is required"]
-  }, 
   about: {
     type:String
   }, 

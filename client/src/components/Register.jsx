@@ -1,6 +1,10 @@
 import {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import axios from 'axios'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastClassName } from 'react-toastify';
+
 
 const Register = ({setLoggedUser}) => {
   const [firstName,setFirstName] = useState(""); 
@@ -31,6 +35,13 @@ const Register = ({setLoggedUser}) => {
     .catch((err)=>{ 
       console.log(err)
       setErrors(err.response.data.errors)
+      // if (err.response.data.errors.firstName.message){
+      //   toast(err.response.data.errors.firstName.message, {position:"top-center"})
+      // }
+      // toast(err.response.data.errors.lastName.message, {position:"top-center"});
+      // toast(err.response.data.errors.email.message, {position:"top-center"});
+      // toast(err.response.data.errors.password.message, {position:"top-center"});
+      // toast(err.response.data.errors.confirmPassword.message, {position:"top-center"});
     })
 
   }
@@ -50,10 +61,10 @@ const Register = ({setLoggedUser}) => {
         <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
         <label className='form-label'>Password:</label>
-        <input className='form-control' type="text" onChange={(e)=>setPassword(e.target.value)}/>
+        <input className='form-control' type="password" onChange={(e)=>setPassword(e.target.value)}/>
         {errors.password && <span className='text-danger'>{errors.password.message}</span>} <br/>
         <label className='form-label'>Confirm password:</label>
-        <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
+        <input className='form-control' type="password" onChange={(e)=>setConfirmPassword(e.target.value)}/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
         <div>
         {/* <div>
@@ -62,7 +73,7 @@ const Register = ({setLoggedUser}) => {
         </div>
         <input className="btn btn-primary mt-3 mb-5" type="submit" value="Register" />
       </form>
-        
+      <Link to="/login">Already Have An Account?</Link>
       </div>
     </div>
   )

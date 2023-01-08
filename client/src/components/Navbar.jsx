@@ -74,7 +74,7 @@ const Navbar = ({loggedUser,setLoggedUser}) => {
         </div>
         {!loggedUser._id? null :
         <Link className='' to={`/user/${loggedUser._id}`}>
-          <img className ="profilePic rounded-3" src={loggedUser.pic} alt="profile pic" />
+          <img className ="profilePic rounded-3 me-2" src={loggedUser.pic} alt="profile pic" />
           <span>{loggedUser.firstName}</span></Link>}
         </div>
       </nav>

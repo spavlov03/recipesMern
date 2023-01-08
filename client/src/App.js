@@ -13,6 +13,7 @@ import NotAuthorized from './components/NotAuthorized';
 import UserDetail from './components/UserDetail';
 import { useState } from 'react';
 import EditProfile from './components/EditProfile';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   // const [user,setUser] = useState({});
@@ -24,6 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>
+        <ToastContainer/>
         <Routes>
           {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/login' element={<Login loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
@@ -32,8 +34,10 @@ function App() {
           {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}
           <Route path='/logout' element={<Logout loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>
-          {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
-          {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
+          <Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>
+          {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
+          {/* {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>} */}
+          <Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
         </Routes>

@@ -53,8 +53,9 @@ module.exports = {
         // console.log('current user ',currentUser)
         res.json(currentUser);
     } catch (error) {
-        console.log("ERROR")
-        res.status(400).json({ errors: 'failed to get logged in user' })
+        // console.log("ERROR")
+        res.status(400)
+        // res.status(400).json({ errors: 'failed to get logged in user' })
     }
   },
   getOneUser:(req,res)=>{ 

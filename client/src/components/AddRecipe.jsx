@@ -1,15 +1,21 @@
 import {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+// import {ToastContainer,toast} from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css';
+import AddProfilePic from './AddProfilePic';
+
 
 const AddRecipe = ({loggedUser}) => {
   const [recipeName,setRecipeName] = useState('');
-  const [cookTime,setCookTime] = useState(0);
+  const [cookTime,setCookTime] = useState();
   const [directions,setDirections] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
   const [yeilds,setYeilds] = useState(0)
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
+  const [url,setUrl] = useState("")
+  // const notify = () => toast("Wow so easy!"); 
 
   let handleChange = (i,e) => { 
     let newIngredientsValues = [...ingredients]; 
@@ -40,6 +46,7 @@ const AddRecipe = ({loggedUser}) => {
       creatorLastName: loggedUser.lastName, 
       status:'pending', 
       yeilds,
+      recipeImg: url,
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -47,6 +54,14 @@ const AddRecipe = ({loggedUser}) => {
     })
     .catch((err)=> { 
       console.log(err)
+      // toast(err.response.data.errors.recipeName.message, {position:"top-center"});
+      // toast(err.response.data.errors.cookTime.message, {position:"top-center"});
+      // toast(err.response.data.errors.yields.message, {position:"top-center"});
+      // toast(err.response.data.errors.directions.message, {position:"top-center"});
+
+      // err.response.data.errors.map((er,index)=>{
+      //   toast(er.message)
+      // })
       setErrors(err.response.data.errors)
     })
 
@@ -54,43 +69,46 @@ const AddRecipe = ({loggedUser}) => {
   return (
     <div>
       <p>Add A recipe</p>
-      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column border myForm'>
+      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column myForm'>
         <div id='topField'>
           <div className='d-flex flex-column gap-1'>
           <div className='d-flex '>
-            <label className='regLabel'>Reicipe Name</label>
-            <input className='regInput' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
+            <label className='form-label regLabel'>Reicipe Name</label>
+            <input className='form-control regInput' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
           </div>
+          {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>} <br/>
           <div className='d-flex ingFields'>
-            <label className='regLabel'>Cook in minutes</label>
-            <input className='regInput' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
+            <label className='form-label regLabel'>Cook in minutes</label>
+            <input className='form-control regInput' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
           </div>
+          {errors.cookTime && <span className='text-danger'>{errors.cookTime.message}</span>} <br/>
           <div className='d-flex ingFields'>
-            <label className='regLabel'>Yeilds</label>
+            <label className='form-label regLabel'>Yeilds</label>
             <div className='d-flex regInput'>
-            <input className='col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span id='servings'>Servings</span></div>
+            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span id='servings'>Servings</span></div>
             </div>
+          {errors.yields && <span className='text-danger'>{errors.yields.message}</span>} <br/>
           </div>
             <div>
-              <p>IMG PLACEHOLDER</p>
+              <AddProfilePic setUrl={setUrl}/>
             </div>
         </div>
-        <div className='border'>
+        <div className=''>
         <label className='text-center'>Ingredients:</label>
         {ingredients.map((element,index) => (
-          <div key={index} className="border pb-2">
+          <div key={index} className="mt-1 pb-2">
             <div className='w-100 ingBox'>
               <div className='d-flex ingField'>
-                <label className='ingLabel'>Name:</label>
-                <input className='ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+                <label className='from-label ingLabel'>Name:</label>
+                <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
               </div>
               <div className='d-flex ingField'>
-                <label className='ingLabel qtyLabel'>Quantity</label>
-                <input className='ingInput qty' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+                <label className='from-label ingLabel qtyLabel'>Quantity</label>
+                <input className='form-control ingInput qty' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
               </div>
               <div className='d-flex ingField'>
-                <label className='ingLabel uomLabel'>Unit of Measure</label>
-                <input className='ingInput qty' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+                <label className='from-label ingLabel uomLabel'>Unit of Measure</label>
+                <input className='form-control ingInput qty' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
               </div>
             </div>
             
@@ -101,10 +119,10 @@ const AddRecipe = ({loggedUser}) => {
             }
           </div>
         ))}
-        <button className='btn btn-info' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
+        <button className='btn btn-info mb-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
         </div>
         <div className='d-flex'>
-          <label className='col-4'>Directions</label>
+          <label className='form-label col-4'>Directions</label>
           <textarea rows="6" cols="50" className='col-7' type="text" name='directions' onChange={(e)=>setDirections(e.target.value)}/>
         </div>
         
@@ -150,6 +168,7 @@ const AddRecipe = ({loggedUser}) => {
           <button className='btn btn-success ms-2' type="submit">Submit</button>
         </div>
       </form>
+      {/* <button onClick={notify}>Toast Test</button> */}
     </div>
   )
 }
