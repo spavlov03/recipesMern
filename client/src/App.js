@@ -22,9 +22,9 @@ function App() {
   // const [thisUser,setThisUser] = useState({}); 
 
   return (
-    <div className="App">
+    <div className="App ">
       <BrowserRouter>
-        <Navbar loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>
+        <Navbar loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
         <ToastContainer/>
         <Routes>
           {/* <Route path='/' element={<Home/>}/> */}
