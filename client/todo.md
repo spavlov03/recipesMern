@@ -1,0 +1,2 @@
+Remove Creator First and Last name from model and keep only creatorId then query the user info. 
+Currently because saving the creator first and last name in the recipe model if the name is changed it is not reflected on the recipe. 

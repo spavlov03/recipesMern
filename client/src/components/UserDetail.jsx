@@ -31,6 +31,7 @@ const UserDetail = ({loggedUser}) => {
       <div className='polaroid mx-auto'>
       <img className ="detailPic" src={thisUser.pic} alt="profile pic" />
       <p>This is {thisUser?.firstName} {thisUser?.lastName} profile</p>
+      <p>Email is {thisUser?.email}</p>
       </div>
       <p>Recipes by {thisUser?.firstName}</p>  
       {thisUser._id===loggedUser._id || loggedUser.type==="admin"?<div>
