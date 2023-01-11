@@ -19,13 +19,14 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
       <p>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{oneRecipe.creatorFirstName} {oneRecipe.creatorLastName}</Link></p>
       <p>Cook Time : {oneRecipe.cookTime} Minutes</p>
       <p>Directions : {oneRecipe.directions}</p>
+      <p>Yields: {oneRecipe.yields} <span>Servings</span></p>
       <div>Ingredients : 
         <ul>
           {oneRecipe.ingredients?.map((ing,index)=>(
         <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
         {/* <p>Recipe Status is {oneRecipe.status}</p> */}
-        {loggedUser.type==="admin"? <p className="">Status: {oneRecipe.status}</p> : null }
+        {loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id ? <p className="">Status: {oneRecipe.status}</p> : null }
       </div>
       {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
       {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger'>Delete Recipe</button> : null}

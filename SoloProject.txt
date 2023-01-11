@@ -1,0 +1,8 @@
+Name: Svetoslav Pavlov
+Stack : MERN
+GitHub Repo: https://github.com/spavlov03/recipesMern
+Wireframe link: PDF attached
+Project Name: Recepify
+Project Description: Web-app for recipes added by users. 
+MVP Features: Add, edit, view and delete recipes based on user type. 
+Bonus Features: Login and reg, protected routes, responsive app, bootstrap and Material UI, deployed. Might use API for ingredients and Socket.io if time allows. 

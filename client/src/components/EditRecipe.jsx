@@ -164,7 +164,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
         <div className=''>
           <button className='btn btn-info mt-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
         </div>
-          <button className='btn btn-success mt-3' type="submit">Edit Recipe</button>
+          <button className='btn btn-success mt-3' type="submit">Save Recipe</button>
       </form>
     </div>
   )

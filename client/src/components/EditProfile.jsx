@@ -39,7 +39,7 @@ const EditProfile = ({loggedUser}) => {
       pic: url,
     },{withCredentials:true,credentials:'include'})
     .then((res)=> { 
-      navigate(-1)
+      navigate(`/user/${loggedUser._id}`)
       window.location.reload(false);
     })
     .catch((err)=>{ 

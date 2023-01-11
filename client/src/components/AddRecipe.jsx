@@ -11,7 +11,7 @@ const AddRecipe = ({loggedUser}) => {
   const [cookTime,setCookTime] = useState();
   const [directions,setDirections] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
-  const [yeilds,setYeilds] = useState(0)
+  const [yields,setYields] = useState("")
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
   const [url,setUrl] = useState("")
@@ -45,7 +45,7 @@ const AddRecipe = ({loggedUser}) => {
       creatorFirstName: loggedUser.firstName,
       creatorLastName: loggedUser.lastName, 
       status:'pending', 
-      yeilds,
+      yields,
       recipeImg: url,
     },{withCredentials:true})
     .then(res=>{
@@ -83,9 +83,9 @@ const AddRecipe = ({loggedUser}) => {
           </div>
           {errors.cookTime && <span className='text-danger'>{errors.cookTime.message}</span>} <br/>
           <div className='d-flex ingFields'>
-            <label className='form-label regLabel'>Yeilds</label>
+            <label className='form-label regLabel'>Yields</label>
             <div className='d-flex regInput'>
-            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYeilds(e.target.value)}/><span id='servings'>Servings</span></div>
+            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYields(e.target.value)}/><span id='servings'>Servings</span></div>
             </div>
           {errors.yields && <span className='text-danger'>{errors.yields.message}</span>} <br/>
           </div>
@@ -125,6 +125,7 @@ const AddRecipe = ({loggedUser}) => {
           <label className='form-label col-4'>Directions</label>
           <textarea rows="6" cols="50" className='col-7' type="text" name='directions' onChange={(e)=>setDirections(e.target.value)}/>
         </div>
+          {errors.directions && <span className='text-danger'>{errors.directions.message}</span>} <br/>
         
         {/* <label className='form-label'>Cuisine/Diet:</label>
         <div className="d-flex gap-2">
