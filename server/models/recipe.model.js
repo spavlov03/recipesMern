@@ -36,12 +36,12 @@ const RecipeSchema = mongoose.Schema({
   creatorId:{
     type:String
   }, 
-  creatorFirstName:{
-    type:String
-  },
-  creatorLastName:{
-    type:String
-  }, 
+  // creatorFirstName:{
+  //   type:String
+  // },
+  // creatorLastName:{
+  //   type:String
+  // }, 
   status:{
     type:String, 
     enum: ['pending','approved']

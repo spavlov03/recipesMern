@@ -61,10 +61,10 @@ const Register = ({setLoggedUser}) => {
         <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
         <label className='form-label'>Password:</label>
-        <input className='form-control' type="password" onChange={(e)=>setPassword(e.target.value)}/>
+        <input className='form-control' type="text" onChange={(e)=>setPassword(e.target.value)}/>
         {errors.password && <span className='text-danger'>{errors.password.message}</span>} <br/>
         <label className='form-label'>Confirm password:</label>
-        <input className='form-control' type="password" onChange={(e)=>setConfirmPassword(e.target.value)}/>
+        <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
         <div>
         {/* <div>

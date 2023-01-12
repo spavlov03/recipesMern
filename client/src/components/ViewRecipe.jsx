@@ -1,14 +1,21 @@
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams,Link } from 'react-router-dom'
 
 const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   const {id} = useParams();
-  // const [recipe,setRecipe] = useState({}); Not needed , state is lifted 
+  const [recipeAuthor,setRecipeAuthor] = useState({});
   useEffect(()=>{
+    // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
+    // const requestTwo = axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
     axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     .then((res)=>{
       setOneRecipe(res.data);
+      axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
+      .then((res=>{
+        setRecipeAuthor(res.data)
+      }))
+      .catch(err=>console.log('inside error',err))
     })
     .catch(err=>console.log(err))
     },[id,setOneRecipe])
