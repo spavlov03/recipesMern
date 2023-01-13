@@ -54,8 +54,8 @@ body {
     height: 30px;
   }
   .ingLabel {
-    width: 120px;
     margin-bottom: 15px;
+    text-align: center;
   }
   .ingInput { 
     width: 200px;
@@ -67,7 +67,6 @@ body {
     flex-direction: column;
     padding: 10px;
     align-items: center;
-    
   }
   #servings { 
     margin-left: 10px;
@@ -78,9 +77,13 @@ body {
     margin-bottom: 10px;
   }
   .recipeForm { 
-    /* background-color: blueviolet; */
-    width: 400px;
+    width: 600px;
   }
+  .saveBtn {
+    position:relative;
+  }
+  
+  
 
 }
 
@@ -103,7 +106,7 @@ body {
     height: 30px;
   }
   .ingLabel {
-    width: 70px;
+    text-align: center;
   }
   .ingInput { 
     width: 200px;
@@ -142,6 +145,12 @@ body {
     width: 800px;
     /* background-color: blueviolet; */
   }
+  .editRecipe { 
+    display: flex;
+  }
+  .saveBtn { 
+    position:fixed
+  }
 }
 .profilePic { 
   width: 40px;
@@ -157,4 +166,29 @@ body {
   width: 300px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/* .deleteBtn { 
+  background-color: rgb(78, 47, 216);
+  
+} */
+.saveBtn { 
+  
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: green;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  margin-top: 50px;
+  border: 0;
+  padding: 0;
+}
+.myNav { 
+  top: 0; 
+  position:fixed;
+  width: 100%;
+}
+.custom { 
+  margin-top: 80px;
 }

@@ -8,4 +8,5 @@ module.exports = (app) => {
   app.get('/api/recipes/pending',authenticate,RecipesControllers.findPending)
   app.get('/api/recipes/approved',RecipesControllers.findApproved)
   app.get('/api/recipes/:creatorId',RecipesControllers.findRecipesByUser)
+  app.delete('/api/recipe/:id',RecipesControllers.deleteRecipe)
 }

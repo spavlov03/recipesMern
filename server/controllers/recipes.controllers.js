@@ -39,5 +39,10 @@ module.exports = {
     .catch(err=>{
       // console.log("error in find")
       res.json(err)})
+  }, 
+  deleteRecipe: (req,res) => { 
+    Recipe.deleteOne({_id:req.params.id})
+    .then(recipe =>res.json(recipe))
+    .catch(err=>res.json(err))
   }
 }

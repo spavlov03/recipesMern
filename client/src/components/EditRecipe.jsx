@@ -4,6 +4,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
+import AddProfilePic from './AddProfilePic';
 
 
 const EditRecipe = ({loggedUser,setOneRecipe}) => {
@@ -59,9 +60,11 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
   const {id} = useParams();
-  const [recipe,setRecipe] = useState({}); 
+  // const [recipe,setRecipe] = useState({}); 
   const [approved, setApproved] = useState("pending");
   const [checked,setChecked] = useState(false);
+  const type = "Recipe"
+  const [recipeImg,setRecipeImg] = useState("")
 
   const switchHandler = (event) => {
     setChecked(event.target.checked)
@@ -82,6 +85,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       setIngredients(res.data.ingredients);
       setStatus(res.data.status);
       setOneRecipe(res.data)
+      setRecipeImg(res.data.recipeImg)
     })
     .catch(err=>console.log(err))
     },[id,setOneRecipe])
@@ -123,10 +127,10 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
     })
   }
   return (
-    <div>
-      <p>Edit {recipe.recipeName}</p>
+    <div className=''>
+      <div className='editRecipe mt-4'>
       {/* <p>Your Name is {user.firstName} and ID is {user._id}</p> */}
-      <form onSubmit={handleSubmit} className='mx-auto recipeForm'>
+      <div className='mx-auto recipeForm w-50'>
         <label className='form-label'>Reicipe Name</label>
         <input className='form-control' type="text" name='recipeName' value={recipeName} onChange={(e)=>setRecipeName(e.target.value)}/>
         <label className='form-label'>Time to cook</label>
@@ -147,25 +151,40 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
           </div> */}
         <label>Ingredients:</label>
         {ingredients.map((element,index) => (
-          <div key={index} className='ingBox'>
-            <label className='form-label ingLabel'>Name:</label>
-            <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
-            <label className='form-label ingLabel'>Quantity</label>
-            <input className='form-control ingInput' type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
-            <label className='form-label ingLabel'>Unit of Measure</label>
-            <input className='form-control ingInput' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+          <div key={index} className="d-flex flex-column">
+            <div className='ingBox'>
+              <div className='d-flex flex-column'>
+                <label className='form-label ingLabel'>Name:</label>
+                <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+              </div>
+              <div className='d-flex flex-column'>
+                <label className='form-label ingLabel'>Quantity</label>
+                <input className='form-control ingInput' type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+              </div>
+            <div className='d-flex flex-column'>
+              <label className='form-label ingLabel'>Unit of Measure</label>
+              <input className='form-control ingInput' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+            </div>
+            </div>
+            <div className=''>
             {
               index ?
-              <button type='button' className='btn btn-danger mt-2' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>
+              <button type='button' className='btn btn-danger mt-2 deleteBtn me-2' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>
               :null
             }
+            <button className='btn btn-info mt-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
+            </div>
           </div>
         ))}
         <div className=''>
-          <button className='btn btn-info mt-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
         </div>
-          <button className='btn btn-success mt-3' type="submit">Save Recipe</button>
-      </form>
+      </div>
+      <div className='mx-auto'>
+      <img className ="detailPic polaroid" src={recipeImg} alt="recipe" />
+      <AddProfilePic setUrl={setRecipeImg} type={type}/>
+      </div>
+      </div>
+      <button onClick={handleSubmit} className='saveBtn' type="submit">Save Recipe</button>
     </div>
   )
 }

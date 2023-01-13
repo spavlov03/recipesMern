@@ -15,6 +15,7 @@ const AddRecipe = ({loggedUser}) => {
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
   const [url,setUrl] = useState("")
+  const type = "Recipe"
   // const notify = () => toast("Wow so easy!"); 
 
   let handleChange = (i,e) => { 
@@ -90,7 +91,7 @@ const AddRecipe = ({loggedUser}) => {
           {errors.yields && <span className='text-danger'>{errors.yields.message}</span>} <br/>
           </div>
             <div>
-              <AddProfilePic setUrl={setUrl}/>
+              <AddProfilePic type={type} setUrl={setUrl}/>
             </div>
         </div>
         <div className=''>

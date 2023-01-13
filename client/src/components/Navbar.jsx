@@ -22,7 +22,7 @@ const Navbar = ({loggedUser,setLoggedUser}) => {
   
   return (
     <div className=''>
-      <nav className="navbar navbar-expand-lg bg-warning"> 
+      <nav className="navbar navbar-expand-lg bg-warning myNav"> 
              {/* Change color of Navbar fro here ^^^^ */}
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

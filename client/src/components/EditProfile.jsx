@@ -13,7 +13,7 @@ const EditProfile = ({loggedUser}) => {
   // const [confirmPassword,setConfirmPassword] = useState("")
   const [url,setUrl] = useState("")
   // const {id} = useParams();
-
+  const type = "Profile"
   
   useEffect(()=>{ 
     axios.get(`http://localhost:8000/api/user/${loggedUser._id}`,{withCredentials:true})
@@ -24,7 +24,7 @@ const EditProfile = ({loggedUser}) => {
       // setAuthor(res.data)
     })
     .catch(err=>console.log('there is error in useEffect',err))
-  },[])
+  },[loggedUser._id])
 
   const submitHandler = (e) => { 
     // console.log(`ID ---->>> ${id}`)
@@ -70,7 +70,7 @@ const EditProfile = ({loggedUser}) => {
           <label className='form-label'>Confirm password:</label>
           <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
           {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/> */}
-          <AddProfilePic url={url} setUrl={setUrl}/>
+          <AddProfilePic type={type} url={url} setUrl={setUrl}/>
           <button className="btn btn-primary mt-3 mb-5" type="submit" onClick={submitHandler}>Save Profile</button>
         </div>
         {/* <div className='w-100'>

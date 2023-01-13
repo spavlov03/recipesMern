@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { toast } from 'react-toastify'
 
-const AddProfilePic = ({setUrl}) => {
+const AddProfilePic = ({type,setUrl}) => {
   const [profilePic,setProfilePic] = useState("")
   // const [url,setUrl] = useState("")
   const uploadPic = (e) => { 
@@ -24,9 +24,9 @@ const AddProfilePic = ({setUrl}) => {
 
 
   return (
-    <div className=''>
+    <div className='d-flex flex-column'>
       
-        <label className=''>Upload Profile Picture:</label>
+        <label className=''>Upload {type} Picture:</label>
         <input className="mt-2" type="file" onChange={(e)=>setProfilePic(e.target.files[0])}/>
         <button className="btn btn-outline-success mx-auto mt-2" onClick={()=>uploadPic()}>Upload Photo</button>
       

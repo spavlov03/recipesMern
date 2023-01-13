@@ -24,7 +24,9 @@ function App() {
   return (
     <div className="App ">
       <BrowserRouter>
+        <div className='custom'>
         <Navbar loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
+        </div>
         <ToastContainer/>
         <Routes>
           {/* <Route path='/' element={<Home/>}/> */}
