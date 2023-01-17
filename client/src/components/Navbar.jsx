@@ -1,11 +1,15 @@
-import { NavLink,Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 
 
 
 
-const Navbar = ({loggedUser,setLoggedUser}) => {
+const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
+  const [search,setSearch] = useState(""); 
+  const navigate = useNavigate();
+
+
   
   useEffect(()=>{ 
     // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
@@ -19,11 +23,22 @@ const Navbar = ({loggedUser,setLoggedUser}) => {
     }))
     .catch(err=>console.log('there is error in useEffect',err))
   },[setLoggedUser])
+
+  let searchSubmit = (e) => { 
+    e.preventDefault(); 
+    console.log(`Search item is ${search}`)
+    axios.get(`http://localhost:8000/api/recipes/search/${search}`)
+    .then((res)=>{
+      console.log(`Search result res is ${res.data}`)
+      setSearchResults(res.data)})
+      navigate('/recipes/searchResult')
+    .catch(err=>console.log(`Error in search submit--- ${err}`))
+  }
   
   return (
     <div className=''>
-      <nav className="navbar navbar-expand-lg bg-warning myNav"> 
-             {/* Change color of Navbar fro here ^^^^ */}
+      <nav className="navbar navbar-expand-lg myNav"> 
+             {/* Change color of Navbar from here ^^^^ */}
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -31,7 +46,7 @@ const Navbar = ({loggedUser,setLoggedUser}) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
+                <Link className="nav-link active" aria-current="page" to='/' >Home</Link>
               </li>
               {/* <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to='/dashboard'>Dashboard</NavLink>
@@ -53,18 +68,18 @@ const Navbar = ({loggedUser,setLoggedUser}) => {
         </li> : null }
         
             </ul>
-      {/* <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form> */}
+      <form onSubmit={searchSubmit} className="d-flex" role="search">
+        <input className="form-control me-2" type="search" placeholder="Search Recipes" aria-label="Search Recipes" onChange={(e)=>setSearch(e.target.value)}/>
+        <button className="btn btn-outline-primary" type="submit">Search</button>
+      </form>
       <ul className="navbar-nav mb-2 mb-lg-0">
       {loggedUser._id? null :
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to='/login'>Login</NavLink>
+          <Link className="nav-link active" aria-current="page" to='/login'>Login</Link>
         </li> }
         {loggedUser._id? null :
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to='/register'>Register</NavLink>
+          <Link className="nav-link active" aria-current="page" to='/register'>Register</Link>
         </li> }
         {!loggedUser._id? null :
         <li className="nav-item">

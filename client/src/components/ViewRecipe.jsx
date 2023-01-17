@@ -1,11 +1,40 @@
 import {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams,Link,useNavigate } from 'react-router-dom'
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   const {id} = useParams();
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
+  const [likes,setLikes] = useState([]); 
+
+  let likeRecipe = (id,e) => {
+    e.preventDefault(); 
+    console.log('Recipe Liked')
+    axios.put(`http://localhost:8000/api/recipe/like/${oneRecipe._id}`, {
+      likes:[loggedUser._id]
+    },{withCredentials:true})
+    .then(res=> { 
+      console.log('res in likes',res)
+      // setLikes(res)
+    })
+    .catch(err=>console.log(err))
+  }
+  let unlikeRecipe = (id,e) => { 
+    e.preventDefault(); 
+    console.log('Recipe Unliked')
+    axios.put(`http://localhost:8000/api/recipe/unlike/${oneRecipe._id}`, {
+      likes:[likes.splice(loggedUser._id)]
+    },{withCredentials:true})
+    .then(res=> { 
+      console.log('res in likes',res)
+      // setLikes(res)
+    })
+    .catch(err=>console.log(err))
+  }
+
   useEffect(()=>{
     // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     // const requestTwo = axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
@@ -28,23 +57,33 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
       .catch(err=>console.log(err))
     }
 
+
   return (
     <div className='mx-auto'>
-      <div className='polaroid mx-auto'>
+      <div className='polaroidRecipe mx-auto'>
       <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
       <p>Recipe name : {oneRecipe.recipeName}</p>
       <p>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
-      </div>
+      {/* </div> */}
       <p>Cook Time : {oneRecipe.cookTime} Minutes</p>
-      <p>Directions : {oneRecipe.directions}</p>
+      <p className='ms-3 me-3'>Directions : {oneRecipe.directions}</p>
       <p>Yields: {oneRecipe.yields} <span>Servings</span></p>
       <div>Ingredients : 
-        <ul>
+        <ul className='list-group'>
           {oneRecipe.ingredients?.map((ing,index)=>(
-        <li key={index}>{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
+        <li key={index} className="list-group-item">{ing.ingredient} - {ing.qty} {ing.uom}</li>))} 
         </ul> 
         {/* <p>Recipe Status is {oneRecipe.status}</p> */}
         {loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id ? <p className="">Status: {oneRecipe.status}</p> : null }
+        {/* {oneRecipe.likes.includes(loggedUser._id)?<i className="material-icons likeIcon">thumb_down</i>:<i className="material-icons likeIcon" onClick={likeRecipe}>thumb_up</i>} */}
+        <button onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
+        <i className="material-icons likeIcon">thumb_up</i>
+        </button>
+        <button>
+        <i className="material-icons likeIcon" onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>thumb_down</i>
+        </button>
+        <p>{oneRecipe.likes.length} like's</p>
+      </div>
       </div>
       {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
       {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe</button> : null}

@@ -48,6 +48,7 @@ const AddRecipe = ({loggedUser}) => {
       status:'pending', 
       yields,
       recipeImg: url,
+      likes:[],
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -69,8 +70,8 @@ const AddRecipe = ({loggedUser}) => {
   }
   return (
     <div>
-      <p>Add A recipe</p>
-      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column myForm'>
+      <h5 className='mb-4'>Ready To Add Your Own Recipe?</h5>
+      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column myForm p-3'>
         <div id='topField'>
           <div className='d-flex flex-column gap-1'>
           <div className='d-flex '>
@@ -86,7 +87,9 @@ const AddRecipe = ({loggedUser}) => {
           <div className='d-flex ingFields'>
             <label className='form-label regLabel'>Yields</label>
             <div className='d-flex regInput'>
-            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYields(e.target.value)}/><span id='servings'>Servings</span></div>
+              <div>
+            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYields(e.target.value)}/><span className="" id='servings'>Servings</span></div>
+            </div>
             </div>
           {errors.yields && <span className='text-danger'>{errors.yields.message}</span>} <br/>
           </div>
@@ -165,10 +168,10 @@ const AddRecipe = ({loggedUser}) => {
         </div> */} 
         {/* Add Later */}
         
-        <div className='mt-2'>
+        {/* <div className='mt-5'> */}
           
-          <button className='btn btn-success ms-2' type="submit">Submit</button>
-        </div>
+          <button className='submitBtn' type="submit">Submit</button>
+        {/* </div> */}
       </form>
       {/* <button onClick={notify}>Toast Test</button> */}
     </div>

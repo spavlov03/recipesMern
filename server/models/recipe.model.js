@@ -52,6 +52,9 @@ const RecipeSchema = mongoose.Schema({
   }, 
   recipeImg: { 
     type:String,
+  }, 
+  likes: { 
+    type:[String]
   }
 })
 

@@ -112,6 +112,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       directions, 
       ingredients, 
       status:loggedUser.type==="admin"?approved:"pending",
+      recipeImg, 
       // creatorId: user._id, 
       // creatorFirstName: user.firstName,
       // creatorLastName: user.lastName

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import CoverFlow from './CoverFlow'
 
 
 const Dashboard = ({loggedUser}) => {
@@ -27,15 +28,15 @@ const Dashboard = ({loggedUser}) => {
   },[])
   
   return (
-    <div>{!loggedUser._id?null:<p>Hello User - {loggedUser.firstName}</p>}
-      {/* <p>This is the Dasboard</p> */}
+    <div className='me-5 ms-5'>
+      {!loggedUser._id?null:<h2>Hello {loggedUser.firstName}!</h2>}
+      {/* <p>This is the Dasboard</p>
       <p>Here is our top recipes of the week!</p>
       {recipes?.map((recipe,index)=> {
         return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
-      })}
-      
-
-
+      })} */}
+      {/* <p>Here is our top recipes of the week!</p> */}
+      <CoverFlow recipes={recipes}/>
     </div>
   )
 }

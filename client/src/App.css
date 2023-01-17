@@ -82,6 +82,16 @@ body {
   .saveBtn {
     position:relative;
   }
+  .profileLink { 
+    position: fixed;
+    top: 15px;
+    right: 20%;
+  }
+  .polaroidRecipe {
+    width: 80%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   
   
 
@@ -96,6 +106,8 @@ body {
 @media all and (min-width:992px){
   .myForm {
     width: 50%;
+    /* background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   }
   .regLabel { 
     width: 120px;
@@ -149,21 +161,36 @@ body {
     display: flex;
   }
   .saveBtn { 
-    position:fixed
+    position:relative;
+    width: 100px;
+  
+  }
+  .profileLink { 
+    position: fixed;
+    top: 15px;
+    right: 80px;
+  }
+  .polaroidRecipe {
+    width: 60%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 .profilePic { 
   width: 40px;
-  /* height: 40px; */
-  
+  height: 40px;
+  object-fit: cover;
 }
 .detailPic { 
   width: 300px;
-
-
 }
 .polaroid {
   width: 300px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.polaroid2 {
+  width: 200px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -172,6 +199,19 @@ body {
   
 } */
 .saveBtn { 
+  
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background-color: green;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  margin-top: 50px;
+  border: 0;
+  padding: 0;
+}
+.submitBtn { 
   
   bottom: 0;
   left: 0;
@@ -188,7 +228,35 @@ body {
   top: 0; 
   position:fixed;
   width: 100%;
+  background-color: rgb(190, 203, 92);
 }
 .custom { 
   margin-top: 80px;
 }
+/* body { 
+  background-color: #363633;
+  color: white;
+} */
+.myTest {
+  /* background-color: rgb(99, 37, 199); */
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* background-color: aqua; */
+  
+}
+.recipeImg { 
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.myCenter { 
+  margin: auto;
+  padding: auto;
+}
+.likeIcon { 
+  /* background-color: aqua; */
+  font-size: 50px;
+}
+
