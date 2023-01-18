@@ -14,11 +14,11 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     e.preventDefault(); 
     console.log('Recipe Liked')
     axios.put(`http://localhost:8000/api/recipe/like/${oneRecipe._id}`, {
-      likes:[loggedUser._id]
+      likes:[...likes,loggedUser._id]
     },{withCredentials:true})
     .then(res=> { 
       console.log('res in likes',res)
-      // setLikes(res)
+      setLikes(res.data.likes)
     })
     .catch(err=>console.log(err))
   }
@@ -41,6 +41,7 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     .then((res)=>{
       setOneRecipe(res.data);
+      setLikes(res.data.likes)
       return axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
       .then((res=>{
         setRecipeAuthor(res.data)
@@ -76,13 +77,16 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
         {/* <p>Recipe Status is {oneRecipe.status}</p> */}
         {loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id ? <p className="">Status: {oneRecipe.status}</p> : null }
         {/* {oneRecipe.likes.includes(loggedUser._id)?<i className="material-icons likeIcon">thumb_down</i>:<i className="material-icons likeIcon" onClick={likeRecipe}>thumb_up</i>} */}
-        <button onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
-        <i className="material-icons likeIcon">thumb_up</i>
-        </button>
-        <button>
-        <i className="material-icons likeIcon" onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>thumb_down</i>
-        </button>
-        <p>{oneRecipe.likes.length} like's</p>
+        {!loggedUser._id? null:<div>
+          <button onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
+            <i className="material-icons likeIcon">thumb_up</i>
+          </button>
+          <button>
+            <i className="material-icons likeIcon" onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>thumb_down</i>
+          </button>
+          <p>{likes.length} like's</p>
+        </div>}
+        {/* Like Buton works , need to make it one like per user , fix unlike button. Make like button dissaper when liked vice versa for unlike */}
       </div>
       </div>
       {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
