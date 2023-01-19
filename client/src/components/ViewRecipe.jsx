@@ -13,8 +13,9 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   let likeRecipe = (id,e) => {
     e.preventDefault(); 
     console.log('Recipe Liked')
-    axios.put(`http://localhost:8000/api/recipe/like/${oneRecipe._id}`, {
-      likes:[...likes,loggedUser._id]
+    axios.put(`http://localhost:8000/api/recipe/like/${id}`, {
+      // likes:[...likes,loggedUser._id]
+      likes:likes.includes(loggedUser._id)?likes:[...likes,loggedUser._id]
     },{withCredentials:true})
     .then(res=> { 
       console.log('res in likes',res)
@@ -25,12 +26,13 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   let unlikeRecipe = (id,e) => { 
     e.preventDefault(); 
     console.log('Recipe Unliked')
-    axios.put(`http://localhost:8000/api/recipe/unlike/${oneRecipe._id}`, {
-      likes:[likes.splice(loggedUser._id)]
+    setLikes(likes.splice((likes.indexOf(loggedUser._id)),1))
+    axios.put(`http://localhost:8000/api/recipe/unlike/${id}`, {
+      likes:[...likes]
     },{withCredentials:true})
     .then(res=> { 
       console.log('res in likes',res)
-      // setLikes(res)
+      setLikes(res.data.likes)
     })
     .catch(err=>console.log(err))
   }
@@ -78,12 +80,13 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
         {loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id ? <p className="">Status: {oneRecipe.status}</p> : null }
         {/* {oneRecipe.likes.includes(loggedUser._id)?<i className="material-icons likeIcon">thumb_down</i>:<i className="material-icons likeIcon" onClick={likeRecipe}>thumb_up</i>} */}
         {!loggedUser._id? null:<div>
-          <button onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
+          {likes.includes(loggedUser._id)?<button className='btn' onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>
+            <i className="material-icons likeIcon" >thumb_down</i>
+          </button>:
+          <button className='btn' onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
             <i className="material-icons likeIcon">thumb_up</i>
-          </button>
-          <button>
-            <i className="material-icons likeIcon" onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>thumb_down</i>
-          </button>
+          </button>}
+          
           <p>{likes.length} like's</p>
         </div>}
         {/* Like Buton works , need to make it one like per user , fix unlike button. Make like button dissaper when liked vice versa for unlike */}
