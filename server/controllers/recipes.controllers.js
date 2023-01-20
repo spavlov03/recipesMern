@@ -46,13 +46,13 @@ module.exports = {
     .catch(err=>res.json(err))
   },
   findRecipes: (req,res) => {
-    console.log(`inside controller ${req.params.recipeName}`)
+    // console.log(`inside controller ${req.params.recipeName}`)
     // Recipe.find({ingredients:
     //         {ingredient:req.params.ingredients.ingredient}})
     Recipe.find({recipeName:
             {$regex: new RegExp("^" + req.params.recipeName.toLowerCase(),'i')},status:"approved"})
     .then(recipes=>{
-      console.log(`inside then ${recipes}`); 
+      // console.log(`inside then ${recipes}`); 
       res.json(recipes)})
     .catch(err=>res.json(err))
   },

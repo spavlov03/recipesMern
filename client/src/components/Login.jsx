@@ -28,18 +28,20 @@ const Login = ({setLoggedUser}) => {
   }
 
   return (
-    <div className='border w-50 mx-auto mt-3'>
+    <div className='container'>
+      <div className='row mt-3'>
       <p>Login</p>
-      <form onSubmit={submitHandler}> 
-        <label className='form-label'>Email:</label>
-        <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
+      <form onSubmit={submitHandler} className="border mx-auto mt-3 col-lg-5 col-8 col-md-6 pt-3"> 
+        {/* <label className='form-label'>Email:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email"/>
         {/* {errors && <span className='text-danger'>{errors}</span>} <br/> */}
-        <label className='form-label'>Password:</label>
-        <input className='form-control' type="password" onChange={(e)=>setPassword(e.target.value)}/>
-        <input className="btn btn-info mt-3" type="submit" value="Login" />
+        {/* <label className='form-label'>Password:</label> */}
+        <input className='form-control mt-3' type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password"/>
+        <input className="btn btn-primary mt-3 mb-4" type="submit" value="Login" />
       </form>
         <Link to="/register">Don't Have An Account?</Link>
       </div>
+    </div>
   )
 }
 

@@ -102,16 +102,16 @@ const AddRecipe = ({loggedUser}) => {
           <div key={index} className="mt-1 pb-2">
             <div className='w-100 ingBox'>
               <div className='d-flex ingField'>
-                <label className='from-label ingLabel'>Name:</label>
-                <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+                {/* <label className='from-label ingLabel'>Name:</label> */}
+                <input className='form-control ingInput' placeholder='Ingredient Name' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
               </div>
               <div className='d-flex ingField'>
-                <label className='from-label ingLabel qtyLabel'>Quantity</label>
-                <input className='form-control ingInput qty' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+                {/* <label className='from-label ingLabel qtyLabel'>Quantity</label> */}
+                <input className='form-control ingInput qty' placeholder='Quantity' type="number" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
               </div>
               <div className='d-flex ingField'>
-                <label className='from-label ingLabel uomLabel'>Unit of Measure</label>
-                <input className='form-control ingInput qty' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+                {/* <label className='from-label ingLabel uomLabel'>Unit of Measure</label> */}
+                <input className='form-control ingInput qty' placeholder='Unit Of Measure' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
               </div>
             </div>
             

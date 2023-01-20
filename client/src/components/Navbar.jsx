@@ -26,10 +26,10 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
 
   let searchSubmit = (e) => { 
     e.preventDefault(); 
-    console.log(`Search item is ${search}`)
+    // console.log(`Search item is ${search}`)
     axios.get(`http://localhost:8000/api/recipes/search/${search}`)
     .then((res)=>{
-      console.log(`Search result res is ${res.data}`)
+      // console.log(`Search result res is ${res.data}`)
       setSearchResults(res.data)})
       navigate('/recipes/searchResult')
     .catch(err=>console.log(`Error in search submit--- ${err}`))

@@ -50,28 +50,28 @@ const Register = ({setLoggedUser}) => {
     <div className='container'>
     <div className='row mt-3'>
       <p>Sign Up</p>
-      <form onSubmit={submitHandler} className='mx-auto border col-lg-4 col-8'>
-        <label className='form-label'>First Name:</label>
-        <input className='form-control' type="text" onChange={(e)=>setFirstName(e.target.value)}/>
+      <form onSubmit={submitHandler} className='mx-auto border col-lg-5 col-8 col-md-6 pt-3'>
+        {/* <label className='form-label'>First Name:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setFirstName(e.target.value)} placeholder="Enter Fist Name"/>
         {errors.firstName && <span className='text-danger'>{errors.firstName.message}</span>} <br/>
-        <label className='form-label'>Last Name:</label>
-        <input className='form-control' type="text" onChange={(e)=>setLastName(e.target.value)}/>
+        {/* <label className='form-label'>Last Name:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setLastName(e.target.value)} placeholder="Enter Last Name"/>
         {errors.lastName && <span className='text-danger'>{errors.lastName.message}</span>} <br/>
-        <label className='form-label'>Email:</label>
-        <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)}/>
+        {/* <label className='form-label'>Email:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email"/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
-        <label className='form-label'>Password:</label>
-        <input className='form-control' type="text" onChange={(e)=>setPassword(e.target.value)}/>
+        {/* <label className='form-label'>Password:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password"/>
         {errors.password && <span className='text-danger'>{errors.password.message}</span>} <br/>
-        <label className='form-label'>Confirm password:</label>
-        <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)}/>
+        {/* <label className='form-label'>Confirm password:</label> */}
+        <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm Password"/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
         <div>
         {/* <div>
           <input type="text" />
         </div> */}
+        <input className="btn btn-primary mb-4" type="submit" value="Register" />
         </div>
-        <input className="btn btn-primary mt-3 mb-5" type="submit" value="Register" />
       </form>
       <Link to="/login">Already Have An Account?</Link>
       </div>
