@@ -79,9 +79,9 @@ body {
   .recipeForm { 
     width: 600px;
   }
-  .saveBtn {
+  /* .saveBtn {
     position:relative;
-  }
+  } */
   .profileLink { 
     position: fixed;
     top: 15px;
@@ -160,11 +160,11 @@ body {
   .editRecipe { 
     display: flex;
   }
-  .saveBtn { 
+  /* .saveBtn { 
     position:relative;
     width: 100px;
   
-  }
+  } */
   .profileLink { 
     position: fixed;
     top: 15px;
@@ -183,8 +183,10 @@ body {
 }
 .detailPic { 
   height: 300px;
-  width: 400px;
+  width: 300px;
   object-fit:cover;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 40px 0 rgba(0, 0, 0, 0.19);
+  
 }
 .polaroid {
   width: 300px;
@@ -193,6 +195,7 @@ body {
 }
 .polaroid2 {
   width: 200px;
+  height: 225px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -204,7 +207,7 @@ body {
   
   bottom: 0;
   left: 0;
-  width: 50%;
+  width: 150px;
   background-color: green;
   height: 50px;
   color: white;
@@ -214,17 +217,12 @@ body {
   padding: 0;
 }
 .submitBtn { 
-  
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  width: 100px;
   background-color: green;
   height: 50px;
   color: white;
   font-weight: 600;
-  margin-top: 50px;
-  border: 0;
-  padding: 0;
+  align-self: center;
 }
 .myNav { 
   top: 0; 

@@ -1,2 +1,4 @@
 node_modules/
 .env
+CoverFlow2.tsx
+CoverFlow.css

@@ -185,7 +185,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       <AddProfilePic setUrl={setRecipeImg} type={type}/>
       </div>
       </div>
-      <button onClick={handleSubmit} className='saveBtn' type="submit">Save Recipe</button>
+      <button onClick={handleSubmit} className='btn saveBtn' type="submit">Save Recipe</button>
     </div>
   )
 }

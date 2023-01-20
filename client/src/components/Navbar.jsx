@@ -48,6 +48,9 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to='/' >Home</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to='/allRecipes'>All Recipes</Link>
+              </li>
               {/* <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to='/dashboard'>Dashboard</NavLink>
               </li> */}

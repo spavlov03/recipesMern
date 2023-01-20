@@ -57,13 +57,13 @@ module.exports = {
     .catch(err=>res.json(err))
   },
   likeRecipe: (req,res) => { 
-    console.log(`Recipe like in controller ${req.body}`)
+    // console.log(`Recipe like in controller ${req.body}`)
     Recipe.findOneAndUpdate({_id:req.params.id},req.body,{new:true,runValidators:true})
     .then(recipe=>res.json(recipe))
     .catch(err=>res.json(err))
   },
   unlikeRecipe: (req,res) => { 
-    console.log(`Recipe like in controller ${req.body}`)
+    // console.log(`Recipe like in controller ${req.body}`)
     Recipe.findOneAndUpdate({_id:req.params.id},req.body,{new:true,runValidators:true})
     .then(recipe=>res.json(recipe))
     .catch(err=>res.json(err))

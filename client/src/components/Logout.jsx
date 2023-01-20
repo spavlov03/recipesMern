@@ -12,7 +12,7 @@ const Logout = ({setLoggedUser}) => {
       // console.log(res)
     })
     .catch(err=>console.log(err))
-  },[])
+  },[navigate,setLoggedUser])
 
   return (
     <div>Logout</div>

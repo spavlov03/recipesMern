@@ -74,24 +74,23 @@ const AddRecipe = ({loggedUser}) => {
       <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column myForm p-3'>
         <div id='topField'>
           <div className='d-flex flex-column gap-1'>
-          <div className='d-flex '>
-            <label className='form-label regLabel'>Reicipe Name</label>
-            <input className='form-control regInput' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)}/>
+          <div className='d-flex'>
+            {/* <label className='form-label regLabel'>Reicipe Name</label> */}
+            <input className='form-control regInput' type="text" name='recipeName' onChange={(e)=>setRecipeName(e.target.value)} placeholder="Recipe Name"/>
           </div>
           {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>} <br/>
           <div className='d-flex ingFields'>
-            <label className='form-label regLabel'>Cook in minutes</label>
-            <input className='form-control regInput' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)}/>
+            {/* <label className='form-label regLabel'>Cook in minutes</label> */}
+            <input className='form-control regInput' type="number" name='cookTime' onChange={(e)=>setCookTime(e.target.value)} placeholder="How Long To Cook?"/>
           </div>
           {errors.cookTime && <span className='text-danger'>{errors.cookTime.message}</span>} <br/>
           <div className='d-flex ingFields'>
-            <label className='form-label regLabel'>Yields</label>
+            {/* <label className='form-label regLabel'>Yields</label> */}
             <div className='d-flex regInput'>
-              <div>
-            <input className='form-control col-7' type="number" name='cookTime' onChange={(e)=>setYields(e.target.value)}/><span className="" id='servings'>Servings</span></div>
+            <input className='form-control col-7' type="number" name='yields' onChange={(e)=>setYields(e.target.value)} placeholder="How Many Servings?"/>
             </div>
             </div>
-          {errors.yields && <span className='text-danger'>{errors.yields.message}</span>} <br/>
+          {errors.yields && <p className='text-danger'>{errors.yields.message}</p>} <br/>
           </div>
             <div>
               <AddProfilePic type={type} setUrl={setUrl}/>
@@ -170,7 +169,7 @@ const AddRecipe = ({loggedUser}) => {
         
         {/* <div className='mt-5'> */}
           
-          <button className='submitBtn' type="submit">Submit</button>
+          <button className='btn submitBtn' type="submit">Submit</button>
         {/* </div> */}
       </form>
       {/* <button onClick={notify}>Toast Test</button> */}

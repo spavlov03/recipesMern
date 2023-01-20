@@ -15,6 +15,7 @@ import { useState } from 'react';
 import EditProfile from './components/EditProfile';
 import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
+import AllRecipes from './components/AllRecipes';
 
 function App() {
   // const [user,setUser] = useState({});
@@ -42,6 +43,7 @@ function App() {
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults}/>}/>
+          <Route path='/allRecipes' element={<AllRecipes/>}/>
         </Routes>
       </BrowserRouter>
     </div>

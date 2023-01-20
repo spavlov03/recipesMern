@@ -12,7 +12,7 @@ const CoverFlow = ({recipes}) => {
         return <div className='' key={index}>
                   <div className='polaroid2'>
                     <Link to={`/recipe/${recipe._id}`}>
-                    <img className='recipeImg' src={recipe.recipeImg} />
+                    <img className='recipeImg' src={recipe.recipeImg} alt={recipe.recipeName}/>
                     <p>{recipe.recipeName}</p>
                     </Link>
                   </div>

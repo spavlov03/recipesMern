@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import { useNavigate,Link } from 'react-router-dom'
 import axios from 'axios'
-import {toast, ToastContainer} from 'react-toastify'
+// import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastClassName } from 'react-toastify';
+// import { ToastClassName } from 'react-toastify';
 
 
 const Register = ({setLoggedUser}) => {
