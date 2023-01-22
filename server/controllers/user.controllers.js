@@ -16,11 +16,11 @@ module.exports = {
   editUser: async (req,res) => { 
     try {
     const user = jwt.verify(req.cookies.userToken, SECRET);
-    const currentUser = await User.findOneAndUpdate({ _id: user._id },(req.body));
+    const currentUser = await User.findOneAndUpdate({ _id: user._id },(req.body),{new:true,runValidators:true});
     res.json(currentUser);
     } catch (error) {
       console.log("error in user update")
-      res.status(400).json({ errors: 'Error in user update' })
+      res.status(400).json(error)
     }
     },
   loginUser:async (req,res)=>{

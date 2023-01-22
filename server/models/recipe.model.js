@@ -24,6 +24,10 @@ const RecipeSchema = mongoose.Schema({
   cookTime:{
     type:Number, 
     required: [true,"Cook time is required"]
+  },
+  yields:{
+    type:Number, 
+    required: [true,"Must enter number of servings"]
   }, 
   directions:{ 
     type:String, 
@@ -31,33 +35,21 @@ const RecipeSchema = mongoose.Schema({
   }, 
   ingredients:{
     type:[IngredientsSchema], 
-    // required: [true,"Must list at least one ingredient"]
-
+    required: [true,"Must list at least one ingredient"]
   },
   creatorId:{
     type:String
   }, 
-  // creatorFirstName:{
-  //   type:String
-  // },
-  // creatorLastName:{
-  //   type:String
-  // }, 
   status:{
     type:String, 
     enum: ['pending','approved']
-  }, 
-  yields:{
-    type:Number, 
-    required: [true,"Must enter number of servings"]
-  }, 
+  },  
   recipeImg: { 
     type:String,
   }, 
   likes: { 
     type:[String], 
     unique: true, 
-
   }
 })
 

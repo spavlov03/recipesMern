@@ -28,9 +28,7 @@ const AdminPanel = ({loggedUser}) => {
   
   return (
     <div>
-      <p>Hello User - {loggedUser.firstName}</p>
-      <p>This is the Admin Panel</p>
-      <p>List of Recipes waiting on approval</p>
+      <h5 className='mb-5'>{loggedUser.firstName}, please review recipes that are pending approval.</h5>
       {recipes?.map((recipe,index)=> {
         return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
       })}

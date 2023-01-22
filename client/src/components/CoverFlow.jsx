@@ -6,7 +6,7 @@ const CoverFlow = ({recipes}) => {
   return (
     <div className=''>
       {recipes.length===0?<p>No Results</p>:
-      <div className='myTest'>
+      <div className='coverFlow'>
         
       {recipes?.map((recipe,index)=> {
         return <div className='' key={index}>

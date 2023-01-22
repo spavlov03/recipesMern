@@ -73,7 +73,7 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
             </ul>
       <form onSubmit={searchSubmit} className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search Recipes" aria-label="Search Recipes" onChange={(e)=>setSearch(e.target.value)}/>
-        <button className="btn btn-outline-primary" type="submit">Search</button>
+        <button className="btn searchBtn" type="submit">Search</button>
       </form>
       <ul className="navbar-nav mb-2 mb-lg-0">
       {loggedUser._id? null :

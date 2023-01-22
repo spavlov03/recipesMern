@@ -53,7 +53,8 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
         duration: 500,
       }),},}));
   const [recipeName,setRecipeName] = useState('');
-  const [cookTime,setCookTime] = useState(0);
+  const [cookTime,setCookTime] = useState();
+  const [yields,setYields] = useState("")
   const [directions,setDirections] = useState('');
   const [status,setStatus] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
@@ -68,7 +69,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
 
   const switchHandler = (event) => {
     setChecked(event.target.checked)
-    if (checked === true) {
+    if (checked === false) {
       setApproved("pending")
     } else {
       setApproved("approved")
@@ -81,9 +82,11 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
     .then((res)=>{
       setRecipeName(res.data.recipeName);
       setCookTime(res.data.cookTime);
+      setYields(res.data.yields)
       setDirections(res.data.directions);
       setIngredients(res.data.ingredients);
       setStatus(res.data.status);
+      res.data.status==="approved"?setChecked(true):setChecked(false);
       setOneRecipe(res.data)
       setRecipeImg(res.data.recipeImg)
     })
@@ -109,13 +112,11 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
     axios.put(`http://localhost:8000/api/recipe/${id}`,{
       recipeName,
       cookTime,
+      yields,
       directions, 
-      ingredients, 
+      ingredients,
       status:loggedUser.type==="admin"?approved:"pending",
       recipeImg, 
-      // creatorId: user._id, 
-      // creatorFirstName: user.firstName,
-      // creatorLastName: user.lastName
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -129,63 +130,49 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
   }
   return (
     <div className=''>
-      <div className='editRecipe mt-4'>
-      {/* <p>Your Name is {user.firstName} and ID is {user._id}</p> */}
-      <div className='mx-auto recipeForm w-50'>
-        <label className='form-label'>Reicipe Name</label>
-        <input className='form-control' type="text" name='recipeName' value={recipeName} onChange={(e)=>setRecipeName(e.target.value)}/>
-        <label className='form-label'>Time to cook</label>
-        <input className='form-control' type="text" name='cookTime' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
-        <label className='form-label'>Directions</label>
-        <textarea className='form-control' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
-        {loggedUser.type==="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
-          {/* <div className="container">
-            <p>Approved : </p>
-            <div className="toggle-switch">
-              <input type="checkbox" className="checkbox" name="status" id="status"/>
-              <label className="label" htmlFor="status">
-                <span className="inner" />
-                <span className="switch" />
-            </label>
+      <h5 className='mb-4'>Edit {recipeName}</h5>
+      <div className='mx-auto d-flex flex-column myForm p-3'>
+        <div id='topField'>
+          <div className='d-flex flex-column gap-1 mx-auto'> 
+            <div className='regBox'>
+              <input className='form-control regInput' type="text" name='recipeName' placeholder='Recipe Name' value={recipeName} onChange={(e)=>setRecipeName(e.target.value)}/>
+              {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>}
             </div>
-            <Switch checked={checked} onChange={switchHandler}/>
-          </div> */}
-        <label>Ingredients:</label>
-        {ingredients.map((element,index) => (
-          <div key={index} className="d-flex flex-column">
-            <div className='ingBox'>
-              <div className='d-flex flex-column'>
-                <label className='form-label ingLabel'>Name:</label>
-                <input className='form-control ingInput' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
-              </div>
-              <div className='d-flex flex-column'>
-                <label className='form-label ingLabel'>Quantity</label>
-                <input className='form-control ingInput' type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
-              </div>
-            <div className='d-flex flex-column'>
-              <label className='form-label ingLabel'>Unit of Measure</label>
-              <input className='form-control ingInput' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
+            <div className='regBox'>
+              <input className='form-control regInput' type="text" name='cookTime' placeholder='Cook Time' value={cookTime} onChange={(e)=>setCookTime(e.target.value)}/>
+              {errors.cookTime && <span className='text-danger'>{errors.cookTime.message}</span>} 
             </div>
+            <div className='regBox'>
+              <input className='form-control regInput' type="number" value={yields} onChange={(e)=>setYields(e.target.value)} placeholder="How Many Servings?"/>
+              {errors.yields && <p className='text-danger'>{errors.yields.message}</p>}
             </div>
-            <div className=''>
-            {
-              index ?
-              <button type='button' className='btn btn-danger mt-2 deleteBtn me-2' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>
-              :null
-            }
-            <button className='btn btn-info mt-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
+            {loggedUser.type==="admin"?<p><FormControlLabel control={<FormControlLabel control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={switchHandler} />} label="Approve"/>}/></p>:null}
+          </div>
+          <div className='mx-auto'>
+            <img className ="detailPic polaroid" src={recipeImg} alt="recipe" />
+            <AddProfilePic setUrl={setRecipeImg} type={type}/>
+          </div>
+        </div>
+        <div>
+          <label>Ingredients:</label>
+          {ingredients.map((element,index) => (
+          <div key={index} className="mt-1 pb-2 d-flex flex-column">
+            <div className='d-flex ingBox '>
+              <input className='form-control ingInput' placeholder='Ingredient Name' type="text" name='ingredient' value={element.ingredient || ""}  onChange={e=>handleChange(index,e)}/>
+              <input className='form-control ingInput' placeholder='Quantity' type="text" name='qty' value={element.qty || ""} onChange={e=>handleChange(index,e)}/>
+              <input className='form-control ingInput' placeholder='Unit Of Measure' type="text" name='uom' value={element.uom || ""} onChange={e=>handleChange(index,e)}/>
             </div>
+            {index?<button type='button' className='btn btn-danger removeBtn' onClick={()=>removeIngredientsFields(index)}>Remove Ingredient</button>:null}
           </div>
         ))}
-        <div className=''>
-        </div>
+        <button className='btn btn-info mb-2' type='button' onClick={()=>addIngredientsFields()}>Add Ingredient</button>
       </div>
-      <div className='mx-auto'>
-      <img className ="detailPic polaroid" src={recipeImg} alt="recipe" />
-      <AddProfilePic setUrl={setRecipeImg} type={type}/>
+      <textarea rows="6" cols="50" className='col-7 form-control directions' placeholder='Directions' type="text" name='directions' value={directions} onChange={(e)=>setDirections(e.target.value)}/>
+      <div className='directionsInput'>
+      {errors.directions && <span className='text-danger'>{errors.directions.message}</span>} 
       </div>
+      <button onClick={handleSubmit} className='btn btn-success saveBtn' type="submit">Save Recipe</button>
       </div>
-      <button onClick={handleSubmit} className='btn saveBtn' type="submit">Save Recipe</button>
     </div>
   )
 }

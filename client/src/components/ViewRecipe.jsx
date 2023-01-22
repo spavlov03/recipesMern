@@ -63,12 +63,11 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
 
   return (
     <div className='mx-auto'>
-      <div className='polaroidRecipe mx-auto'>
-      <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
-      <p>Recipe name : {oneRecipe.recipeName}</p>
-      <p>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
-      {/* </div> */}
-      <p>Cook Time : {oneRecipe.cookTime} Minutes</p>
+      <div className='recipeFrame mx-auto'>
+        <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
+        <p>Recipe name : {oneRecipe.recipeName}</p>
+        <p>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
+        <p>Cook Time : {oneRecipe.cookTime} Minutes</p>
       <p className='ms-3 me-3'>Directions : {oneRecipe.directions}</p>
       <p>Yields: {oneRecipe.yields} <span>Servings</span></p>
       <div>Ingredients : 
