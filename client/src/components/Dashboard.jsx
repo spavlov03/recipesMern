@@ -32,6 +32,7 @@ const Dashboard = ({loggedUser}) => {
   // console.log(top5Recipes)
   return (
     <div className='me-5 ms-5'>
+      <p>This is a test! </p>
       {/* <p>This page will display using cover flow top-5 recipes</p>
       <a href='https://youtu.be/CrvQ790xG7I'>Like this</a> */}
       {!loggedUser._id?null:<h2>Hello {loggedUser.firstName}!</h2>}
