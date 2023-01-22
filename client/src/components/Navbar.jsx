@@ -13,7 +13,7 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
   
   useEffect(()=>{ 
     // const requestOne = axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
-    const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true})
+    const requestTwo = axios.get('http://localhost:8000/api/user',{withCredentials:true,credentials:'include'})
     axios.all([requestTwo])
     .then(axios.spread((...res)=>{
       // const responseOne = res[0]
