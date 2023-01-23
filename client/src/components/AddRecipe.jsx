@@ -16,6 +16,7 @@ const AddRecipe = ({loggedUser}) => {
   const navigate = useNavigate();
   const [url,setUrl] = useState("")
   const type = "Recipe"
+  const likes = [];
   // const notify = () => toast("Wow so easy!"); 
 
   let handleChange = (i,e) => { 
@@ -48,7 +49,7 @@ const AddRecipe = ({loggedUser}) => {
       status:'pending', 
       yields,
       recipeImg: url,
-      likes:[],
+      likes, 
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
@@ -63,7 +64,7 @@ const AddRecipe = ({loggedUser}) => {
   return (
     <div>
       <h5 className='mb-4'>Ready To Add Your Own Recipe?</h5>
-      <form onSubmit={handleSubmit} className='mx-auto d-flex flex-column myForm p-3'>
+      <div className='mx-auto d-flex flex-column myForm p-3'>
         <div id='topField'>
           <div className='d-flex flex-column gap-1 mx-auto'> 
             <div className='regBox'>
@@ -102,8 +103,8 @@ const AddRecipe = ({loggedUser}) => {
           <div className='directionsInput'>
           {errors.directions && <span className='text-danger'>{errors.directions.message}</span>}
           </div>
-          <button className='btn btn-success submitBtn' type="submit">Submit</button>
-      </form>
+          <button onClick={handleSubmit}  className='btn btn-success submitBtn' type="submit">Submit</button>
+      </div>
     </div>
   )
 }
