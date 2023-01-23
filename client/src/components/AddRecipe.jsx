@@ -16,7 +16,7 @@ const AddRecipe = ({loggedUser}) => {
   const navigate = useNavigate();
   const [recipeImg,setRecipeImg] = useState("")
   const type = "Recipe"
-  const likes = [];
+  // const likes = [];
   // const notify = () => toast("Wow so easy!"); 
 
   let handleChange = (i,e) => { 
@@ -34,22 +34,16 @@ const AddRecipe = ({loggedUser}) => {
   }
   let handleSubmit = (e) => { 
     e.preventDefault(); 
-    // console.log(`Recipe name is ${recipeName}`)
-    // console.log(`Cook time is ${cookTime}`)
-    // console.log(`Directions are ${directions}`)
-    // console.log(`Ingredients are ${ingredients}`)
     axios.post('http://localhost:8000/api/recipe',{
       recipeName,
       cookTime,
       directions, 
       ingredients, 
       creatorId: loggedUser._id, 
-      // creatorFirstName: loggedUser.firstName,
-      // creatorLastName: loggedUser.lastName, 
       status:'pending', 
       yields,
       recipeImg,
-      likes, 
+      likes:[],
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
