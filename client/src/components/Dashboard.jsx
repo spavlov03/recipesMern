@@ -32,16 +32,8 @@ const Dashboard = ({loggedUser}) => {
   // console.log(top5Recipes)
   return (
     <div className='me-5 ms-5'>
-      <p>This is a test! </p>
-      {/* <p>This page will display using cover flow top-5 recipes</p>
-      <a href='https://youtu.be/CrvQ790xG7I'>Like this</a> */}
       {!loggedUser._id?null:<h2>Hello {loggedUser.firstName}!</h2>}
       <h4 className='mb-4'>Here is our top recipes of the week!</h4>
-      {/* <p>This is the Dasboard</p>
-      {recipes?.map((recipe,index)=> {
-        return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
-      })} */}
-      {/* <p>Here is our top recipes of the week!</p> */}
       <CoverFlow recipes={top5Recipes}/>
       <div className='mt-4'>
       <Link to="/allRecipes">Click Here To See All Recipes</Link>

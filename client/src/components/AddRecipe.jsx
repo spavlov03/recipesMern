@@ -14,7 +14,7 @@ const AddRecipe = ({loggedUser}) => {
   const [yields,setYields] = useState("")
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
-  const [url,setUrl] = useState("")
+  const [recipeImg,setRecipeImg] = useState("")
   const type = "Recipe"
   const likes = [];
   // const notify = () => toast("Wow so easy!"); 
@@ -48,7 +48,7 @@ const AddRecipe = ({loggedUser}) => {
       // creatorLastName: loggedUser.lastName, 
       status:'pending', 
       yields,
-      recipeImg: url,
+      recipeImg,
       likes, 
     },{withCredentials:true})
     .then(res=>{
@@ -81,7 +81,7 @@ const AddRecipe = ({loggedUser}) => {
             </div>
           </div>
           <div className='ms-5'>
-            <AddProfilePic type={type} setUrl={setUrl}/>
+            <AddProfilePic type={type} recipeImg={recipeImg} setUrl={setRecipeImg}/>
           </div>
         </div>
         <div className=''>
