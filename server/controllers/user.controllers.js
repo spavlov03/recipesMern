@@ -50,12 +50,9 @@ module.exports = {
     try {
         const user = jwt.verify(req.cookies.userToken, SECRET);
         const currentUser = await User.findOne({ _id: user._id });
-        // console.log('current user ',currentUser)
         res.json(currentUser);
     } catch (error) {
-        // console.log("ERROR")
         res.status(400)
-        // res.status(400).json({ errors: 'failed to get logged in user' })
     }
   },
   getOneUser:(req,res)=>{ 
