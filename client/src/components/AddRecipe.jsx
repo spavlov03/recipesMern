@@ -69,7 +69,7 @@ const AddRecipe = ({loggedUser}) => {
           <div className='d-flex flex-column gap-1 mx-auto'> 
             <div className='regBox'>
               <input className='form-control regInput' type="text" onChange={(e)=>setRecipeName(e.target.value)} placeholder="Recipe Name"/>
-              {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>}
+              {/* {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>} */}
             </div>
             <div className='regBox'>
               <input className='form-control regInput' type="number" onChange={(e)=>setCookTime(e.target.value)} placeholder="How Long To Cook?"/>
