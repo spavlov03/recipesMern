@@ -70,9 +70,9 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
   const switchHandler = (event) => {
     setChecked(event.target.checked)
     if (checked === false) {
-      setApproved("pending")
-    } else {
       setApproved("approved")
+    } else {
+      setApproved("pending")
     }
   
   };
