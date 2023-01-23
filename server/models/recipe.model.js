@@ -49,7 +49,7 @@ const RecipeSchema = mongoose.Schema({
   }, 
   likes: { 
     type:[String], 
-    unique: true, 
+    // unique: true, 
   }
 })
 
