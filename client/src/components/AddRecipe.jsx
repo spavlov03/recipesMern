@@ -43,7 +43,7 @@ const AddRecipe = ({loggedUser}) => {
       status:'pending', 
       yields,
       recipeImg,
-      likes:[],
+      // likes:[],
     },{withCredentials:true})
     .then(res=>{
       console.log(res.data); 
