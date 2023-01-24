@@ -16,7 +16,7 @@ import EditProfile from './components/EditProfile';
 import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
 import AllRecipes from './components/AllRecipes';
-import BasicExample from './components/BasicExample';
+
 
 function App() {
   // const [user,setUser] = useState({});
@@ -29,7 +29,7 @@ function App() {
     <div className="App ">
       <BrowserRouter>
         <div className='custom'>
-        {/* <BasicExample /> */}
+
         <Navbar loggedUser={loggedUser} setLoggedUser={setLoggedUser} setSearchResults={setSearchResults}/>
         </div>
         <ToastContainer/>
