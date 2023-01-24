@@ -47,35 +47,35 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
           <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarSupportedContent" >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to='/' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Home</Link>
+                <Link className="nav-link active" aria-current="page" to='/' onClick={()=>setIsNavCollapsed(true)}>Home</Link>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to='/allRecipes' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>All Recipes</NavLink>
+                <NavLink className="nav-link active" aria-current="page" to='/allRecipes' onClick={()=>setIsNavCollapsed(true)}>All Recipes</NavLink>
               </li>
               <li className="nav-item">
-                {!loggedUser._id? null : <NavLink className="nav-link active" to="/add-recipe" onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Add Recipe</NavLink> }
+                {!loggedUser._id? null : <NavLink className="nav-link active" to="/add-recipe" onClick={()=>setIsNavCollapsed(true)}>Add Recipe</NavLink> }
               </li>
               {loggedUser.type==="admin"? <li className="nav-item">
-          <NavLink className="nav-link active" to='/admin' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Pending Approval</NavLink>
+          <NavLink className="nav-link active" to='/admin' onClick={()=>setIsNavCollapsed(true)}>Pending Approval</NavLink>
         </li> : null }
         
             </ul>
       <form onSubmit={searchSubmit} className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search Recipes" aria-label="Search Recipes" onChange={(e)=>setSearch(e.target.value)}/>
-        <button className="btn searchBtn" type="submit" onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Search</button>
+        <button className="btn searchBtn" type="submit" onClick={()=>setIsNavCollapsed(true)}>Search</button>
       </form>
       <ul className="navbar-nav mb-2 mb-lg-0">
       {loggedUser._id? null :
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to='/login' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Login</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to='/login' onClick={()=>setIsNavCollapsed(true)}>Login</NavLink>
         </li> }
         {loggedUser._id? null :
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" to='/register' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Register</NavLink>
+          <NavLink className="nav-link active" aria-current="page" to='/register' onClick={()=>setIsNavCollapsed(true)}>Register</NavLink>
         </li> }
         {!loggedUser._id? null :
         <li className="nav-item">
-          <NavLink className="nav-link" to="/logout" onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Logout</NavLink>
+          <NavLink className="nav-link" to="/logout" onClick={()=>setIsNavCollapsed(true)}>Logout</NavLink>
         </li> }
 
       </ul>
