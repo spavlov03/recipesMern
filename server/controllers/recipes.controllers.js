@@ -40,8 +40,9 @@ module.exports = {
     .catch(err=>res.json(err))
   },
   findRecipes: (req,res) => {
-    Recipe.find({recipeName:
-            {$regex: new RegExp("^" + req.params.recipeName.toLowerCase(),'i')},status:"approved"})
+    console.log(req.params.recipeName)
+    Recipe.find({recipeName: 
+            {$regex: new RegExp("^" + req.params.recipeName.toLowerCase(),"i")},status:"approved"})
     .then(recipes=>{
       res.json(recipes)})
     .catch(err=>res.json(err))
