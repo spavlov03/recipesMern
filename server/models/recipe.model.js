@@ -3,17 +3,13 @@ const mongoose = require('mongoose')
 const IngredientsSchema = mongoose.Schema({
   ingredient:{
     type:String,
-    // required: [true,"Ingredient must have name"]
   },
   qty:{
     type:Number,
-    // required: [true,"Enter Ingredient Quantity"]
   },
   uom:{
     type:String,
-    // required: [true,"Enter unit of measurment"]
   },
-  
 })
 
 const RecipeSchema = mongoose.Schema({

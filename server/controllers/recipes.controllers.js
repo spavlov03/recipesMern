@@ -42,10 +42,12 @@ module.exports = {
   findRecipes: (req,res) => {
     console.log(req.params.recipeName)
     Recipe.find({recipeName: {$regex: req.params.recipeName,$options:"i"},status:"approved"})
-            // {$regex: new RegExp("^" + req.params.recipeName.toLowerCase(),"i")},status:"approved"})
     .then(recipes=>{
+      console.log("inside then",recipes)
       res.json(recipes)})
-    .catch(err=>res.json(err))
+    .catch(err=>{
+      console.log("inside error",err)
+      res.json(err)})
   },
   likeRecipe: (req,res) => { 
     Recipe.findOneAndUpdate({_id:req.params.id},req.body,{new:true,runValidators:true})

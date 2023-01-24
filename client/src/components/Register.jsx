@@ -50,9 +50,9 @@ const Register = ({setLoggedUser}) => {
         {errors.lastName && <span className='text-danger'>{errors.lastName.message}</span>} <br/>
         <input className='form-control' type="text" onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email"/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
-        <input className='form-control' type="text" onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password"/>
+        <input className='form-control' type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password"/>
         {errors.password && <span className='text-danger'>{errors.password.message}</span>} <br/>
-        <input className='form-control' type="text" onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm Password"/>
+        <input className='form-control' type="password" onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm Password"/>
         {errors.confirmPassword && <span className='text-danger'>{errors.confirmPassword.message}</span>} <br/>
         <div>
         <input className="btn btn-primary mb-4" type="submit" value="Register" />
