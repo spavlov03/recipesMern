@@ -2,6 +2,7 @@ import { NavLink, useNavigate,Link } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect,useState } from 'react'
 
+
 const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
   const [search,setSearch] = useState(""); 
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
           <span>{loggedUser.firstName}</span></NavLink>}
         </div>
       </nav>
-    // </div>
+    // </div>cd 
   )
 }
 
