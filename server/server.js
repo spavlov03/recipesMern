@@ -26,23 +26,23 @@ const server = app.listen(PORT,()=>{
   console.log(`Server is up and running on port ${PORT}`)
 })
 
-const io = socket(server, { 
-  cors: { 
-    origin: '*', 
-    methods: ['GET','POST'], 
-  }
-}); 
-io.on('connection',(socket) => { 
-  console.log('new user: ',socket.id); 
-  socket.on('deleteRecipe',(payload) => { 
-  Recipe.deleteOne({_id:payload})
-  .then((res)=>{ 
-    io.emit('recipeDeleted',payload)
-  }).catch((err)=> { 
-    console.log(err)
-  })
-  })
-  socket.on('disconnect',(socket)=> {
-    console.log('disconnected socket with id:',socket.id)
-  })
-})
+// const io = socket(server, { 
+//   cors: { 
+//     origin: '*', 
+//     methods: ['GET','POST'], 
+//   }
+// }); 
+// io.on('connection',(socket) => { 
+//   console.log('new user: ',socket.id); 
+//   socket.on('deleteRecipe',(payload) => { 
+//   Recipe.deleteOne({_id:payload})
+//   .then((res)=>{ 
+//     io.emit('recipeDeleted',payload)
+//   }).catch((err)=> { 
+//     console.log(err)
+//   })
+//   })
+//   socket.on('disconnect',(socket)=> {
+//     console.log('disconnected socket with id:',socket.id)
+//   })
+// })

@@ -26,14 +26,14 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({_id:null}); 
   // const [thisUser,setThisUser] = useState({}); 
   const [searchResults,setSearchResults] = useState([])
-  const [socket] = useState(() => io(':8000'));
+  // const [socket] = useState(() => io(':8000'));
  
-  useEffect(() => {
-    socket.on('connection', () => {
-      console.log('connected to server');
-    })
-    return () => socket.disconnect(true);
-  }, []);
+  // useEffect(() => {
+  //   socket.on('connection', () => {
+  //     console.log('connected to server');
+  //   })
+  //   return () => socket.disconnect(true);
+  // }, []);
 
   return (
     <div className="App ">
@@ -49,13 +49,13 @@ function App() {
           <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}
           <Route path='/logout' element={<Logout loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
-          <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} socket={socket} />}/>
+          <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} />}/>
           {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
           {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults}/>}/>
-          <Route path='/allRecipes' element={<AllRecipes socket={socket}/>}/>
+          <Route path='/allRecipes' element={<AllRecipes />}/>
         </Routes>
       </BrowserRouter>
     </div>
