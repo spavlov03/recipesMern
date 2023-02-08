@@ -33,12 +33,15 @@ module.exports = {
       const isPasswordValid = await bcrypt.compare(req.body.password,user.password)
       console.log('Is Password Valid',isPasswordValid)
       if (!isPasswordValid) {
+        // console.log("error1")
         res.status(400).json({error:"Invalid email/password"})
       }else{ 
         const userToken = jwt.sign({_id:user._id,email:user.email},SECRET);
         res.status(201).cookie('userToken',userToken,{httpOnly:false}).json({successMessage:"User logged in",user:user})
+        // console.log("error2")
       }
     } catch(error){
+      // console.log("error3",error)
       res.status(400).json({error:"Invalid email/password"})
     }
   }, 
