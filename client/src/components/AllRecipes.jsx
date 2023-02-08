@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState,useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import CoverFlow from './CoverFlow'
-// import {io} from 'socket.io-client'
+
 
 
 
@@ -20,9 +20,6 @@ const AllRecipes = () => {
     .catch(err=>console.log('there is error in useEffect',err))
   },[])
 
-  // socket.on('recipeDeleted',(deletedId)=> { 
-  //   setRecipes(recipes.filter((recipe)=> recipe._id !== deletedId))
-  // })
   return (
     <div className='me-5 ms-5'>
       <CoverFlow recipes={recipes}/>

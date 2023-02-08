@@ -16,7 +16,7 @@ import EditProfile from './components/EditProfile';
 import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
 import AllRecipes from './components/AllRecipes';
-import io from 'socket.io-client'
+
 
 
 
@@ -26,14 +26,7 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({_id:null}); 
   // const [thisUser,setThisUser] = useState({}); 
   const [searchResults,setSearchResults] = useState([])
-  // const [socket] = useState(() => io(':8000'));
- 
-  // useEffect(() => {
-  //   socket.on('connection', () => {
-  //     console.log('connected to server');
-  //   })
-  //   return () => socket.disconnect(true);
-  // }, []);
+
 
   return (
     <div className="App ">

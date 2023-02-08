@@ -53,7 +53,6 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     .catch(err=>console.log(err))
     },[id,setOneRecipe,oneRecipe.creatorId])
     const deleteRecipe = () => { 
-      // socket.emit('deleteRecipe',oneRecipe._id)
       axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
       .then((res)=> {
         navigate("/")

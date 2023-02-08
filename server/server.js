@@ -4,8 +4,6 @@ const app = express();
 const PORT = 8000
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
-const socket = require('socket.io'); 
-const Recipe = require('./models/recipe.model')
 
 require("./config/mongoose.config"); 
 
@@ -22,27 +20,7 @@ recipesRoutes(app);
 const userRoutes = require("./routes/user.routes")
 userRoutes(app);
 
-const server = app.listen(PORT,()=>{
+app.listen(PORT,()=>{
   console.log(`Server is up and running on port ${PORT}`)
 })
 
-// const io = socket(server, { 
-//   cors: { 
-//     origin: '*', 
-//     methods: ['GET','POST'], 
-//   }
-// }); 
-// io.on('connection',(socket) => { 
-//   console.log('new user: ',socket.id); 
-//   socket.on('deleteRecipe',(payload) => { 
-//   Recipe.deleteOne({_id:payload})
-//   .then((res)=>{ 
-//     io.emit('recipeDeleted',payload)
-//   }).catch((err)=> { 
-//     console.log(err)
-//   })
-//   })
-//   socket.on('disconnect',(socket)=> {
-//     console.log('disconnected socket with id:',socket.id)
-//   })
-// })
