@@ -90,7 +90,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       setOneRecipe(res.data)
       setRecipeImg(res.data.recipeImg)
     })
-    .catch(err=>console.log(err))
+    .catch(err=>console.log("Error update",err))
     },[id,setOneRecipe])
 
   let handleChange = (i,e) => { 
@@ -119,12 +119,12 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       recipeImg, 
     },{withCredentials:true})
     .then(res=>{
-      console.log(res.data); 
+      // console.log(res.data); 
       loggedUser.type==="admin"?navigate('/admin'):
       navigate(-1)
     })
     .catch((err)=> { 
-      console.log(err)
+      // console.log(err)
       setErrors(err.response.data.errors)
     })
   }

@@ -46,11 +46,11 @@ const AddRecipe = ({loggedUser}) => {
       likes:[loggedUser._id],
     },{withCredentials:true})
     .then(res=>{
-      console.log(res.data); 
+      // console.log(res.data); 
       navigate('/')
     })
     .catch((err)=> { 
-      console.log(err)
+      // console.log(err)
       setErrors(err.response.data.errors)
     })
 

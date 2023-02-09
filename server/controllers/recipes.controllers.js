@@ -6,7 +6,8 @@ module.exports = {
       res.json(recipe)})
     .catch(err=>{
       res.status(400).json(err);
-      console.log(err)})
+      // console.log(err)
+    })
   }, 
   getOneRecipe: (req,res) => { 
     Recipe.findOne({_id:req.params.id})
@@ -40,13 +41,13 @@ module.exports = {
     .catch(err=>res.json(err))
   },
   findRecipes: (req,res) => {
-    console.log(req.params.recipeName)
+    // console.log(req.params.recipeName)
     Recipe.find({recipeName: {$regex: req.params.recipeName,$options:"i"},status:"approved"})
     .then(recipes=>{
-      console.log("inside then",recipes)
+      // console.log("inside then",recipes)
       res.json(recipes)})
     .catch(err=>{
-      console.log("inside error",err)
+      // console.log("inside error",err)
       res.json(err)})
   },
   likeRecipe: (req,res) => { 
