@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState,useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import CoverFlow from './CoverFlow'
-import {io} from 'socket.io-client'
+// import {io} from 'socket.io-client'
 
 
 
@@ -25,7 +25,7 @@ const AllRecipes = ({socket}) => {
   })
   return (
     <div className='me-5 ms-5'>
-      <CoverFlow recipes={recipes}/>
+      <CoverFlow socket={socket} recipes={recipes} setRecipes={setRecipes}/>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import CoverFlow from './CoverFlow'
 
 
 
-const Dashboard = ({loggedUser}) => {
+const Dashboard = ({loggedUser,socket}) => {
   const [recipes,setRecipes] = useState([]); 
   // useEffect(()=>{ 
   //   axios.get('http://localhost:8000/api/recipes',{withCredentials:true})
@@ -34,7 +34,7 @@ const Dashboard = ({loggedUser}) => {
     <div className='me-5 ms-5'>
       {!loggedUser._id?null:<h2>Hello {loggedUser.firstName}!</h2>}
       <h4 className='mb-4'>Here is our top recipes of the week!</h4>
-      <CoverFlow recipes={top5Recipes}/>
+      <CoverFlow recipes={top5Recipes} socket={socket} setRecipes={setRecipes}/>
       <div className='mt-4'>
       <Link to="/allRecipes">Click Here To See All Recipes</Link>
       </div>

@@ -46,16 +46,16 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/register' element={<Register loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
-          <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser} socket={socket}/>}/>
           {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}
           <Route path='/logout' element={<Logout loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} socket={socket}/>}/>
           {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
-          {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
+          {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} socket={socket}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
-          <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults}/>}/>
-          <Route path='/allRecipes' element={<AllRecipes socket={socket}/>}/>
+          <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults} socket={socket} setRecipes={setSearchResults}/>}/>
+          <Route path='/allRecipes' element={<AllRecipes socket={socket} setRecipes={setSearchResults}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

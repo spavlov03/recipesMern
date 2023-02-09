@@ -2,7 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const CoverFlow = ({recipes}) => {
+const CoverFlow = ({recipes,socket,setRecipes}) => {
+  socket.on('recipeDeleted',(deletedId)=> { 
+    setRecipes(recipes.filter((recipe)=> recipe._id !== deletedId))
+  })
   return (
     <div className=''>
       {recipes.length===0?<p>No Results</p>:
