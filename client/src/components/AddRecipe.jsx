@@ -76,11 +76,12 @@ const AddRecipe = ({loggedUser}) => {
           </div>
           <div className='ms-5'>
             <AddProfilePic type={type} recipeImg={recipeImg} setUrl={setRecipeImg}/>
+            <img className="previewRec" src={recipeImg} alt="recipe image" />
           </div>
         </div>
         <div className=''>
           {/* Ingredients Div */}
-          <label className='text-center'>Ingredients:</label>
+          {/* <label className='text-center'>Ingredients:</label> */}
           {ingredients.map((element,index) => (
           <div key={index} className="mt-1 pb-2 d-flex flex-column">
             <div className='d-flex ingBox'>

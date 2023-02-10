@@ -60,6 +60,7 @@ const EditProfile = ({loggedUser}) => {
           <input className='form-control' type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email"/>
         {errors.email && <span className='text-danger'>{errors.email.message}</span>} <br/>
           <AddProfilePic type={type} url={url} setUrl={setUrl}/>
+          <p className='mt-2'><img className="previewRec" src={url} alt="" /></p>
           <button className="btn btn-primary mt-3 mb-5" type="submit" onClick={submitHandler}>Save Profile</button>
         </div>
       </div>

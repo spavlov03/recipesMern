@@ -26,8 +26,8 @@ const AddProfilePic = ({type,setUrl}) => {
   return (
     <div className='d-flex flex-column'>
       
-        <label className=''>Upload {type} Picture:</label>
-        <input className="mt-2" type="file" onChange={(e)=>setProfilePic(e.target.files[0])}/>
+        <label className='form-label'>Upload {type} Picture:</label>
+        <input className="mt-2 form-control" type="file" onChange={(e)=>setProfilePic(e.target.files[0])}/>
         <button className="btn btn-outline-success mx-auto mt-2" onClick={(e)=>uploadPic()}>Upload Photo</button>
       
     </div>

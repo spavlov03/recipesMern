@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams,Link,useNavigate } from 'react-router-dom'
-import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 
 const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
@@ -66,8 +66,8 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
       <div className='recipeFrame mx-auto'>
         <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
         <p>Recipe name : {oneRecipe.recipeName}</p>
-        <p>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
-        <p>Cook Time : {oneRecipe.cookTime} Minutes</p>
+        <p><i className="bi bi-person"></i> Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
+        <p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>
       <p className='ms-3 me-3'>Directions : {oneRecipe.directions}</p>
       <p>Yields: {oneRecipe.yields} <span>Servings</span></p>
       <div>Ingredients : 
@@ -80,10 +80,10 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
         {/* {oneRecipe.likes.includes(loggedUser._id)?<i className="material-icons likeIcon">thumb_down</i>:<i className="material-icons likeIcon" onClick={likeRecipe}>thumb_up</i>} */}
         {!loggedUser._id? null:<div>
           {likes.includes(loggedUser._id)?<button className='btn' onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>
-            <i className="material-icons likeIcon" >thumb_down</i>
+          <i className="likeIcon bi bi-hand-thumbs-up-fill"></i>
           </button>:
           <button className='btn' onClick={(e)=>likeRecipe(oneRecipe._id,e)}>
-            <i className="material-icons likeIcon">thumb_up</i>
+            <i className="likeIcon bi bi-hand-thumbs-up"></i>
           </button>}
           
           <p>{likes.length} like's</p>
@@ -91,8 +91,8 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
         {/* Like Buton works , need to make it one like per user , fix unlike button. Make like button dissaper when liked vice versa for unlike */}
       </div>
       </div>
-      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe</Link> : null}
-      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe</button> : null}
+      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe <i className="bi bi-pen"></i></Link> : null}
+      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe <i className="bi bi-trash3"></i></button> : null}
       
 
     </div>

@@ -1,6 +1,7 @@
 import { NavLink, useNavigate,Link } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect,useState } from 'react'
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
@@ -48,7 +49,7 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
           <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarSupportedContent" >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to='/' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Home</Link>
+                <Link className="nav-link active" aria-current="page" to='/' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}><i className="bi bi-house-door"></i></Link>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to='/allRecipes' onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>All Recipes</NavLink>
@@ -63,7 +64,7 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
             </ul>
       <form onSubmit={searchSubmit} className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search Recipes" aria-label="Search Recipes" onChange={(e)=>setSearch(e.target.value)}/>
-        <button className="btn searchBtn" type="submit" onClick={()=>setIsNavCollapsed(!isNavCollapsed)}>Search</button>
+        <button className="btn searchBtn" type="submit" onClick={()=>setIsNavCollapsed(!isNavCollapsed)}><i className="bi bi-search"></i></button>
       </form>
       <ul className="navbar-nav mb-2 mb-lg-0">
       {loggedUser._id? null :
