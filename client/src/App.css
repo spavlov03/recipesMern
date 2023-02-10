@@ -21,6 +21,16 @@ body {
   object-fit:cover;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 40px 0 rgba(0, 0, 0, 0.19); 
 }
+.searchInput { 
+  width: 200px;
+}
+.navLink:hover {
+  color: white;
+  text-shadow: rgb(255, 255, 255) 1px 0 5px;
+}
+.navLink { 
+  color: black;
+}
 .polaroid {
   width: 300px;
   background-color: white;
