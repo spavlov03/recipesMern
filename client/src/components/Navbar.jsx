@@ -56,6 +56,9 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
               <li className="nav-item">
                 {!loggedUser._id? null : <NavLink className="nav-link active" to="/add-recipe" onClick={()=>setIsNavCollapsed(true)}>Add Recipe</NavLink> }
               </li>
+              <li className="nav-item">
+                {!loggedUser._id? null : <NavLink className="nav-link active" to="/messages" onClick={()=>setIsNavCollapsed(true)}>Messages</NavLink> }
+              </li>
               {loggedUser.type==="admin"? <li className="nav-item">
           <NavLink className="nav-link active" to='/admin' onClick={()=>setIsNavCollapsed(true)}>Pending Approval</NavLink>
         </li> : null }

@@ -46,6 +46,7 @@ const UserDetail = ({loggedUser}) => {
           </div>
         })}</div>}
         {thisUser._id===loggedUser._id?<Link to={`/user/${loggedUser._id}/edit`}>Edit Profile</Link>:null}
+        {thisUser._id!==loggedUser._id?<button>Send Message</button>:null}
     </div>
   )
 }
