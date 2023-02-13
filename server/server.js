@@ -22,6 +22,9 @@ recipesRoutes(app);
 const userRoutes = require("./routes/user.routes")
 userRoutes(app);
 
+const messagesRoutes = require('./routes/messages.routes')
+messagesRoutes(app); 
+
 const server = app.listen(PORT,()=>{
   console.log(`Server is up and running on port ${PORT}`)
 })

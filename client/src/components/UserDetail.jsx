@@ -4,9 +4,9 @@ import { useParams,Link } from 'react-router-dom'
 // import AddProfilePic from './AddProfilePic';
 
 
-const UserDetail = ({loggedUser}) => {
+const UserDetail = ({loggedUser,thisUser,setThisUser}) => {
   
-  const [thisUser,setThisUser] = useState({}); 
+
   const [recipes,setRecipes] = useState([]); 
   const {id} = useParams();
   // const [loggedAuthor,setloggedAuthor] = useState(false);
@@ -46,7 +46,7 @@ const UserDetail = ({loggedUser}) => {
           </div>
         })}</div>}
         {thisUser._id===loggedUser._id?<Link to={`/user/${loggedUser._id}/edit`}>Edit Profile</Link>:null}
-        {thisUser._id!==loggedUser._id?<button>Send Message</button>:null}
+        {thisUser._id!==loggedUser._id?<Link to="/send-message" className='btn btn-info'>Send Message</Link>:null}
     </div>
   )
 }

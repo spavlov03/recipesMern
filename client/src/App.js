@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
 import AllRecipes from './components/AllRecipes';
 import Messages from './components/Messages';
+import SendMessage from './components/SendMessage';
 import {io} from 'socket.io-client'
 
 
@@ -27,6 +28,7 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({_id:null}); 
   // const [thisUser,setThisUser] = useState({}); 
   const [searchResults,setSearchResults] = useState([])
+  const [thisUser,setThisUser] = useState({}); 
   const [socket] = useState(() => io(':8000'));
  
   useEffect(() => {
@@ -52,9 +54,10 @@ function App() {
           <Route path='/logout' element={<Logout loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} socket={socket}/>}/>
           {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
-          {loggedUser._id?<Route path='/messages' element={<Messages loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
+          {loggedUser._id?<Route path='/messages' element={<Messages loggedUser={loggedUser}/>}/>:<Route path='/messages' element={<NotAuthorized/>}/>}
+          {loggedUser._id?<Route path='/send-message' element={<SendMessage loggedUser={loggedUser} thisUser={thisUser}/>}/>:<Route path='/send-message' element={<NotAuthorized/>}/>}
           {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} socket={socket}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
-          <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser} thisUser={thisUser} setThisUser={setThisUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults} socket={socket} setRecipes={setSearchResults}/>}/>
           <Route path='/allRecipes' element={<AllRecipes socket={socket} setRecipes={setSearchResults}/>}/>
