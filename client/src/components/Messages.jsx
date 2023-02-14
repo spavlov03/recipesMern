@@ -13,17 +13,19 @@ const Messages = ({loggedUser}) => {
   },[])
   return (
     <div className='d-flex gap-5 ms-5'>
-      <div>Placeholder for users</div>
+      {/* <div>Placeholder for users</div> */}
       <div>
         {/* {messages[2].content} */}
      {!messages[0]?<p>empty</p>:
-     <p>not empty
+     <div>
       {messages?.map((msg,index)=>{
           return <div key={index}>
-            <p>{msg.content}</p>
+            <p>Content: {msg.content}</p>
+            <p>From : {msg.senderName}</p>
+            <p>To: {msg.receiverName}</p>
             </div>
         })}
-      </p>}
+      </div>}
       </div>
     </div>
   )

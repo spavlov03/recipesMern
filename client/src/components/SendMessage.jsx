@@ -9,8 +9,10 @@ const SendMessage = ({loggedUser,thisUser}) => {
     console.log("send button pressed",content,loggedUser._id,thisUser)
     axios.post('http://localhost:8000/api/message',{ 
       content, 
-      sender:loggedUser._id,
-      receiver:thisUser._id, 
+      senderId:loggedUser._id,
+      senderName: loggedUser.firstName + loggedUser.lastName,
+      receiverId:thisUser._id, 
+      receiverName: thisUser.firstName + thisUser.lastName,
       timeSent: Date()
     },{withCredentials:true})
     .then(res=>{ 

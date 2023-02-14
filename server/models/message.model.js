@@ -4,12 +4,18 @@ const MessageSchema = mongoose.Schema({
   content: { 
     type:String,
   }, 
-  sender: { 
+  senderId: { 
+    type:String,
+  },
+  senderName: { 
     type:String,
   }, 
-  receiver: { 
+  receiverId: { 
     type:String,
   }, 
+  receiverName: { 
+    type:String,
+  },
   timeSent: { 
     type:Date, 
   }
