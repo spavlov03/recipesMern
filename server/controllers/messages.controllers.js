@@ -10,7 +10,8 @@ module.exports = {
     })
   }, 
   getAllmessagesBySender: (req,res) => { 
-    Message.find({sender:req.params.sender})
+    console.log(req.params)
+    Message.find({sender:req.params.id})
     .then(msg=>res.json(msg))
     .catch(err=>{ 
       res.json(err)})
