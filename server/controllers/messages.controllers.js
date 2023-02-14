@@ -11,7 +11,8 @@ module.exports = {
   }, 
   getAllmessagesBySender: (req,res) => { 
     console.log(req.params)
-    Message.find({sender:req.params.id})
+    // Message.find({senderId:req.params.id})
+    Message.find({$or:[{senderId:req.params.id},{receiverId:req.params.id}]})
     .then(msg=>res.json(msg))
     .catch(err=>{ 
       res.json(err)})

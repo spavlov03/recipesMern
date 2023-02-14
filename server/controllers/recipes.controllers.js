@@ -43,6 +43,7 @@ module.exports = {
   findRecipes: (req,res) => {
     // console.log(req.params.recipeName)
     Recipe.find({recipeName: {$regex: req.params.recipeName,$options:"i"},status:"approved"})
+    // Recipe.find({$or:[{recipeName: {$regex: req.params.recipeName,$options:"i"},status:"approved"},{ingredients: {$regex: req.params.recipeName,$options:"i"},status:"approved"}]})
     .then(recipes=>{
       // console.log("inside then",recipes)
       res.json(recipes)})

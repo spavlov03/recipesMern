@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 const SendMessage = ({loggedUser,thisUser}) => {
   const [content,setContent] = useState('')
+  const navigate = useNavigate();
   let submitHandler = (e) => { 
     e.preventDefault(); 
     console.log("send button pressed",content,loggedUser._id,thisUser)
@@ -17,6 +19,7 @@ const SendMessage = ({loggedUser,thisUser}) => {
     },{withCredentials:true})
     .then(res=>{ 
       console.log(res.data)
+      navigate('/messages')
     })
     .catch((err)=> { 
       console.log(err)
