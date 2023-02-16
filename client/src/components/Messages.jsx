@@ -4,6 +4,8 @@ import { useState,useEffect } from 'react'
 
 const Messages = ({loggedUser}) => {
   const [messages,setMessages] = useState({})
+  const [sentMessages,setSendMessages] = useState({})
+  const [receivedMessages,setReceivedMessages] = useState({})
   useEffect(()=> { 
     axios.get(`http://localhost:8000/api/messages/${loggedUser._id}`)
     .then((res)=> { 
@@ -13,21 +15,33 @@ const Messages = ({loggedUser}) => {
   },[])
   return (
     <div className='d-flex gap-5 ms-5'>
-      {/* <div>Placeholder for users</div> */}
-      <div>
-        {/* {messages[2].content} */}
-     {!messages[0]?<p>empty</p>:
-     <div>
-      {messages?.map((msg,index)=>{
-          return <div key={index}>
-            <p>Content: {msg.content}</p>
-            <p>From : {msg.senderName}</p>
-            <p>To: {msg.receiverName}</p>
-            </div>
-        })}
-      </div>}
+          <div className='me-5'>
+            <p>Sent Messages</p>
+            {!messages[0]?<p>empty</p>:
+            <div>
+              {messages?.map((msg,index)=>{
+              return <div key={index} className=''>
+                      {msg.senderId==loggedUser._id?
+                      <p className='border p-3'>
+                          <p className='bg-warning'>To:<br/>{msg.receiverName}</p>{msg.content}</p>:null}
+                      </div>})}
+            </div>}
+          </div>
+          <div className=''>
+            <p>Received Messages</p>
+            {!messages[0]?<p>empty</p>:
+            <div>
+              {messages?.map((msg,index)=>{
+              return <div key={index} className=''>
+                      {msg.receiverId==loggedUser._id?
+                      <p className='border p-3'>
+                        <p className='bg-info'>From:<br/>{msg.senderName} </p>{msg.content}</p>:null}
+                      </div>})}
+            </div>}
+          </div>
+          
+          
       </div>
-    </div>
   )
 }
 

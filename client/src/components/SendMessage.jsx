@@ -12,9 +12,9 @@ const SendMessage = ({loggedUser,thisUser}) => {
     axios.post('http://localhost:8000/api/message',{ 
       content, 
       senderId:loggedUser._id,
-      senderName: loggedUser.firstName + loggedUser.lastName,
+      senderName: loggedUser.firstName + " " +loggedUser.lastName,
       receiverId:thisUser._id, 
-      receiverName: thisUser.firstName + thisUser.lastName,
+      receiverName: thisUser.firstName + " " + thisUser.lastName,
       timeSent: Date()
     },{withCredentials:true})
     .then(res=>{ 
