@@ -4,8 +4,8 @@ import { useState,useEffect } from 'react'
 
 const Messages = ({loggedUser}) => {
   const [messages,setMessages] = useState({})
-  const [sentMessages,setSendMessages] = useState({})
-  const [receivedMessages,setReceivedMessages] = useState({})
+  // const [sentMessages,setSendMessages] = useState({})
+  // const [receivedMessages,setReceivedMessages] = useState({})
   useEffect(()=> { 
     axios.get(`http://localhost:8000/api/messages/${loggedUser._id}`)
     .then((res)=> { 
@@ -21,7 +21,7 @@ const Messages = ({loggedUser}) => {
             <div>
               {messages?.map((msg,index)=>{
               return <div key={index} className=''>
-                      {msg.senderId==loggedUser._id?
+                      {msg.senderId===loggedUser._id?
                       <p className='border p-3'>
                           <p className='bg-warning'>To:<br/>{msg.receiverName}</p>{msg.content}</p>:null}
                       </div>})}
@@ -33,7 +33,7 @@ const Messages = ({loggedUser}) => {
             <div>
               {messages?.map((msg,index)=>{
               return <div key={index} className=''>
-                      {msg.receiverId==loggedUser._id?
+                      {msg.receiverId===loggedUser._id?
                       <p className='border p-3'>
                         <p className='bg-info'>From:<br/>{msg.senderName} </p>{msg.content}</p>:null}
                       </div>})}
