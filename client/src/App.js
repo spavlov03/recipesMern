@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
 import AllRecipes from './components/AllRecipes';
 import Api from './components/Api';
+import ViewRecipe2 from './components/ViewRecipe2';
 
 
 
@@ -43,7 +44,7 @@ function App() {
           <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}
           <Route path='/logout' element={<Logout loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
-          <Route path='/recipe/:id' element={<ViewRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} />}/>
+          <Route path='/recipe/:id' element={<ViewRecipe2 loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe} />}/>
           {loggedUser._id?<Route path='/add-recipe' element={<AddRecipe loggedUser={loggedUser}/>}/>:<Route path='/add-recipe' element={<NotAuthorized/>}/>}
           {loggedUser._id===oneRecipe.creatorId || loggedUser.type==="admin"?<Route path='/recipe/:id/edit' element={<EditRecipe loggedUser={loggedUser} oneRecipe={oneRecipe} setOneRecipe={setOneRecipe}/>}/>:<Route path='/recipe/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>

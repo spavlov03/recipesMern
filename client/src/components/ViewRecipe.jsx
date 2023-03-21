@@ -36,7 +36,25 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     })
     .catch(err=>console.log(err))
   }
+  
 
+    const options = {
+      method: 'GET',
+      url: 'https://tasty.p.rapidapi.com/recipes/get-more-info',
+      params: {id: '8629'},
+      headers: {
+        'X-RapidAPI-Key': 'e3d9cc7f6cmshf9a3771f789b43dp106b9ajsne22f3873bb9c',
+        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+  
   useEffect(()=>{
     // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     // const requestTwo = axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
@@ -52,6 +70,7 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     })
     .catch(err=>console.log(err))
     },[id,setOneRecipe,oneRecipe.creatorId])
+  
     const deleteRecipe = () => { 
       axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
       .then((res)=> {
