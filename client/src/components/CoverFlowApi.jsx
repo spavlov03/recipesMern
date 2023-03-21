@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const CoverFlow = ({recipes}) => {
+const CoverFlowApi = ({recipes}) => {
   return (
     <div className=''>
       {recipes.length===0?<p>No Results</p>:
@@ -24,4 +24,4 @@ const CoverFlow = ({recipes}) => {
   )
 }
 
-export default CoverFlow
+export default CoverFlowApi

@@ -30,7 +30,7 @@ const AdminPanel = ({loggedUser}) => {
     <div>
       <h5 className='mb-5'>{loggedUser.firstName}, please review recipes that are pending approval.</h5>
       {recipes?.map((recipe,index)=> {
-        return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.recipeName}</Link></p>
+        return <p key={index}><Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link></p>
       })}
     </div>
   )

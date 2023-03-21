@@ -7,14 +7,14 @@ import AddProfilePic from './AddProfilePic';
 
 
 const AddRecipe = ({loggedUser}) => {
-  const [recipeName,setRecipeName] = useState('');
+  const [name,setName] = useState('');
   const [cookTime,setCookTime] = useState();
   const [directions,setDirections] = useState('');
   const [ingredients,setIngredients] = useState([{ingredient:"",qty:"",uom:""}])
   const [yields,setYields] = useState("")
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
-  const [recipeImg,setRecipeImg] = useState("")
+  const [thumbnail_url,setThumbnail_url] = useState("")
   const type = "Recipe"
   // const likes = [];
   // const notify = () => toast("Wow so easy!"); 
@@ -35,14 +35,14 @@ const AddRecipe = ({loggedUser}) => {
   let handleSubmit = (e) => { 
     e.preventDefault(); 
     axios.post('http://localhost:8000/api/recipe',{
-      recipeName,
+      name,
       cookTime,
       directions, 
       ingredients, 
       creatorId: loggedUser._id, 
       status:'pending', 
       yields,
-      recipeImg,
+      thumbnail_url,
       likes:[loggedUser._id],
     },{withCredentials:true})
     .then(res=>{
@@ -62,8 +62,8 @@ const AddRecipe = ({loggedUser}) => {
         <div id='topField'>
           <div className='d-flex flex-column gap-1 mx-auto'> 
             <div className='regBox'>
-              <input className='form-control regInput' type="text" onChange={(e)=>setRecipeName(e.target.value)} placeholder="Recipe Name"/>
-              {errors.recipeName && <span className='text-danger'>{errors.recipeName.message}</span>}
+              <input className='form-control regInput' type="text" onChange={(e)=>setName(e.target.value)} placeholder="Recipe Name"/>
+              {errors.name && <span className='text-danger'>{errors.name.message}</span>}
             </div>
             <div className='regBox'>
               <input className='form-control regInput' type="number" onChange={(e)=>setCookTime(e.target.value)} placeholder="How Long To Cook?"/>
@@ -75,8 +75,8 @@ const AddRecipe = ({loggedUser}) => {
             </div>
           </div>
           <div className='ms-5'>
-            <AddProfilePic type={type} recipeImg={recipeImg} setUrl={setRecipeImg}/>
-            <img className="previewRec" src={recipeImg} alt="recipe image" />
+            <AddProfilePic type={type} thumbnail_url={thumbnail_url} setUrl={setThumbnail_url}/>
+            <img className="previewRec" src={thumbnail_url} alt="recipe image" />
           </div>
         </div>
         <div className=''>

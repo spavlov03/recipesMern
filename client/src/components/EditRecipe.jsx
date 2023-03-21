@@ -80,7 +80,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
   useEffect(()=>{
     axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     .then((res)=>{
-      setRecipeName(res.data.recipeName);
+      setRecipeName(res.data.name);
       setCookTime(res.data.cookTime);
       setYields(res.data.yields)
       setDirections(res.data.directions);
@@ -88,7 +88,7 @@ const EditRecipe = ({loggedUser,setOneRecipe}) => {
       setStatus(res.data.status);
       res.data.status==="approved"?setChecked(true):setChecked(false);
       setOneRecipe(res.data)
-      setRecipeImg(res.data.recipeImg)
+      setRecipeImg(res.data.thumbnail_url)
     })
     .catch(err=>console.log(err))
     },[id,setOneRecipe])

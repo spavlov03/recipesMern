@@ -13,7 +13,7 @@ const IngredientsSchema = mongoose.Schema({
 })
 
 const RecipeSchema = mongoose.Schema({
-  recipeName:{
+  name:{
     type:String, 
     required: [true,"Recipe name is required"]
   }, 
@@ -40,7 +40,7 @@ const RecipeSchema = mongoose.Schema({
     type:String, 
     enum: ['pending','approved']
   },  
-  recipeImg: { 
+  thumbnail_url: { 
     type:String,
   }, 
   likes: { 

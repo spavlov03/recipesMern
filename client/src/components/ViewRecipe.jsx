@@ -64,8 +64,8 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   return (
     <div className='mx-auto'>
       <div className='recipeFrame mx-auto'>
-        <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
-        <p>Recipe name : {oneRecipe.recipeName}</p>
+        <img className ="detailPic" src={oneRecipe.thumbnail_url} alt="recipe" />
+        <p>Recipe name : {oneRecipe.name}</p>
         <p><i className="bi bi-person"></i> Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
         <p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>
       <p className='ms-3 me-3'>Directions : {oneRecipe.directions}</p>
