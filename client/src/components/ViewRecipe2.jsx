@@ -4,77 +4,85 @@ import { useParams,Link,useNavigate } from 'react-router-dom'
 
 
 
-const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
+const ViewRecipe2 = ({loggedUser,allRecipes}) => {
   const {id} = useParams();
-  const {thisId} = useParams();
   console.log("THIS ID IS ",id.length)
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
   const [likes,setLikes] = useState([]); 
   const [thisRecipe,setThisRecipe] = useState({});
   const [directions,setDirections] = useState([]); 
+  // console.log(allRecipes)
+  useEffect(()=>{
+    for (let i =0;i<allRecipes.length;i++) { 
+      if (allRecipes[i].id = id) { 
+        setThisRecipe(allRecipes[i])
+        console.log("IN LOOP",thisRecipe)
+      }
+    }
 
-  let likeRecipe = (id,e) => {
-    e.preventDefault(); 
-    console.log('Recipe Liked')
-    axios.put(`http://localhost:8000/api/recipe/like/${id}`, {
-      // likes:[...likes,loggedUser._id]
-      likes:likes.includes(loggedUser._id)?likes:[...likes,loggedUser._id]
-    },{withCredentials:true})
-    .then(res=> { 
-      console.log('res in likes',res)
-      setLikes(res.data.likes)
-    })
-    .catch(err=>console.log(err))
-  }
-  let unlikeRecipe = (id,e) => { 
-    e.preventDefault(); 
-    console.log('Recipe Unliked')
-    setLikes(likes.splice((likes.indexOf(loggedUser._id)),1))
-    axios.put(`http://localhost:8000/api/recipe/unlike/${id}`, {
-      likes:[...likes]
-    },{withCredentials:true})
-    .then(res=> { 
-      console.log('res in likes',res)
-      setLikes(res.data.likes)
-    })
-    .catch(err=>console.log(err))
-  }
+  },[])
+  // let likeRecipe = (id,e) => {
+  //   e.preventDefault(); 
+  //   console.log('Recipe Liked')
+  //   axios.put(`http://localhost:8000/api/recipe/like/${id}`, {
+  //     // likes:[...likes,loggedUser._id]
+  //     likes:likes.includes(loggedUser._id)?likes:[...likes,loggedUser._id]
+  //   },{withCredentials:true})
+  //   .then(res=> { 
+  //     console.log('res in likes',res)
+  //     setLikes(res.data.likes)
+  //   })
+  //   .catch(err=>console.log(err))
+  // }
+  // let unlikeRecipe = (id,e) => { 
+  //   e.preventDefault(); 
+  //   console.log('Recipe Unliked')
+  //   setLikes(likes.splice((likes.indexOf(loggedUser._id)),1))
+  //   axios.put(`http://localhost:8000/api/recipe/unlike/${id}`, {
+  //     likes:[...likes]
+  //   },{withCredentials:true})
+  //   .then(res=> { 
+  //     console.log('res in likes',res)
+  //     setLikes(res.data.likes)
+  //   })
+  //   .catch(err=>console.log(err))
+  // }
   
 
-  const options = {
-    method: 'GET',
-    url: 'https://tasty.p.rapidapi.com/recipes/get-more-info',
-    params: {id:id},
-    headers: {
-      'X-RapidAPI-Key': 'e3d9cc7f6cmshf9a3771f789b43dp106b9ajsne22f3873bb9c',
-      'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
-    }
-  };
-  useEffect(()=>{
-    if (id.length==4){
-      axios.request(options).then(function (response) {
-        console.log("RESPONSE------",response.data);
-        setThisRecipe(response.data)
-        setDirections(response.data.instructions)
-      }).catch(function (error) {
-        console.error(error);
-      });
-    }
-    else { 
-      axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
-    .then((res)=>{
-      setThisRecipe(res.data);
-      setLikes(res.data.likes)
-      return axios.get(`http://localhost:8000/api/user/${thisRecipe.creatorId}`,{withCredentials:true})
-      .then((res=>{
-        setRecipeAuthor(res.data)
-      }))
-      .catch(err=>console.log('inside error',err))
-    })
-    .catch(err=>console.log(err))
-    }
-  },[])
+  // const options = {
+  //   method: 'GET',
+  //   url: 'https://tasty.p.rapidapi.com/recipes/get-more-info',
+  //   params: {id:id},
+  //   headers: {
+  //     'X-RapidAPI-Key': 'e3d9cc7f6cmshf9a3771f789b43dp106b9ajsne22f3873bb9c',
+  //     'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
+  //   }
+  // };
+  // useEffect(()=>{
+  //   if (id.length==4){
+  //     axios.request(options).then(function (response) {
+  //       console.log("RESPONSE------",response.data);
+  //       setThisRecipe(response.data)
+  //       setDirections(response.data.instructions)
+  //     }).catch(function (error) {
+  //       console.error(error);
+  //     });
+  //   }
+  //   else { 
+  //     axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
+  //   .then((res)=>{
+  //     setThisRecipe(res.data);
+  //     setLikes(res.data.likes)
+  //     return axios.get(`http://localhost:8000/api/user/${thisRecipe.creatorId}`,{withCredentials:true})
+  //     .then((res=>{
+  //       setRecipeAuthor(res.data)
+  //     }))
+  //     .catch(err=>console.log('inside error',err))
+  //   })
+  //   .catch(err=>console.log(err))
+  //   }
+  // },[])
   
   // useEffect(()=>{
   //   // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
@@ -92,13 +100,13 @@ const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
   //   .catch(err=>console.log(err))
   //   },[id])
   
-    const deleteRecipe = () => { 
-      axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
-      .then((res)=> {
-        navigate("/")
-      })
-      .catch(err=>console.log(err))
-    }
+    // const deleteRecipe = () => { 
+    //   axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
+    //   .then((res)=> {
+    //     navigate("/")
+    //   })
+    //   .catch(err=>console.log(err))
+    // }
 
 
   return (
