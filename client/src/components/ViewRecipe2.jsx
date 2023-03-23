@@ -7,7 +7,7 @@ import { useParams,Link,useNavigate } from 'react-router-dom'
 const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
   const {id} = useParams();
   const {thisId} = useParams();
-  console.log("THIS ID IS ",id)
+  console.log("THIS ID IS ",id.length)
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
   const [likes,setLikes] = useState([]); 
@@ -52,13 +52,28 @@ const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
     }
   };
   useEffect(()=>{
-    axios.request(options).then(function (response) {
-      console.log("RESPONSE------",response.data);
-      setThisRecipe(response.data)
-      setDirections(response.data.instructions)
-    }).catch(function (error) {
-      console.error(error);
-    });
+    if (id.length==4){
+      axios.request(options).then(function (response) {
+        console.log("RESPONSE------",response.data);
+        setThisRecipe(response.data)
+        setDirections(response.data.instructions)
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+    else { 
+      axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
+    .then((res)=>{
+      setThisRecipe(res.data);
+      setLikes(res.data.likes)
+      return axios.get(`http://localhost:8000/api/user/${thisRecipe.creatorId}`,{withCredentials:true})
+      .then((res=>{
+        setRecipeAuthor(res.data)
+      }))
+      .catch(err=>console.log('inside error',err))
+    })
+    .catch(err=>console.log(err))
+    }
   },[])
   
   // useEffect(()=>{
@@ -66,16 +81,16 @@ const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
   //   // const requestTwo = axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
   //   axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
   //   .then((res)=>{
-  //     setOneRecipe(res.data);
+  //     setThisRecipe(res.data);
   //     setLikes(res.data.likes)
-  //     return axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
+  //     return axios.get(`http://localhost:8000/api/user/${thisRecipe.creatorId}`,{withCredentials:true})
   //     .then((res=>{
   //       setRecipeAuthor(res.data)
   //     }))
   //     .catch(err=>console.log('inside error',err))
   //   })
   //   .catch(err=>console.log(err))
-  //   },[id,setOneRecipe,oneRecipe.creatorId])
+  //   },[id])
   
     const deleteRecipe = () => { 
       axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
@@ -94,9 +109,10 @@ const ViewRecipe2 = ({loggedUser,oneRecipe,setOneRecipe}) => {
         <img className ="detailPic" src={thisRecipe.thumbnail_url} alt="recipe" />
         <p>Recipe name : {thisRecipe.name}</p>
         {/* <p><i className="bi bi-person"></i> Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p> */}
-        <p><i className="bi bi-clock"></i> Cook Time : {thisRecipe.total_time_minutes} Minutes</p>
-      <p className='ms-3 me-3'>Directions : <br/><br/>{directions.map((inst,index)=>{return <span key={index}>{inst.display_text}</span>})}</p>
-      <p>{thisRecipe.yields}</p>
+        <p><i className="bi bi-clock"></i> Cook Time : {thisRecipe.total_time_minutes} {thisRecipe.cookTime} Minutes</p>
+      <p className='ms-3 me-3'>Directions : <br/><br/>{directions[0]?directions.map((inst,index)=>{return <span key={index}>{inst.display_text}</span>}):<span>{thisRecipe.directions}</span>}</p>
+      
+      <p>Yields: {thisRecipe.yields}</p>
       {/* <div>Ingredients : 
         <ul className='list-group'>
           {oneRecipe.ingredients?.map((ing,index)=>(
