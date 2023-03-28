@@ -6,6 +6,7 @@ import CoverFlow from './CoverFlow'
 
 
 
+
 const AllRecipes = ({allRecipes}) => {
   const [recipes,setRecipes] = useState([]); 
 

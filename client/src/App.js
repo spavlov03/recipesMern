@@ -33,33 +33,34 @@ function App() {
 
   const [recipes,setRecipes] = useState([]); 
   const [apiRec,setApiRec] = useState([]);
-  const options = {
-    method: 'GET',
-    url: 'https://tasty.p.rapidapi.com/recipes/list',
-    params: {from: '0', size: '20', tags: 'under_30_minutes'},
-    headers: {
-      'X-RapidAPI-Key': 'e3d9cc7f6cmshf9a3771f789b43dp106b9ajsne22f3873bb9c',
-      'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
-    }
-  };
-  // useEffect(()=> {
-  // axios.request(options).then(function (response) {
-  //   console.log(response.data.results)
-  //   setApiRec(response.data.results);
-  // }).catch(function (error) {
-  //   console.error(error);
-  // });
-  // },[])
+  useEffect(()=> {
+    const options = {
+      method: 'GET',
+      url: 'https://tasty.p.rapidapi.com/recipes/list',
+      params: {from: '0', size: '20', tags: 'under_30_minutes'},
+      headers: {
+        'X-RapidAPI-Key': 'e3d9cc7f6cmshf9a3771f789b43dp106b9ajsne22f3873bb9c',
+        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
+      }
+    };
+  axios.request(options).then(function (response) {
+    console.log(response.data.results)
+    setApiRec(response.data.results);
+    // setAllRecipes([...apiRec])
+  }).catch(function (error) {
+    console.error(error);
+  });
+  },[])
   useEffect(()=>{ 
     const requestOne = axios.get('http://localhost:8000/api/recipes/approved',{withCredentials:true})
     axios.all([requestOne])
     .then(axios.spread((...res)=>{
       const responseOne = res[0]
-      setAllRecipes(responseOne.data);
-      // setAllRecipes([...recipes,...apiRec])
+      setRecipes(responseOne.data);
+      setAllRecipes([...recipes,...apiRec])
     }))
     .catch(err=>console.log('there is error in useEffect',err))
-  },[])
+  },[apiRec,recipes])
   
   // setAllRecipes(...recipes)
 
@@ -73,7 +74,7 @@ function App() {
         </div>
         <ToastContainer/>
         <Routes>
-          <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
+          <Route path='/' element={<Dashboard loggedUser={loggedUser} setLoggedUser={setLoggedUser} recipes={allRecipes}/>}/>
           <Route path='/login' element={<Login loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           <Route path='/register' element={<Register loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser.type==="admin"?<Route path='/admin' element={<AdminPanel loggedUser={loggedUser}/>}/>:<Route path='/admin' element={<NotAuthorized/>}/>}

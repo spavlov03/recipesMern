@@ -6,7 +6,7 @@ import { useParams,Link,useNavigate } from 'react-router-dom'
 
 const ViewRecipe2 = ({loggedUser,allRecipes}) => {
   const {id} = useParams();
-  console.log("THIS ID IS ",id.length)
+  console.log("THIS ID IS ",id)
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
   const [likes,setLikes] = useState([]); 
