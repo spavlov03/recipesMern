@@ -4,7 +4,7 @@ import { useParams,Link,useNavigate } from 'react-router-dom'
 
 
 
-const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
+const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe,recipes,meals}) => {
   const {id} = useParams();
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
@@ -36,6 +36,14 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     })
     .catch(err=>console.log(err))
   }
+  let idlength = id.toString()
+  // console.log(idlength.length)
+  if (idlength.length > 5) 
+    console.log("Long")
+  else
+    console.log("Short")
+
+
 
   useEffect(()=>{
     // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
@@ -52,19 +60,20 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
     })
     .catch(err=>console.log(err))
     },[id,setOneRecipe,oneRecipe.creatorId])
-    const deleteRecipe = () => { 
-      axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
-      .then((res)=> {
-        navigate("/")
-      })
-      .catch(err=>console.log(err))
-    }
+  const deleteRecipe = () => { 
+    axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
+    .then((res)=> {
+      navigate("/")
+    })
+    .catch(err=>console.log(err))
+  }
 
 
   return (
     <div className='mx-auto'>
       <div className='recipeFrame mx-auto'>
-        <img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />
+        {oneRecipe._id?<img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />:<img className ="detailPic" src={oneRecipe.strMealThumb} alt="recipe" />}
+        
         <p>Recipe name : {oneRecipe.recipeName}</p>
         <p><i className="bi bi-person"></i> Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></p>
         <p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>
