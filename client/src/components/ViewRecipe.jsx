@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams,Link,useNavigate } from 'react-router-dom'
-import YoutubeEmbed from './YoutubeEmbed'
+
 
 
 
@@ -100,7 +100,7 @@ const newTest = Object.entries(test)
 
     }))
     .catch(err=>console.log('inside error',err))
-    },[id,setOneRecipe,oneRecipe.creatorId])
+    },[id,setOneRecipe,oneRecipe.creatorId,addIngredientsToList,idlength.length])
   const deleteRecipe = () => { 
     axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
     .then((res)=> {
@@ -108,10 +108,6 @@ const newTest = Object.entries(test)
     })
     .catch(err=>console.log(err))
   }
-  const youtubeId = oneRecipe.strYoutube
-  // console.log(youtubeId);
-  const ytb = youtubeId.replace("https://www.youtube.com/watch?v=","")
-  // console.log(ytb)
   
   return (
     <div className='mx-auto'>
@@ -120,9 +116,9 @@ const newTest = Object.entries(test)
         
         <p>Recipe name :  {oneRecipe._id?oneRecipe.recipeName:oneRecipe.strMeal}</p>
         <p><i className="bi bi-person"></i> {oneRecipe._id?<span>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></span>:<span>Source <a href={oneRecipe.strSource} target='_blank'>Click Here</a></span>}</p>
-        <p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>
+        {oneRecipe._id?<p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>:null}
       <p className='ms-3 me-3'>Directions : {oneRecipe._id?oneRecipe.directions:oneRecipe.strInstructions}</p>
-      <p>Yields: {oneRecipe.yields} <span>Servings</span></p>
+      {oneRecipe._id?<p>Yields: {oneRecipe.yields} <span>Servings</span></p>:null}
       <div>Ingredients : 
         <ul className='list-group'>
           {oneRecipe._id?oneRecipe.ingredients?.map((ing,index)=>(
@@ -138,12 +134,12 @@ const newTest = Object.entries(test)
           </>
           } 
         </ul> 
-        {oneRecipe._id?<span></span>:
-        <YoutubeEmbed id={ytb}/>}
+        
         {/* <p>Recipe Status is {oneRecipe.status}</p> */}
-        {loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id ? <p className="">Status: {oneRecipe.status}</p> : null }
+        {(loggedUser.type==="admin" || oneRecipe.creatorId===loggedUser._id) && oneRecipe._id ? <p className="">Status: {oneRecipe.status}</p> : null }
         {/* {oneRecipe.likes.includes(loggedUser._id)?<i className="material-icons likeIcon">thumb_down</i>:<i className="material-icons likeIcon" onClick={likeRecipe}>thumb_up</i>} */}
-        {!loggedUser._id? null:<div>
+
+        {loggedUser._id && oneRecipe._id?<div>
           {likes.includes(loggedUser._id)?<button className='btn' onClick={(e)=>unlikeRecipe(oneRecipe._id,e)}>
           <i className="likeIcon bi bi-hand-thumbs-up-fill"></i>
           </button>:
@@ -152,12 +148,13 @@ const newTest = Object.entries(test)
           </button>}
           
           <p>{likes.length} like's</p>
-        </div>}
+        </div>:null}
         {/* Like Buton works , need to make it one like per user , fix unlike button. Make like button dissaper when liked vice versa for unlike */}
       </div>
       </div>
-      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe <i className="bi bi-pen"></i></Link> : null}
-      {oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin'?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe <i className="bi bi-trash3"></i></button> : null}
+      
+      {(oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin') && oneRecipe._id?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe <i className="bi bi-pen"></i></Link> : null}
+      {(oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin') && oneRecipe._id?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe <i className="bi bi-trash3"></i></button> : null}
       
 
     </div>
