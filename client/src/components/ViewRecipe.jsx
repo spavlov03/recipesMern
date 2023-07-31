@@ -54,28 +54,29 @@ const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe,recipes,meals}) => {
   //   .catch(err=>console.log('inside error',err))
   // },[])
 
-const addIngredientsToList = () => {
-  const ingredients = {};
 
-    // Loop through the strIngredient properties and add non-empty values to the ingredients list
-  for (let i = 1; i <= 20; i++) {
-    const ingredientKey = `strIngredient${i}`;
-    const ingredientValue = oneRecipe[ingredientKey];
-    const otherKey = `strMeasure${i}`; 
-    const otherValue = oneRecipe[otherKey]
-      
-    if (ingredientValue !== "") {
-      ingredients[ingredientValue] = otherValue;
-      // console.log("INGREDIENTS---->",ingredientValue)
-    }
-  }
-  // console.log("INGGG",ingredients)
-    // Set the ingredients list state
-  setTest(ingredients);
-};
 const newTest = Object.entries(test)
 
   useEffect(()=>{
+    const addIngredientsToList = () => {
+      const ingredients = {};
+    
+        // Loop through the strIngredient properties and add non-empty values to the ingredients list
+      for (let i = 1; i <= 20; i++) {
+        const ingredientKey = `strIngredient${i}`;
+        const ingredientValue = oneRecipe[ingredientKey];
+        const otherKey = `strMeasure${i}`; 
+        const otherValue = oneRecipe[otherKey]
+          
+        if (ingredientValue !== "") {
+          ingredients[ingredientValue] = otherValue;
+          // console.log("INGREDIENTS---->",ingredientValue)
+        }
+      }
+      // console.log("INGGG",ingredients)
+        // Set the ingredients list state
+      setTest(ingredients);
+    };
     if (idlength.length > 5)
     // const requestOne = axios.get(`http://localhost:8000/api/recipe/${id}`,{withCredentials:true})
     // const requestTwo = axios.get(`http://localhost:8000/api/user/${oneRecipe.creatorId}`,{withCredentials:true})
@@ -100,7 +101,7 @@ const newTest = Object.entries(test)
 
     }))
     .catch(err=>console.log('inside error',err))
-    },[id,setOneRecipe,oneRecipe.creatorId,addIngredientsToList,idlength.length])
+    },[id,setOneRecipe,oneRecipe.creatorId,idlength.length,oneRecipe])
   const deleteRecipe = () => { 
     axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
     .then((res)=> {
@@ -115,7 +116,7 @@ const newTest = Object.entries(test)
         {oneRecipe._id?<img className ="detailPic" src={oneRecipe.recipeImg} alt="recipe" />:<img className ="detailPic" src={oneRecipe.strMealThumb} alt="recipe" />}
         
         <p>Recipe name :  {oneRecipe._id?oneRecipe.recipeName:oneRecipe.strMeal}</p>
-        <p><i className="bi bi-person"></i> {oneRecipe._id?<span>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></span>:<span>Source <a href={oneRecipe.strSource} target='_blank'>Click Here</a></span>}</p>
+        <p><i className="bi bi-person"></i> {oneRecipe._id?<span>Added By: <Link to={`/user/${oneRecipe.creatorId}`}>{recipeAuthor.firstName} {recipeAuthor.lastName}</Link></span>:<span>Source <a href={oneRecipe.strSource} target='_blank' rel='noreferrer'>Click Here</a></span>}</p>
         {oneRecipe._id?<p><i className="bi bi-clock"></i> Cook Time : {oneRecipe.cookTime} Minutes</p>:null}
       <p className='ms-3 me-3'>Directions : {oneRecipe._id?oneRecipe.directions:oneRecipe.strInstructions}</p>
       {oneRecipe._id?<p>Yields: {oneRecipe.yields} <span>Servings</span></p>:null}
