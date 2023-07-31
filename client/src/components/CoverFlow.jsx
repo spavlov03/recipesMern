@@ -10,12 +10,18 @@ const CoverFlow = ({recipes}) => {
         
       {recipes?.map((recipe,index)=> {
         return <div className='' key={index}>
-                  <div className='polaroid2'>
+            {recipe._id?<div className='polaroid2'>
                     <Link to={`/recipe/${recipe._id}`}>
                     <img className='recipeImg' src={recipe.recipeImg} alt={recipe.recipeName}/>
                     <p>{recipe.recipeName}</p>
                     </Link>
                   </div>
+          :<div className='polaroid2'>
+          <Link to={`/recipe/${recipe.idMeal}`}>
+          <img className='recipeImg' src={recipe.strMealThumb} alt={recipe.strMeal}/>
+          <p>{recipe.strMeal}</p>
+          </Link>
+        </div>}
                 </div>
       })}
       </div>

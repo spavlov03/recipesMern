@@ -16,7 +16,7 @@ import EditProfile from './components/EditProfile';
 import { ToastContainer } from 'react-toastify';
 import CoverFlow from './components/CoverFlow';
 import AllRecipes from './components/AllRecipes';
-
+import axios from 'axios'
 
 
 
@@ -26,6 +26,34 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({_id:null}); 
   // const [thisUser,setThisUser] = useState({}); 
   const [searchResults,setSearchResults] = useState([])
+  const [recipes,setRecipes] = useState([]); 
+  const [meals, setMeals] = useState([]);
+
+
+  useEffect(()=>{ 
+    const requestOne = axios.get('http://localhost:8000/api/recipes/approved',{withCredentials:true})
+    axios.all([requestOne])
+    .then(axios.spread((...res)=>{
+      const responseOne = res[0]
+      setRecipes(responseOne.data);
+    }))
+    .catch(err=>console.log('there is error in useEffect',err))
+  },[])
+
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const data = await response.json();
+        setMeals(data.meals);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchMeals();
+  }, []);
 
 
   return (
@@ -48,7 +76,7 @@ function App() {
           <Route path='/user/:id' element={<UserDetail loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>
           {loggedUser._id?<Route path={`/user/${loggedUser._id}/edit`} element={<EditProfile loggedUser={loggedUser} setLoggedUser={setLoggedUser}/>}/>:<Route path='/user/:id/edit' element={<NotAuthorized/>}/>}
           <Route path='/recipes/searchResult' element={<CoverFlow recipes={searchResults}/>}/>
-          <Route path='/allRecipes' element={<AllRecipes />}/>
+          <Route path='/allRecipes' element={<AllRecipes recipes={recipes} meals={meals}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

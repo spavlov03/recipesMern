@@ -27,6 +27,9 @@ const Dashboard = ({loggedUser}) => {
     }))
     .catch(err=>console.log('there is error in useEffect',err))
   },[])
+
+  
+
   let sortedRecipes = recipes.sort((r1,r2)=>(r1.likes.length<r2.likes.lenght)?1:(r1.likes.length>r2.likes.length?-1:0));
   let top5Recipes = sortedRecipes.slice(0,5)
   // console.log(top5Recipes)
