@@ -32,10 +32,25 @@ const Navbar = ({loggedUser,setLoggedUser,setSearchResults}) => {
     // console.log(`Search item is ${search}`)
     axios.get(`http://localhost:8000/api/recipes/search/${search}`)
     .then((res)=>{
-      // console.log(`Search result res is ${res.data}`)
-      setSearchResults(res.data)
-      navigate('/recipes/searchResult')})
-    .catch(err=>console.log(err))
+    //   // const currentApiResults = res.data;
+    //   // console.log(`Search result res is ${res.data}`)
+    //   setSearchResults(res.data)
+      // navigate('/recipes/searchResult')})
+    // .catch(err=>console.log(err))
+    const currentApiResults = res.data;
+        
+    // Use the MealDB API for searching
+    axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
+      .then((res) => {
+        const mealDbResults = res.data.meals || []; // If no results, set as an empty array
+        
+        // Combine both API results
+        const combinedResults = [...currentApiResults, ...mealDbResults];
+        
+        setSearchResults(combinedResults);
+        navigate('/recipes/searchResult')})
+      })
+      .catch(err => console.log(err));
   }
   
   return (
