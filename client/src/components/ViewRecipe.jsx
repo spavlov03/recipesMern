@@ -5,7 +5,7 @@ import { useParams,Link,useNavigate } from 'react-router-dom'
 
 
 
-const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe,recipes,meals}) => {
+const ViewRecipe = ({loggedUser,oneRecipe,setOneRecipe}) => {
   const {id} = useParams();
   const [recipeAuthor,setRecipeAuthor] = useState({});
   const navigate = useNavigate();
@@ -101,11 +101,10 @@ const newTest = Object.entries(test)
 
     }))
     .catch(err=>console.log('inside error',err))
-    },[id,setOneRecipe,idlength.length,oneRecipe])
+    },[])
   const deleteRecipe = () => { 
     axios.delete(`http://localhost:8000/api/recipe/${oneRecipe._id}`)
     .then((res)=> {
-      console.log("deleting",res)
       navigate("/")
     })
     .catch(err=>console.log(err))
@@ -154,9 +153,8 @@ const newTest = Object.entries(test)
         {/* Like Buton works , need to make it one like per user , fix unlike button. Make like button dissaper when liked vice versa for unlike */}
       </div>
       </div>
-      <p>Test - {oneRecipe.creatorId} {loggedUser._id}</p>
-      {(oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin') && oneRecipe._id?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe <i className="bi bi-pen"></i></Link> : null}
-      {(oneRecipe.creatorId===loggedUser._id || loggedUser.type==='admin') && oneRecipe._id?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe <i className="bi bi-trash3"></i></button> : null}
+      {oneRecipe._id && (recipeAuthor._id===loggedUser._id || loggedUser.type==='admin') ?<Link className='btn btn-warning me-2' to={`/recipe/${oneRecipe._id}/edit`}>Edit Recipe <i className="bi bi-pen"></i></Link> : null}
+      {oneRecipe._id && (recipeAuthor._id===loggedUser._id || loggedUser.type==='admin')?<button className='btn btn-danger' onClick={deleteRecipe}>Delete Recipe <i className="bi bi-trash3"></i></button> : null}
       
 
     </div>
