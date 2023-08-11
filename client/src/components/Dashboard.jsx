@@ -36,7 +36,9 @@ const Dashboard = ({loggedUser}) => {
   return (
     <div className='me-5 ms-5'>
       {!loggedUser._id?null:<h2>Hello {loggedUser.firstName}!</h2>}
-      <h4 className='mb-4'>Here is our top recipes of the week!</h4>
+      <h4 className='mb-4'>Welcome to Recipefy! - the recipes place</h4>
+      <br/>
+      <h5 className='mb-4'>Here is our top recipes of the week!</h5>
       <CoverFlow recipes={top5Recipes}/>
       <div className='mt-4'>
       <Link to="/allRecipes">Click Here To See All Recipes</Link>
